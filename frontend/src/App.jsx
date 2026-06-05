@@ -1,0 +1,28 @@
+import { Routes, Route } from 'react-router-dom'
+import { AuthProvider } from './context/AuthContext'
+import Landing from './pages/Landing'
+import Login from './pages/Login'
+import Dashboard from './pages/Dashboard'
+import WhatsAppViewer from './pages/WhatsAppViewer'
+import Bookings from './pages/Bookings'
+import Messages from './pages/Messages'
+import Leads from './pages/Leads'
+import AIChat from './pages/AIChat'
+import ProtectedRoute from './components/ProtectedRoute'
+
+export default function App() {
+  return (
+    <AuthProvider>
+      <Routes>
+        <Route path="/" element={<Landing />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
+        <Route path="/whatsapp" element={<ProtectedRoute><WhatsAppViewer /></ProtectedRoute>} />
+        <Route path="/bookings" element={<ProtectedRoute><Bookings /></ProtectedRoute>} />
+        <Route path="/messages" element={<ProtectedRoute><Messages /></ProtectedRoute>} />
+        <Route path="/leads" element={<ProtectedRoute><Leads /></ProtectedRoute>} />
+        <Route path="/ai-chat" element={<ProtectedRoute><AIChat /></ProtectedRoute>} />
+      </Routes>
+    </AuthProvider>
+  )
+}
