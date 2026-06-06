@@ -1,377 +1,252 @@
 <div align="center">
+  <br/>
+---
+title: Smartbiz AI
+emoji: 🚀
+colorFrom: blue
+colorTo: cyberpunk
+sdk: gradio
+sdk_version: 5.0.0
+app_file: app.py
+pinned: false
+---
 
-<img src="frontend/public/favicon.svg" alt="SmartBiz AI" width="90"/>
+  <img src="frontend/public/favicon.svg" alt="SmartBiz AI" width="80"/>
+  <h1>SmartBiz AI</h1>
+  <p><strong>Turn your WhatsApp into a 24/7 AI sales team.</strong></p>
 
-# SmartBiz AI
+  <p>
+    <a href="#features">Features</a> ·
+    <a href="#demo">Live Demo</a> ·
+    <a href="#quick-start">Quick Start</a> ·
+    <a href="#deployment">Deployment</a> ·
+    <a href="#tech-stack">Tech Stack</a>
+  </p>
 
-**Turn your WhatsApp Business into a 24/7 AI-powered sales machine.**
+  <p>
+    <img src="https://img.shields.io/badge/React-18-6366f1?style=flat-square&logo=react" alt="React 18"/>
+    <img src="https://img.shields.io/badge/Vite-5-7c3aed?style=flat-square&logo=vite" alt="Vite 5"/>
+    <img src="https://img.shields.io/badge/FastAPI-Python-14b8a6?style=flat-square&logo=fastapi" alt="FastAPI"/>
+    <img src="https://img.shields.io/badge/Tailwind_CSS-3-6366f1?style=flat-square&logo=tailwindcss" alt="Tailwind CSS"/>
+    <img src="https://img.shields.io/badge/SQLite-SQLAlchemy-14b8a6?style=flat-square&logo=sqlite" alt="SQLite"/>
+    <img src="https://img.shields.io/badge/JWT-Auth-7c3aed?style=flat-square&logo=jsonwebtokens" alt="JWT"/>
+  </p>
 
-*Automated conversations. Smart bookings. Real-time analytics. Zero complexity.*
-
-<br/>
-
-[![React](https://img.shields.io/badge/React_18-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)](https://react.dev)
-[![Vite](https://img.shields.io/badge/Vite_5-646CFF?style=for-the-badge&logo=vite&logoColor=white)](https://vitejs.dev)
-[![FastAPI](https://img.shields.io/badge/FastAPI-009688?style=for-the-badge&logo=fastapi&logoColor=white)](https://fastapi.tiangolo.com)
-[![TailwindCSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)](https://tailwindcss.com)
-[![SQLite](https://img.shields.io/badge/SQLite-07405E?style=for-the-badge&logo=sqlite&logoColor=white)](https://sqlite.org)
-[![JWT](https://img.shields.io/badge/JWT-black?style=for-the-badge&logo=JSON%20web%20tokens)](https://jwt.io)
-
-<br/>
-
-[🌐 Live Demo](https://smartbiz-ai.vercel.app) · [✨ Features](#-features) · [🚀 Quick Start](#-quick-start) · [☁️ Deployment](#️-deployment) · [🛠 Tech Stack](#-tech-stack)
-
-<br/>
-
-
-> ⚡ **10-minute setup. No server required. Ready to sell.**
-
+  <br/>
 </div>
 
------
+---
 
-## 📊 Stats at a Glance
+## 👋 Overview
 
-<div align="center">
+**SmartBiz AI** is a production-ready SaaS platform that turns your WhatsApp Business number into an intelligent, automated sales and support system. It handles customer conversations, books appointments, captures and scores leads, and provides real-time business analytics — all from a single, premium dashboard.
 
-|💬 Monthly Conversations|📅 Booking Accuracy|⭐ Customer Rating|🔁 Conversion Boost|
-|:---------------------:|:----------------:|:---------------:|:----------------:|
-|**3,200+**             |**98%**           |**4.8 / 5**      |**3× more**       |
+> **10-minute setup. No coding. No complexity.**
 
-</div>
-
------
+---
 
 ## ✨ Features
 
-<table>
-<tr>
-<td width="50%">
-
 ### 🤖 AI Sales Assistant
-
-- 24/7 automated responses via WhatsApp
-- Handles pricing, services, hours & booking queries
-- Auto lead scoring: 🔥 Hot / 🟡 Warm / ⚪ Cold
-- Natural conversations in Arabic & English
+- 24/7 automated customer responses via WhatsApp
+- Smart FAQ handling (pricing, services, bookings, hours)
+- Lead qualification and scoring (Hot 🔥 / Warm 🟡 / Cold ⚪)
+- Natural conversation flow with typing animation
 
 ### 💬 WhatsApp Integration
-
 - Connect your WhatsApp Business number in one click
-- Full conversation UI inside the dashboard
-- Webhook support for real-time messaging
-- Full archive with search & status tracking
+- Full conversation history with search and status tracking
+- WhatsApp webhook endpoint for real messaging
+- Arabic and English language support
 
 ### 📅 Smart Booking Engine
-
 - Customers book directly from WhatsApp
-- Automatic double-booking prevention
-- Configurable business hours per day
-- Auto confirmation & reminder messages
-
-</td>
-<td width="50%">
+- Double-booking prevention with intelligent slot management
+- Configurable business hours (per day of week)
+- Automatic confirmation and reminder messages
+- Customer feedback and star rating system
 
 ### 🎯 Lead Pipeline Management
-
-- Visual pipeline with Hot / Warm / Cold scoring
+- Visual pipeline with Hot/Warm/Cold scoring
 - Automatic score calculation based on engagement
 - Source tracking (WhatsApp vs Web)
-- Promote or demote leads with one click
+- Promote/demote with one click
 
 ### 📊 Executive Dashboard
+- Real-time stats (leads, bookings, messages, conversion)
+- Weekly activity bar charts
+- Service distribution pie charts
+- AI-powered business insights
+- Today's summary with trend indicators
 
-- Live stats: leads, bookings, messages, conversion
-- Weekly activity charts & service distribution
-- AI-powered insights: peak hours, top service, best source
-- Automated daily AI report every morning
+### 📋 Additional Features
+- **Daily AI Report** — automated morning email/WhatsApp summary
+- **WhatsApp Conversation Viewer** — full WhatsApp UI in the browser
+- **Calendar View** — monthly/weekly visual booking calendar
+- **Notification Center** — real-time activity alerts with bell icon
+- **Customer Reviews** — post-booking rating and feedback collection
+- **Mobile Responsive** — fully functional on phones and tablets
+- **Dark Theme** — premium glass-morphism design with cosmic indigo branding
 
-### 📱 Mobile-First Design
+---
 
-- Fully responsive on phones and tablets
-- Bottom Navigation for mobile
-- Sidebar overlay for small screens
-- Glass-morphism UI with Framer Motion animations
-
-</td>
-</tr>
-</table>
-
------
-
-## 🖥 Screenshots
-
-> **📸 Note:** Add real screenshots to the `/screenshots` folder and update the paths below.
+## 📸 Preview
 
 <div align="center">
-<table>
-  <tr>
-    <td align="center"><b>🏠 Landing Page</b></td>
-    <td align="center"><b>📊 Dashboard</b></td>
-  </tr>
-  <tr>
-    <td><img src="screenshots/landing.png" alt="Landing Page" width="420"/></td>
-    <td><img src="screenshots/dashboard.png" alt="Dashboard" width="420"/></td>
-  </tr>
-  <tr>
-    <td align="center"><b>💬 WhatsApp Viewer</b></td>
-    <td align="center"><b>📅 Booking Calendar</b></td>
-  </tr>
-  <tr>
-    <td><img src="screenshots/whatsapp.png" alt="WhatsApp Viewer" width="420"/></td>
-    <td><img src="screenshots/calendar.png" alt="Booking Calendar" width="420"/></td>
-  </tr>
-  <tr>
-    <td align="center"><b>🎯 Lead Pipeline</b></td>
-    <td align="center"><b>📱 Mobile View</b></td>
-  </tr>
-  <tr>
-    <td><img src="screenshots/leads.png" alt="Lead Pipeline" width="420"/></td>
-    <td><img src="screenshots/mobile.png" alt="Mobile View" width="420"/></td>
-  </tr>
-</table>
+  <table>
+    <tr>
+      <td><b>Landing Page</b></td>
+      <td><b>Executive Dashboard</b></td>
+    </tr>
+    <tr>
+      <td><img src="https://via.placeholder.com/400x250/0a0a12/7c3aed?text=Landing+Page" alt="Landing" width="400"/></td>
+      <td><img src="https://via.placeholder.com/400x250/0a0a12/14b8a6?text=Dashboard" alt="Dashboard" width="400"/></td>
+    </tr>
+    <tr>
+      <td><b>WhatsApp View</b></td>
+      <td><b>Booking Calendar</b></td>
+    </tr>
+    <tr>
+      <td><img src="https://via.placeholder.com/400x250/0a0a12/6366f1?text=WhatsApp" alt="WhatsApp" width="400"/></td>
+      <td><img src="https://via.placeholder.com/400x250/0a0a12/14b8a6?text=Calendar" alt="Calendar" width="400"/></td>
+    </tr>
+  </table>
 </div>
 
------
+---
 
 ## 🚀 Quick Start
 
 ### Prerequisites
 
-```
-Node.js v18+    npm v9+    Python 3.10+    pip
-```
+- **Node.js** v18+ · **npm** v9+
+- **Python** 3.10+ · **pip**
 
-### 1️⃣ Frontend
-
-```bash
-cd frontend
-npm install
-npm run dev
-# ✅ Open http://localhost:5173
-```
-
-### 2️⃣ Backend — optional in Demo Mode
+### 1. Backend
 
 ```bash
 cd backend
 pip install -r requirements.txt
 uvicorn main:app --reload --port 8000
-# ✅ API Docs: http://localhost:8000/docs
 ```
 
-### 3️⃣ Login
+API docs available at `http://localhost:8000/docs`
 
-```
-📧 Any email  +  🔑 Any password
-The app runs fully in Demo Mode without a backend.
-```
-
-### 4️⃣ Test on Mobile
+### 2. Frontend
 
 ```bash
-npm run dev -- --host
-# ✅ Open the Network URL on your phone (same WiFi)
+cd frontend
+npm install
+npm run dev
 ```
 
------
+Open `http://localhost:5173`
+
+### 3. Login
+
+Use any email/password — the app works in **demo mode** without a running backend.
+
+---
 
 ## ☁️ Deployment
 
-### Frontend → Vercel (Free)
+### Frontend (Vercel)
 
 ```bash
-# 1. Push code to GitHub
-git push origin main
-
-# 2. Connect repo on vercel.com
-# 3. Build Command:
 npm run build
-
-# 4. Output Directory:
-dist/
-
-# ✅ Your link: https://smartbiz-ai.vercel.app
+# Deploy the dist/ folder to Vercel
 ```
 
-### Backend → Render (Free)
+### Backend (Render)
 
 ```bash
-# Start Command on Render:
+# Render start command:
 uvicorn main:app --host 0.0.0.0 --port $PORT
 ```
 
-### Environment Variables
-
-```env
-# frontend/.env
-VITE_API_URL=https://your-backend.onrender.com
-VITE_APP_NAME=SmartBiz AI
-
-# backend/.env
-SECRET_KEY=your-super-secret-jwt-key
-DATABASE_URL=sqlite:///./smartbiz.db
-OPENAI_API_KEY=sk-...   # optional — for real AI responses
-```
-
------
+---
 
 ## 🛠 Tech Stack
 
-<div align="center">
+| Layer | Technology |
+|-------|-----------|
+| **Frontend** | React 18 + Vite 5 |
+| **Styling** | Tailwind CSS 3 + Framer Motion 10 |
+| **Charts** | Recharts 2 |
+| **Icons** | Lucide React |
+| **Routing** | React Router DOM v6 |
+| **Backend** | FastAPI (Python) |
+| **Database** | SQLite via SQLAlchemy 2 |
+| **Auth** | JWT (PyJWT + hashlib SHA-256) |
+| **Validation** | Pydantic v2 |
 
-|Layer                 |Technology           |Purpose                 |
-|:---------------------|:--------------------|:-----------------------|
-|**Frontend Framework**|React 18 + Vite 5    |UI & routing            |
-|**Styling**           |Tailwind CSS 3       |Responsive design       |
-|**Animations**        |Framer Motion 10     |Professional transitions|
-|**Charts**            |Recharts 2           |Analytics visualizations|
-|**Icons**             |Lucide React         |Icon system             |
-|**Routing**           |React Router DOM v6  |Page navigation         |
-|**Backend**           |FastAPI (Python)     |High-performance API    |
-|**Database**          |SQLite + SQLAlchemy 2|Data persistence        |
-|**Auth**              |JWT + PyJWT          |Secure authentication   |
-|**Validation**        |Pydantic v2          |Data validation         |
-
-</div>
-
------
+---
 
 ## 📁 Project Structure
 
 ```
 smartbiz-ai/
-├── 📂 backend/
-│   ├── main.py                    # FastAPI entry point
-│   ├── database.py                # SQLAlchemy config
-│   ├── models.py                  # Database models
-│   ├── schemas.py                 # Request/response validation
-│   ├── auth.py                    # JWT + password hashing
-│   ├── 📂 routers/
-│   │   ├── auth.py                # Login / Register / Me
-│   │   ├── bookings.py            # Booking CRUD + slots
-│   │   ├── leads.py               # Lead CRUD
-│   │   ├── messages.py            # Message logs
-│   │   ├── ai.py                  # AI chat endpoint
-│   │   ├── whatsapp.py            # WhatsApp webhook
-│   │   ├── stats.py               # Dashboard statistics
-│   │   └── business_hours.py      # Hours configuration
-│   └── 📂 utils/
-│       ├── ai_assistant.py        # AI response engine
-│       └── calendar.py            # Time slot management
-│
-├── 📂 frontend/
-│   ├── 📂 src/
-│   │   ├── 📂 pages/
-│   │   │   ├── Landing.jsx        # Marketing page
-│   │   │   ├── Login.jsx          # Authentication
-│   │   │   ├── Dashboard.jsx      # Executive dashboard
-│   │   │   ├── WhatsAppViewer.jsx # WhatsApp UI
-│   │   │   ├── Bookings.jsx       # Booking management
-│   │   │   ├── Messages.jsx       # Chat inbox
-│   │   │   ├── Leads.jsx          # Lead pipeline
-│   │   │   └── AIChat.jsx         # AI assistant
-│   │   ├── 📂 components/         # Reusable components
-│   │   ├── 📂 context/            # Auth context
-│   │   ├── 📂 utils/              # API client + mock data
-│   │   └── index.css              # Global styles
-│   └── vite.config.js
-│
-├── 📂 screenshots/                # ← Add screenshots here
+├── backend/
+│   ├── main.py                 # FastAPI entry point
+│   ├── database.py             # SQLAlchemy config
+│   ├── models.py               # Database models
+│   ├── schemas.py              # Request/response validation
+│   ├── auth.py                 # JWT + password hashing
+│   ├── routers/
+│   │   ├── auth.py             # Login / Register / Me
+│   │   ├── bookings.py         # Booking CRUD + slots
+│   │   ├── leads.py            # Lead CRUD
+│   │   ├── messages.py         # Message logs
+│   │   ├── ai.py               # AI chat endpoint
+│   │   ├── whatsapp.py         # WhatsApp webhook
+│   │   ├── stats.py            # Dashboard stats
+│   │   └── business_hours.py   # Hours config
+│   └── utils/
+│       ├── ai_assistant.py     # AI response engine
+│       └── calendar.py         # Time slot management
+├── frontend/
+│   ├── src/
+│   │   ├── pages/              # All page components
+│   │   │   ├── Landing.jsx     # Marketing page
+│   │   │   ├── Login.jsx       # Auth page
+│   │   │   ├── Dashboard.jsx   # Executive dashboard
+│   │   │   ├── WhatsAppViewer.jsx  # WhatsApp UI
+│   │   │   ├── Bookings.jsx    # Booking management
+│   │   │   ├── Messages.jsx    # Chat inbox
+│   │   │   ├── Leads.jsx       # Lead pipeline
+│   │   │   └── AIChat.jsx      # AI assistant
+│   │   ├── components/         # Reusable components
+│   │   ├── context/            # Auth context
+│   │   ├── utils/              # API client + mock data
+│   │   └── index.css           # Global styles
+│   └── vite.config.js          # Vite config
 └── README.md
 ```
 
------
-
-## 💰 Pricing
-
-<div align="center">
-
-|Feature      |🥉 Starter  |🥈 Pro      |🥇 Enterprise  |
-|:------------|:---------:|:---------:|:------------:|
-|**Price**    |**$29/mo** |**$79/mo** |**$199/mo**   |
-|Conversations|1,000/mo   |Unlimited  |Unlimited     |
-|WhatsApp     |✅          |✅          |✅             |
-|Bookings     |✅          |✅          |✅             |
-|Analytics    |Basic      |Advanced   |Advanced + API|
-|Custom AI    |❌          |❌          |✅             |
-|Support      |Standard   |24/7       |VIP           |
-|Free Trial   |**14 days**|**14 days**|**14 days**   |
-
-</div>
-
------
+---
 
 ## 🎨 Brand Identity
 
-<div align="center">
+| Element | Color | Hex |
+|---------|-------|-----|
+| **Cosmic Indigo** (Primary) | <span style="color:#7c3aed">■</span> | `#7c3aed` |
+| **Electric Blue** (Secondary) | <span style="color:#6366f1">■</span> | `#6366f1` |
+| **Teal Aurora** (Accent) | <span style="color:#14b8a6">■</span> | `#14b8a6` |
+| **Deep Obsidian** (Background) | <span style="color:#050508">■</span> | `#050508` |
 
-|Swatch|Name         |Hex      |Usage                        |
-|:----:|:------------|:--------|:----------------------------|
-|🟣     |Cosmic Indigo|`#7c3aed`|Primary — buttons, highlights|
-|🔵     |Electric Blue|`#6366f1`|Secondary — gradients        |
-|🟢     |Teal Aurora  |`#14b8a6`|Accent — success, charts     |
-|⚫     |Deep Obsidian|`#050508`|Background                   |
-
-</div>
-
------
-
-## 🗺 Roadmap
-
-- [x] AI Sales Assistant
-- [x] WhatsApp Integration (Demo)
-- [x] Smart Booking Engine
-- [x] Lead Pipeline Management
-- [x] Executive Dashboard
-- [x] Mobile Responsive
-- [x] Notification Center
-- [x] Landing Page
-- [ ] WhatsApp Business API (Real)
-- [ ] Stripe Payment Integration
-- [ ] Multi-tenant Support
-- [ ] PostgreSQL Migration
-- [ ] OpenAI GPT-4 Integration
-- [ ] iOS / Android App
-
------
-
-## 🤝 Contributing
-
-```bash
-# 1. Fork the repo
-# 2. Create a feature branch
-git checkout -b feature/amazing-feature
-
-# 3. Commit your changes
-git commit -m 'Add amazing feature'
-
-# 4. Push to the branch
-git push origin feature/amazing-feature
-
-# 5. Open a Pull Request
-```
-
------
+---
 
 ## 📄 License
 
-```
-MIT License — Free for personal and commercial use.
-```
+MIT License — see [LICENSE](LICENSE) for details.
 
------
+---
 
 <div align="center">
-
-**Built with ❤️ for businesses that want to grow.**
-
-<br/>
-
-[🌐 Live Demo](https://smartbiz-ai.vercel.app) · [🐛 Report Bug](../../issues) · [💡 Request Feature](../../issues) · [📧 Contact](mailto:hello@smartbiz-ai.com)
-
-<br/>
-
-⭐ **If you find this project useful, please give it a star!** ⭐
-
+  <p>Built with ❤️ for businesses that want to grow.</p>
+  <p>
+    <a href="https://smartbiz-ai.vercel.app">🌐 Live Demo</a> ·
+    <a href="#features">📋 Features</a> ·
+    <a href="#quick-start">🚀 Quick Start</a>
+  </p>
 </div>
