@@ -39,8 +39,8 @@ export default function FAQ() {
               className="glass-card overflow-hidden">
               <button onClick={() => setOpenIndex(openIndex === i ? null : i)}
                 className="w-full flex items-center justify-between p-5 text-left">
-                <span className="text-sm font-medium text-white pr-4">{faq.q}</span>
-                <div className="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center shrink-0">
+                <span className="text-sm font-medium text-slate-900 pr-4">{faq.q}</span>
+                <div className="w-8 h-8 rounded-full bg-[#F0F4FF] flex items-center justify-center shrink-0">
                   {openIndex === i ? <Minus className="w-4 h-4 text-accent-400" /> : <Plus className="w-4 h-4 text-dark-400" />}
                 </div>
               </button>

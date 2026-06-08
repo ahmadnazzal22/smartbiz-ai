@@ -60,16 +60,16 @@ export default function Onboarding() {
               <div key={s.id} className="flex items-center">
                 <div className={`
                   w-10 h-10 rounded-full flex items-center justify-center text-sm font-bold transition-all duration-300
-                  ${step > s.id ? 'bg-brand-500 text-white' : step === s.id ? 'ring-2 ring-brand-400 bg-brand-500/20 text-brand-300' : 'bg-white/5 text-dark-400'}
+                  ${step > s.id ? 'bg-brand-500 text-slate-900' : step === s.id ? 'ring-2 ring-brand-400 bg-brand-500/20 text-brand-300' : 'bg-[#F0F4FF] text-dark-400'}
                 `}>
                   {step > s.id ? <Check className="w-5 h-5" /> : s.id}
                 </div>
-                {s.id < 4 && <div className={`w-16 sm:w-24 h-0.5 mx-1 transition-all duration-300 ${step > s.id ? 'bg-brand-500' : 'bg-white/10'}`} />}
+                {s.id < 4 && <div className={`w-16 sm:w-24 h-0.5 mx-1 transition-all duration-300 ${step > s.id ? 'bg-brand-500' : 'bg-[#F0F4FF]'}`} />}
               </div>
             ))}
           </div>
           <div className="text-center">
-            <p className="text-lg font-semibold text-white">{steps[step - 1].label}</p>
+            <p className="text-lg font-semibold text-slate-900">{steps[step - 1].label}</p>
             <p className="text-sm text-dark-400">{steps[step - 1].subtitle}</p>
           </div>
         </div>
@@ -89,10 +89,10 @@ export default function Onboarding() {
                       className={`p-4 rounded-xl text-center transition-all duration-200 ${
                         selected
                           ? 'ring-2 ring-brand-400 bg-brand-500/10'
-                          : 'bg-white/[0.03] hover:bg-white/[0.06] border border-white/5'
+                          : 'bg-[#F0F4FF] hover:bg-[#F0F4FF] border border-[#DBEAFE]'
                       }`}>
                       <Icon className={`w-8 h-8 mx-auto mb-2 ${selected ? 'text-brand-400' : 'text-dark-400'}`} />
-                      <p className={`text-xs font-medium ${selected ? 'text-white' : 'text-dark-300'}`}>{bt.label}</p>
+                      <p className={`text-xs font-medium ${selected ? 'text-slate-900' : 'text-dark-300'}`}>{bt.label}</p>
                       <p className="text-[10px] text-dark-500 mt-1 leading-tight">{bt.desc}</p>
                     </button>
                   )
@@ -106,13 +106,13 @@ export default function Onboarding() {
                 <div>
                   <label className="block text-sm font-medium text-dark-300 mb-2">Company Name</label>
                   <input value={form.companyName} onChange={e => update('companyName', e.target.value)}
-                    className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-dark-500 outline-none focus:border-brand-500/50 transition-all"
+                    className="w-full bg-[#F0F4FF] border border-[#DBEAFE] rounded-xl px-4 py-3 text-slate-900 placeholder-dark-500 outline-none focus:border-brand-500/50 transition-all"
                     placeholder="e.g. SmartBiz Clinic" />
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-dark-300 mb-2">Services Offered</label>
                   <textarea value={form.services} onChange={e => update('services', e.target.value)} rows={3}
-                    className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-dark-500 outline-none focus:border-brand-500/50 transition-all resize-none"
+                    className="w-full bg-[#F0F4FF] border border-[#DBEAFE] rounded-xl px-4 py-3 text-slate-900 placeholder-dark-500 outline-none focus:border-brand-500/50 transition-all resize-none"
                     placeholder="e.g. Haircuts, Coloring, Styling, Beard Trimming" />
                   <p className="text-xs text-dark-500 mt-1">Separate with commas</p>
                 </div>
@@ -125,15 +125,15 @@ export default function Onboarding() {
                 <div>
                   <label className="block text-sm font-medium text-dark-300 mb-2">AI Greeting Message</label>
                   <textarea value={form.aiGreeting} onChange={e => update('aiGreeting', e.target.value)} rows={3}
-                    className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-dark-500 outline-none focus:border-brand-500/50 transition-all resize-none"
+                    className="w-full bg-[#F0F4FF] border border-[#DBEAFE] rounded-xl px-4 py-3 text-slate-900 placeholder-dark-500 outline-none focus:border-brand-500/50 transition-all resize-none"
                     placeholder="Your AI assistant's first message to customers..." />
-                  <div className="mt-3 p-3 rounded-xl bg-white/[0.03] border border-white/5">
+                  <div className="mt-3 p-3 rounded-xl bg-[#F0F4FF] border border-[#DBEAFE]">
                     <p className="text-xs text-dark-400 mb-2 flex items-center gap-1.5"><MessageSquare className="w-3 h-3 text-brand-400" /> Preview</p>
                     <div className="flex items-start gap-2">
                       <div className="w-7 h-7 rounded-full bg-gradient-to-br from-brand-500 to-accent-500 flex-shrink-0 flex items-center justify-center">
-                        <Sparkles className="w-3.5 h-3.5 text-white" />
+                        <Sparkles className="w-3.5 h-3.5 text-slate-900" />
                       </div>
-                      <p className="text-sm text-dark-200 bg-white/[0.05] rounded-2xl rounded-tl-sm px-4 py-2.5">{form.aiGreeting || 'Your greeting will appear here'}</p>
+                      <p className="text-sm text-dark-200 bg-[#F0F4FF] rounded-2xl rounded-tl-sm px-4 py-2.5">{form.aiGreeting || 'Your greeting will appear here'}</p>
                     </div>
                   </div>
                 </div>
@@ -143,7 +143,7 @@ export default function Onboarding() {
                     {['professional', 'friendly', 'casual'].map(tone => (
                       <button key={tone} onClick={() => update('aiTone', tone)}
                         className={`flex-1 py-3 rounded-xl text-sm font-medium capitalize transition-all ${
-                          form.aiTone === tone ? 'bg-brand-500/20 text-brand-300 ring-1 ring-brand-500/30' : 'bg-white/5 text-dark-400 hover:bg-white/[0.08]'
+                          form.aiTone === tone ? 'bg-brand-500/20 text-brand-300 ring-1 ring-brand-500/30' : 'bg-[#F0F4FF] text-dark-400 hover:bg-[#F0F4FF]'
                         }`}>
                         {tone}
                       </button>
@@ -161,7 +161,7 @@ export default function Onboarding() {
                   <Code className="w-8 h-8 text-brand-400" />
                 </div>
                 <div>
-                  <h3 className="text-xl font-bold text-white">You're all set!</h3>
+                  <h3 className="text-xl font-bold text-slate-900">You're all set!</h3>
                   <p className="text-dark-400 text-sm mt-1">Add this code to your website to activate SmartBiz AI</p>
                 </div>
                 <div className="bg-dark-950 rounded-xl p-4 text-left relative group">
@@ -178,7 +178,7 @@ export default function Onboarding() {
 <script src="https://cdn.smartbiz.ai/widget.js" async defer></script>`}
                   </pre>
                   <button onClick={() => { navigator.clipboard?.writeText(document.querySelector('pre')?.textContent || '') }}
-                    className="absolute top-2 right-2 px-3 py-1.5 text-xs rounded-lg bg-white/10 text-dark-300 hover:bg-white/20 hover:text-white transition-all">
+                    className="absolute top-2 right-2 px-3 py-1.5 text-xs rounded-lg bg-[#F0F4FF] text-dark-300 hover:bg-[#F0F4FF] hover:text-slate-900 transition-all">
                     Copy
                   </button>
                 </div>
@@ -192,7 +192,7 @@ export default function Onboarding() {
         {/* Navigation */}
         <div className="flex items-center justify-between mt-6">
           <button onClick={() => step > 1 ? setStep(s => s - 1) : navigate('/dashboard')}
-            className="flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm text-dark-400 hover:text-white hover:bg-white/[0.06] transition-all">
+            className="flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm text-dark-400 hover:text-slate-900 hover:bg-[#F0F4FF] transition-all">
             <ArrowLeft className="w-4 h-4" />
             {step > 1 ? 'Back' : 'Skip'}
           </button>
@@ -206,7 +206,7 @@ export default function Onboarding() {
             )}
             <button onClick={() => step < 4 ? setStep(s => s + 1) : handleComplete()}
               disabled={!canProceed()}
-              className={`flex items-center gap-2 px-6 py-2.5 rounded-xl text-sm font-semibold text-white transition-all ${
+              className={`flex items-center gap-2 px-6 py-2.5 rounded-xl text-sm font-semibold text-slate-900 transition-all ${
                 canProceed() ? 'hover:shadow-lg hover:scale-105' : 'opacity-50 cursor-not-allowed'
               }`}
               style={{ background: canProceed() ? 'linear-gradient(135deg, #7c3aed, #6366f1)' : '#222' }}>

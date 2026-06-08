@@ -82,13 +82,13 @@ export default function Dashboard() {
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
             className="flex items-start justify-between">
             <div>
-              <h1 className="text-3xl font-bold text-white">{greeting} 👋</h1>
+              <h1 className="text-3xl font-bold text-slate-900">{greeting} 👋</h1>
               <p className="text-dark-400 mt-1">Here's your business overview for today.</p>
             </div>
             <div className="flex items-center gap-3">
               <NotificationCenter />
               <button onClick={() => setShowReport(true)}
-                className="flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-medium text-white transition-all"
+                className="flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-medium text-slate-900 transition-all"
                 style={{ background: 'linear-gradient(135deg, rgba(124,58,237,0.2), rgba(20,184,166,0.1))', border: '1px solid rgba(124,58,237,0.2)' }}>
                 <Sparkles className="w-4 h-4 text-brand-400" />
                 AI Report
@@ -106,17 +106,17 @@ export default function Dashboard() {
               <motion.div id="ai-report-banner" initial={{ opacity: 0, y: -10, scale: 0.95 }} animate={{ opacity: 1, y: 0, scale: 1 }} exit={{ opacity: 0, y: -10 }}
                 className="relative overflow-hidden rounded-2xl p-5"
                 style={{ background: 'linear-gradient(135deg, rgba(124,58,237,0.12), rgba(20,184,166,0.06))', border: '1px solid rgba(124,58,237,0.15)' }}>
-                <button onClick={() => setShowReportBanner(false)} className="absolute top-3 right-3 text-dark-400 hover:text-white">
+                <button onClick={() => setShowReportBanner(false)} className="absolute top-3 right-3 text-dark-400 hover:text-slate-900">
                   <X className="w-4 h-4" />
                 </button>
                 <div className="flex items-start gap-4">
                   <div className="w-12 h-12 rounded-xl flex items-center justify-center shrink-0"
                     style={{ background: 'linear-gradient(135deg, #7c3aed, #6366f1)' }}>
-                    <Sparkles className="w-6 h-6 text-white" />
+                    <Sparkles className="w-6 h-6 text-slate-900" />
                   </div>
                   <div className="flex-1">
                     <div className="flex items-center gap-2 mb-1">
-                      <h3 className="text-base font-semibold text-white">AI Daily Report</h3>
+                      <h3 className="text-base font-semibold text-slate-900">AI Daily Report</h3>
                       <span className="text-[10px] px-2 py-0.5 rounded-full bg-brand-500/20 text-brand-300 border border-brand-500/20">Delivered 8:00 AM</span>
                     </div>
                     <p className="text-sm text-dark-300">Good morning! Here's your business snapshot for {new Date().toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}.</p>
@@ -134,7 +134,7 @@ export default function Dashboard() {
                     </div>
                   </div>
                   <Link to="/ai-report"
-                    className="px-5 py-2.5 rounded-xl text-sm font-medium text-white shrink-0 transition-all hover:shadow-lg"
+                    className="px-5 py-2.5 rounded-xl text-sm font-medium text-slate-900 shrink-0 transition-all hover:shadow-lg"
                     style={{ background: 'linear-gradient(135deg, #7c3aed, #6366f1)' }}>
                     View Full Report
                   </Link>
@@ -156,14 +156,14 @@ export default function Dashboard() {
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-3">
                       <div className="w-10 h-10 rounded-xl flex items-center justify-center" style={{ background: 'linear-gradient(135deg, #7c3aed, #6366f1)' }}>
-                        <Sparkles className="w-5 h-5 text-white" />
+                        <Sparkles className="w-5 h-5 text-slate-900" />
                       </div>
                       <div>
-                        <h2 className="text-lg font-semibold text-white">AI Daily Report</h2>
+                        <h2 className="text-lg font-semibold text-slate-900">AI Daily Report</h2>
                         <p className="text-xs text-dark-400">{new Date().toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}</p>
                       </div>
                     </div>
-                    <button onClick={() => setShowReport(false)} className="text-dark-400 hover:text-white">
+                    <button onClick={() => setShowReport(false)} className="text-dark-400 hover:text-slate-900">
                       <X className="w-5 h-5" />
                     </button>
                   </div>
@@ -176,7 +176,7 @@ export default function Dashboard() {
 
                   <div className="grid grid-cols-3 gap-3">
                     <div className="glass-card p-4 text-center">
-                      <p className="text-2xl font-bold text-white">{stats?.total_leads ?? 128}</p>
+                      <p className="text-2xl font-bold text-slate-900">{stats?.total_leads ?? 128}</p>
                       <p className="text-xs text-dark-400 mt-1">Total Customers</p>
                     </div>
                     <div className="glass-card p-4 text-center">
@@ -191,16 +191,16 @@ export default function Dashboard() {
 
                   {aiReport?.recommendations && (
                     <div>
-                      <h3 className="text-sm font-semibold text-white mb-3 flex items-center gap-2">
+                      <h3 className="text-sm font-semibold text-slate-900 mb-3 flex items-center gap-2">
                         <Calendar className="w-4 h-4 text-accent-400" /> Today's Recommendations
                       </h3>
                       <div className="space-y-2">
                         {aiReport.recommendations.map((r, i) => (
-                          <div key={i} className="flex items-center gap-3 p-3 rounded-xl bg-white/5">
-                            <div className="w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold text-white"
+                          <div key={i} className="flex items-center gap-3 p-3 rounded-xl bg-[#F0F4FF]">
+                            <div className="w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold text-slate-900"
                               style={{ background: 'linear-gradient(135deg, #7c3aed, #14b8a6)' }}>{i + 1}</div>
                             <div className="flex-1">
-                              <p className="text-sm text-white">{r.task}</p>
+                              <p className="text-sm text-slate-900">{r.task}</p>
                               <p className="text-xs text-dark-400">{r.description}</p>
                             </div>
                             <span className="text-sm text-accent-400 font-medium">{r.time}</span>
@@ -212,16 +212,16 @@ export default function Dashboard() {
 
                   {aiReport?.hot_leads && (
                     <div>
-                      <h3 className="text-sm font-semibold text-white mb-3 flex items-center gap-2">
+                      <h3 className="text-sm font-semibold text-slate-900 mb-3 flex items-center gap-2">
                         <AlertTriangle className="w-4 h-4 text-red-400" /> Hot Leads — Needs Follow-up
                       </h3>
                       <div className="space-y-2">
                         {aiReport.hot_leads.map((l, i) => (
-                          <div key={i} className="flex items-center gap-3 p-3 rounded-xl bg-white/5">
-                            <div className="w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold text-white"
+                          <div key={i} className="flex items-center gap-3 p-3 rounded-xl bg-[#F0F4FF]">
+                            <div className="w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold text-slate-900"
                               style={{ background: 'linear-gradient(135deg, #ef4444, #f97316)' }}>{l.name.split(' ').map(n => n[0]).join('')}</div>
                             <div className="flex-1">
-                              <p className="text-sm text-white">{l.name}</p>
+                              <p className="text-sm text-slate-900">{l.name}</p>
                               <p className="text-xs text-dark-400">{l.score && `Score: ${l.score}`}</p>
                               <p className="text-xs text-red-300 mt-0.5">{l.note}</p>
                             </div>
@@ -236,13 +236,13 @@ export default function Dashboard() {
 
                   <div className="flex items-center gap-3 pt-2">
                     <button onClick={() => { setReportSent(true); setTimeout(() => setReportSent(false), 2000) }}
-                      className="flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-medium text-white transition-all"
+                      className="flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-medium text-slate-900 transition-all"
                       style={{ background: 'linear-gradient(135deg, #7c3aed, #6366f1)' }}>
                       {reportSent ? <CheckCircle2 className="w-4 h-4" /> : <Mail className="w-4 h-4" />}
                       {reportSent ? 'Sent to Email' : 'Send to Email'}
                     </button>
                     <button
-                      className="flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-medium text-white transition-all"
+                      className="flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-medium text-slate-900 transition-all"
                       style={{ background: 'linear-gradient(135deg, #25D366, #128C7E)' }}>
                       <Smartphone className="w-4 h-4" /> Send to WhatsApp
                     </button>
@@ -263,7 +263,7 @@ export default function Dashboard() {
                 <Calendar className="w-8 h-8 text-primary-400" />
                 <div>
                   <p className="text-sm text-dark-400">Today's Summary</p>
-                  <p className="text-2xl font-bold text-white">8 bookings · 12 new leads · 75% conversion</p>
+                  <p className="text-2xl font-bold text-slate-900">8 bookings · 12 new leads · 75% conversion</p>
                 </div>
               </div>
               <span className="px-4 py-2 rounded-full bg-accent-500/10 border border-accent-500/20 text-sm text-accent-400">
@@ -277,17 +277,17 @@ export default function Dashboard() {
             {statCards.map((stat, index) => (
               <motion.div key={stat.label} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.1 + index * 0.08 }}
-                className="glass-card p-6 group hover:bg-white/[0.04]">
+                className="glass-card p-6 group hover:bg-[#F0F4FF]">
                 <div className="flex items-center justify-between mb-4">
                   <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${stat.color} p-2.5 group-hover:scale-110 transition-transform duration-300`}>
-                    <stat.icon className="w-full h-full text-white" />
+                    <stat.icon className="w-full h-full text-slate-900" />
                   </div>
                   <span className="flex items-center gap-1 text-xs text-green-400 bg-green-500/10 px-2 py-1 rounded-full">
                     <ArrowUpRight className="w-3 h-3" />
                     {stat.change}
                   </span>
                 </div>
-                <p className="text-3xl font-bold text-white mb-1">
+                <p className="text-3xl font-bold text-slate-900 mb-1">
                   {stat.value}{stat.suffix}
                 </p>
                 <p className="text-sm text-dark-400">{stat.label}</p>
@@ -300,7 +300,7 @@ export default function Dashboard() {
             <motion.div id="activity-chart" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.4 }}
               className="glass-card p-6">
               <div className="flex items-center justify-between mb-6">
-                <h3 className="text-lg font-semibold text-white">Weekly Activity</h3>
+                <h3 className="text-lg font-semibold text-slate-900">Weekly Activity</h3>
                 <div className="flex items-center gap-3 text-xs text-dark-400">
                   <span className="flex items-center gap-1"><span className="w-2 h-2 rounded-full bg-primary-500" /> Messages</span>
                   <span className="flex items-center gap-1"><span className="w-2 h-2 rounded-full bg-accent-500" /> Bookings</span>
@@ -325,7 +325,7 @@ export default function Dashboard() {
             <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.5 }}
               className="glass-card p-6">
               <div className="flex items-center justify-between mb-6">
-                <h3 className="text-lg font-semibold text-white">Service Distribution</h3>
+                <h3 className="text-lg font-semibold text-slate-900">Service Distribution</h3>
                 <span className="text-xs text-dark-400">Most requested: AI WhatsApp Bot</span>
               </div>
               <div className="h-72 flex items-center">
@@ -345,7 +345,7 @@ export default function Dashboard() {
                     <div key={s.name} className="flex items-center gap-2 text-sm">
                       <span className="w-3 h-3 rounded-full" style={{ background: s.color }} />
                       <span className="text-dark-300">{s.name}</span>
-                      <span className="text-white font-medium ml-auto">{s.value}%</span>
+                      <span className="text-slate-900 font-medium ml-auto">{s.value}%</span>
                     </div>
                   ))}
                 </div>
@@ -359,18 +359,18 @@ export default function Dashboard() {
             <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.6 }}
               className="lg:col-span-2 glass-card p-6">
               <div className="flex items-center justify-between mb-6">
-                <h3 className="text-lg font-semibold text-white">Activity Center</h3>
+                <h3 className="text-lg font-semibold text-slate-900">Activity Center</h3>
                 <Activity className="w-5 h-5 text-dark-400" />
               </div>
               <div className="space-y-1">
                 {recentActivity.map((item, i) => (
                   <motion.div key={i} initial={{ opacity: 0, x: -10 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.7 + i * 0.05 }}
-                    className="flex items-start gap-4 p-3 rounded-xl hover:bg-white/[0.02] transition-colors group">
-                    <div className={`w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center ${item.color} group-hover:scale-110 transition-transform`}>
+                    className="flex items-start gap-4 p-3 rounded-xl hover:bg-[#F0F4FF] transition-colors group">
+                    <div className={`w-10 h-10 rounded-xl bg-[#F0F4FF] flex items-center justify-center ${item.color} group-hover:scale-110 transition-transform`}>
                       <item.icon className="w-5 h-5" />
                     </div>
                     <div className="flex-1 min-w-0">
-                      <p className="text-sm font-medium text-white">{item.action}</p>
+                      <p className="text-sm font-medium text-slate-900">{item.action}</p>
                       <p className="text-xs text-dark-400 mt-0.5">{item.detail}</p>
                     </div>
                     <span className="text-xs text-dark-500 shrink-0">{item.time}</span>
@@ -383,25 +383,25 @@ export default function Dashboard() {
             <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.7 }}
               className="glass-card p-6">
               <div className="flex items-center justify-between mb-6">
-                <h3 className="text-lg font-semibold text-white">AI Insights</h3>
+                <h3 className="text-lg font-semibold text-slate-900">AI Insights</h3>
                 <Brain className="w-5 h-5 text-primary-400" />
               </div>
               <div className="space-y-4">
                 {aiInsights.map((insight, i) => (
-                  <div key={i} className="glass-card p-4 border-white/5">
+                  <div key={i} className="glass-card p-4 border-[#DBEAFE]">
                     <div className="flex items-start gap-3">
                       <div className={`w-10 h-10 rounded-xl bg-gradient-to-br ${insight.color} p-2.5 shrink-0`}>
-                        <insight.icon className="w-full h-full text-white" />
+                        <insight.icon className="w-full h-full text-slate-900" />
                       </div>
                       <div>
-                        <p className="text-sm font-medium text-white">{insight.title}</p>
+                        <p className="text-sm font-medium text-slate-900">{insight.title}</p>
                         <p className="text-xs text-dark-400 mt-1">{insight.desc}</p>
                       </div>
                     </div>
                   </div>
                 ))}
               </div>
-              <div className="mt-6 pt-6 border-t border-white/5">
+              <div className="mt-6 pt-6 border-t border-[#DBEAFE]">
                 <div className="grid grid-cols-2 gap-4">
                   {[
                     { label: 'Avg Rating', value: '4.8', icon: Star, color: 'text-yellow-400' },
@@ -409,7 +409,7 @@ export default function Dashboard() {
                   ].map(q => (
                     <div key={q.label} className="text-center">
                       <q.icon className={`w-5 h-5 ${q.color} mx-auto mb-1`} />
-                      <p className="text-xl font-bold text-white">{q.value}</p>
+                      <p className="text-xl font-bold text-slate-900">{q.value}</p>
                       <p className="text-xs text-dark-400">{q.label}</p>
                     </div>
                   ))}

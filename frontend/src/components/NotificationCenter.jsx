@@ -88,10 +88,10 @@ export default function NotificationCenter() {
   return (
     <div ref={ref} className="relative">
       <button onClick={() => setOpen(!open)}
-        className="relative w-10 h-10 rounded-xl glass-card flex items-center justify-center text-dark-300 hover:text-white hover:border-brand-500/30 transition-all">
+        className="relative w-10 h-10 rounded-xl glass-card flex items-center justify-center text-dark-300 hover:text-slate-900 hover:border-brand-500/30 transition-all">
         <Bell className="w-5 h-5" />
         {unread > 0 && (
-          <span className="absolute -top-1 -right-1 w-5 h-5 rounded-full text-[10px] text-white flex items-center justify-center font-bold"
+          <span className="absolute -top-1 -right-1 w-5 h-5 rounded-full text-[10px] text-slate-900 flex items-center justify-center font-bold"
             style={{ background: 'linear-gradient(135deg, #ef4444, #dc2626)' }}>
             {unread > 9 ? '9+' : unread}
           </span>
@@ -104,12 +104,12 @@ export default function NotificationCenter() {
             exit={{ opacity: 0, y: 10, scale: 0.95 }} transition={{ duration: 0.15 }}
             className="absolute right-0 top-full mt-2 w-80 sm:w-96 rounded-2xl overflow-hidden shadow-2xl z-50"
             style={{ background: '#0a0a12', border: '1px solid rgba(255,255,255,0.08)' }}>
-            <div className="p-4 border-b border-white/5 flex items-center justify-between">
+            <div className="p-4 border-b border-[#DBEAFE] flex items-center justify-between">
               <div className="flex items-center gap-2">
                 <Bell className="w-4 h-4 text-brand-400" />
-                <h3 className="text-sm font-semibold text-white">Notifications</h3>
+                <h3 className="text-sm font-semibold text-slate-900">Notifications</h3>
                 {unread > 0 && (
-                  <span className="text-[10px] px-1.5 py-0.5 rounded-full text-white" style={{ background: 'linear-gradient(135deg, #ef4444, #dc2626)' }}>
+                  <span className="text-[10px] px-1.5 py-0.5 rounded-full text-slate-900" style={{ background: 'linear-gradient(135deg, #ef4444, #dc2626)' }}>
                     {unread} new
                   </span>
                 )}
@@ -118,7 +118,7 @@ export default function NotificationCenter() {
                 {unread > 0 && (
                   <button onClick={markAllRead} className="text-[10px] text-brand-400 hover:text-brand-300">Mark all read</button>
                 )}
-                <button onClick={clearAll} className="text-dark-400 hover:text-white"><X className="w-3.5 h-3.5" /></button>
+                <button onClick={clearAll} className="text-dark-400 hover:text-slate-900"><X className="w-3.5 h-3.5" /></button>
               </div>
             </div>
 
@@ -135,14 +135,14 @@ export default function NotificationCenter() {
                   const Icon = nt.icon
                   return (
                     <button key={n.id} onClick={() => markRead(n.id)}
-                      className={`w-full p-3 text-left border-b border-white/5 transition-all hover:bg-white/[0.02] flex items-start gap-3 ${
-                        !n.read ? 'bg-white/[0.03]' : ''
+                      className={`w-full p-3 text-left border-b border-[#DBEAFE] transition-all hover:bg-[#F0F4FF] flex items-start gap-3 ${
+                        !n.read ? 'bg-[#F0F4FF]' : ''
                       }`}>
                       <div className={`w-8 h-8 rounded-xl ${nt.bg} flex items-center justify-center shrink-0 ${nt.color}`}>
                         <Icon className="w-4 h-4" />
                       </div>
                       <div className="flex-1 min-w-0">
-                        <p className={`text-xs font-medium ${!n.read ? 'text-white' : 'text-dark-300'}`}>{n.title}</p>
+                        <p className={`text-xs font-medium ${!n.read ? 'text-slate-900' : 'text-dark-300'}`}>{n.title}</p>
                         <p className="text-[11px] text-dark-400 mt-0.5 truncate">{n.detail}</p>
                         <p className="text-[10px] text-dark-500 mt-0.5">{n.time}</p>
                       </div>
@@ -156,9 +156,9 @@ export default function NotificationCenter() {
             </div>
 
             {notifications.length > 0 && (
-              <div className="p-2 border-t border-white/5">
+              <div className="p-2 border-t border-[#DBEAFE]">
                 <button onClick={clearAll}
-                  className="w-full py-2 rounded-xl text-xs text-dark-400 hover:text-white hover:bg-white/5 transition-all text-center">
+                  className="w-full py-2 rounded-xl text-xs text-dark-400 hover:text-slate-900 hover:bg-[#F0F4FF] transition-all text-center">
                   Clear all notifications
                 </button>
               </div>

@@ -40,14 +40,14 @@ export default function HowItWorks() {
                 i % 2 === 0 ? 'lg:flex-row' : 'lg:flex-row-reverse'
               } flex-col lg:flex-row`}>
               <div className={`flex-1 ${i % 2 === 0 ? 'lg:text-right' : 'lg:text-left'} text-center`}>
-                <span className="text-6xl font-display font-bold text-white/5 block mb-2">{step.step}</span>
-                <h3 className="text-2xl font-semibold text-white mb-3">{step.title}</h3>
+                <span className="text-6xl font-display font-bold text-slate-900/5 block mb-2">{step.step}</span>
+                <h3 className="text-2xl font-semibold text-slate-900 mb-3">{step.title}</h3>
                 <p className="text-dark-300 leading-relaxed max-w-md mx-auto lg:mx-0">{step.desc}</p>
               </div>
 
               <div className="relative shrink-0">
                 <div className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${step.color} p-4 flex items-center justify-center shadow-xl relative z-10`}>
-                  <step.icon className="w-full h-full text-white" />
+                  <step.icon className="w-full h-full text-slate-900" />
                 </div>
                 {i < steps.length - 1 && (
                   <div className="absolute top-full left-1/2 -translate-x-1/2 h-12 hidden lg:block">

@@ -30,10 +30,10 @@ export default function EmailNotifications() {
   return (
     <>
       <button onClick={() => setShowPanel(!showPanel)}
-        className="relative w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center hover:bg-white/10 transition-all">
+        className="relative w-10 h-10 rounded-xl bg-[#F0F4FF] border border-[#DBEAFE] flex items-center justify-center hover:bg-[#F0F4FF] transition-all">
         <Mail className="w-4 h-4 text-dark-300" />
         {unread > 0 && (
-          <span className="absolute -top-1 -right-1 w-4 h-4 rounded-full text-[9px] font-bold text-white flex items-center justify-center"
+          <span className="absolute -top-1 -right-1 w-4 h-4 rounded-full text-[9px] font-bold text-slate-900 flex items-center justify-center"
             style={{ background: '#ef4444' }}>
             {unread > 9 ? '9+' : unread}
           </span>
@@ -47,10 +47,10 @@ export default function EmailNotifications() {
             <motion.div initial={{ opacity: 0, y: -10, scale: 0.95 }} animate={{ opacity: 1, y: 0, scale: 1 }} exit={{ opacity: 0, y: -10 }}
               className="absolute right-0 top-14 w-80 sm:w-96 z-50 rounded-2xl overflow-hidden shadow-2xl"
               style={{ background: '#0a0a12', border: '1px solid rgba(255,255,255,0.08)' }}>
-              <div className="p-4 border-b border-white/5 flex items-center justify-between">
+              <div className="p-4 border-b border-[#DBEAFE] flex items-center justify-between">
                 <div className="flex items-center gap-2">
                   <Mail className="w-4 h-4 text-brand-400" />
-                  <h3 className="text-sm font-semibold text-white">Email Notifications</h3>
+                  <h3 className="text-sm font-semibold text-slate-900">Email Notifications</h3>
                 </div>
                 <div className="flex items-center gap-2">
                   <span className="text-[10px] text-dark-400">{notifs.length} notifications</span>
@@ -68,12 +68,12 @@ export default function EmailNotifications() {
                   </div>
                 ) : (
                   notifs.map(n => (
-                    <div key={n.id} className="flex items-start gap-3 p-3 border-b border-white/5 hover:bg-white/[0.02] transition-colors">
+                    <div key={n.id} className="flex items-start gap-3 p-3 border-b border-[#DBEAFE] hover:bg-[#F0F4FF] transition-colors">
                       <div className="w-8 h-8 rounded-xl flex items-center justify-center shrink-0" style={{ background: n.bg }}>
                         <n.icon className={`w-4 h-4 ${n.color}`} />
                       </div>
                       <div className="flex-1 min-w-0">
-                        <p className="text-xs font-medium text-white">{n.title}</p>
+                        <p className="text-xs font-medium text-slate-900">{n.title}</p>
                         <p className="text-[11px] text-dark-400 mt-0.5">{n.desc}</p>
                         <p className="text-[10px] text-dark-500 mt-1">{n.time}</p>
                       </div>
@@ -83,7 +83,7 @@ export default function EmailNotifications() {
                 )}
               </div>
               {notifs.length > 0 && (
-                <div className="p-3 border-t border-white/5 text-center">
+                <div className="p-3 border-t border-[#DBEAFE] text-center">
                   <button className="text-xs text-brand-400 hover:text-brand-300 transition-colors">View all notifications →</button>
                 </div>
               )}

@@ -8,71 +8,74 @@ html { scroll-behavior: smooth; }
 
 body {
   font-family: 'Inter', system-ui, sans-serif;
-  background: #050508;
-  color: #f8fafc;
+  background: #EFF6FF;
+  color: #0F172A;
   overflow-x: hidden;
 }
 
+::selection {
+  background: #4F46E5;
+  color: white;
+}
+
 ::-webkit-scrollbar { width: 6px; }
-::-webkit-scrollbar-track { background: #0a0a12; }
+::-webkit-scrollbar-track { background: #E2E8F0; }
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(180deg, #7c3aed, #14b8a6);
+  background: linear-gradient(180deg, #4F46E5, #0EA5E9);
   border-radius: 3px;
 }
 
-/* ─── Glassmorphism ─── */
+/* ─── Clean Cards ─── */
 .glass {
-  background: rgba(255, 255, 255, 0.03);
-  backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.05);
+  background: #FFFFFF;
+  border: 1px solid #DBEAFE;
 }
 
 .glass-card {
-  background: linear-gradient(135deg, rgba(124, 58, 237, 0.06), rgba(20, 184, 166, 0.06));
-  backdrop-filter: blur(24px);
-  border: 1px solid rgba(255, 255, 255, 0.06);
+  background: #FFFFFF;
+  border: 1px solid #DBEAFE;
   border-radius: 16px;
-  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.04), 0 1px 2px rgba(0,0,0,0.02);
+  transition: all 0.2s ease;
 }
 
 .glass-card:hover {
-  border-color: rgba(124, 58, 237, 0.25);
-  box-shadow: 0 8px 40px rgba(124, 58, 237, 0.12);
-  transform: translateY(-2px);
+  border-color: #A5B4FC;
+  box-shadow: 0 4px 12px rgba(79, 70, 229, 0.08);
+  transform: translateY(-1px);
 }
 
 .glass-card-deep {
-  background: rgba(10, 10, 18, 0.7);
-  backdrop-filter: blur(32px);
-  border: 1px solid rgba(255, 255, 255, 0.05);
+  background: #FFFFFF;
+  border: 1px solid #DBEAFE;
   border-radius: 20px;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.03);
 }
 
 /* ─── Signature Gradients ─── */
 .gradient-text {
-  background: linear-gradient(135deg, #a78bfa, #2dd4bf);
+  background: linear-gradient(135deg, #4F46E5, #0EA5E9);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
 .gradient-text-brand {
-  background: linear-gradient(135deg, #7c3aed, #6366f1);
+  background: linear-gradient(135deg, #4F46E5, #6366F1);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
 .gradient-text-accent {
-  background: linear-gradient(135deg, #2dd4bf, #14b8a6);
+  background: linear-gradient(135deg, #38BDF8, #0EA5E9);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
 .gradient-brand {
-  background: linear-gradient(135deg, #7c3aed, #6366f1, #14b8a6);
+  background: linear-gradient(135deg, #4F46E5, #6366F1, #0EA5E9);
 }
 
 /* ─── Gradient Border ─── */
@@ -81,7 +84,7 @@ body {
   position: absolute; inset: 0;
   border-radius: inherit;
   padding: 1px;
-  background: linear-gradient(135deg, #7c3aed, #14b8a6);
+  background: linear-gradient(135deg, #4F46E5, #0EA5E9);
   -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
   -webkit-mask-composite: xor;
   mask-composite: exclude;
@@ -90,18 +93,18 @@ body {
 
 /* ─── Glow Effects ─── */
 .glow-brand {
-  box-shadow: 0 0 20px rgba(124, 58, 237, 0.25), 0 0 40px rgba(124, 58, 237, 0.1);
+  box-shadow: 0 0 20px rgba(79, 70, 229, 0.2), 0 0 40px rgba(79, 70, 229, 0.08);
 }
 .glow-accent {
-  box-shadow: 0 0 20px rgba(20, 184, 166, 0.25), 0 0 40px rgba(20, 184, 166, 0.1);
+  box-shadow: 0 0 20px rgba(14, 165, 233, 0.2), 0 0 40px rgba(14, 165, 233, 0.08);
 }
 
 /* ─── Background Mesh ─── */
 .bg-mesh {
   background-image:
-    radial-gradient(at 100% 0%, rgba(124, 58, 237, 0.08) 0px, transparent 50%),
-    radial-gradient(at 0% 100%, rgba(20, 184, 166, 0.06) 0px, transparent 50%),
-    radial-gradient(at 50% 50%, rgba(99, 102, 241, 0.04) 0px, transparent 50%);
+    radial-gradient(at 100% 0%, rgba(79, 70, 229, 0.04) 0px, transparent 50%),
+    radial-gradient(at 0% 100%, rgba(14, 165, 233, 0.03) 0px, transparent 50%),
+    radial-gradient(at 50% 50%, rgba(99, 102, 241, 0.02) 0px, transparent 50%);
 }
 
 .hero-glow {
@@ -110,11 +113,10 @@ body {
   height: 600px;
   border-radius: 50%;
   filter: blur(120px);
-  opacity: 0.12;
+  opacity: 0.08;
   pointer-events: none;
 }
 
-/* ─── Particles ─── */
 #particles-canvas {
   position: fixed;
   top: 0; left: 0;
@@ -170,14 +172,14 @@ body {
 .btn-premium {
   position: relative;
   overflow: hidden;
-  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  transition: all 0.2s ease;
 }
 .btn-premium::before {
   content: '';
   position: absolute;
   top: -50%; left: -50%;
   width: 200%; height: 200%;
-  background: conic-gradient(from 0deg, transparent, rgba(255,255,255,0.08), transparent, rgba(255,255,255,0.08), transparent);
+  background: conic-gradient(from 0deg, transparent, rgba(255,255,255,0.12), transparent, rgba(255,255,255,0.12), transparent);
   animation: rotate 4s linear infinite;
   opacity: 0;
   transition: opacity 0.4s;
@@ -187,23 +189,23 @@ body {
 
 /* ─── Skeleton ─── */
 .skeleton {
-  background: linear-gradient(90deg, rgba(255,255,255,0.02) 25%, rgba(255,255,255,0.05) 50%, rgba(255,255,255,0.02) 75%);
+  background: linear-gradient(90deg, #F1F5F9 25%, #E2E8F0 50%, #F1F5F9 75%);
   background-size: 200% 100%;
   animation: shimmer 1.5s ease-in-out infinite;
   border-radius: 8px;
 }
 
 /* ─── Status Badges ─── */
-.badge-hot { background: linear-gradient(135deg, rgba(239,68,68,0.15), rgba(239,68,68,0.05)); border: 1px solid rgba(239,68,68,0.25); color: #fca5a5; }
-.badge-warm { background: linear-gradient(135deg, rgba(234,179,8,0.15), rgba(234,179,8,0.05)); border: 1px solid rgba(234,179,8,0.25); color: #fde047; }
-.badge-cold { background: linear-gradient(135deg, rgba(100,116,139,0.15), rgba(100,116,139,0.05)); border: 1px solid rgba(100,116,139,0.25); color: #94a3b8; }
+.badge-hot { background: linear-gradient(135deg, rgba(239,68,68,0.1), rgba(239,68,68,0.04)); border: 1px solid rgba(239,68,68,0.2); color: #DC2626; }
+.badge-warm { background: linear-gradient(135deg, rgba(234,179,8,0.1), rgba(234,179,8,0.04)); border: 1px solid rgba(234,179,8,0.2); color: #D97706; }
+.badge-cold { background: linear-gradient(135deg, rgba(100,116,139,0.1), rgba(100,116,139,0.04)); border: 1px solid rgba(100,116,139,0.2); color: #64748B; }
 
 /* ─── Brand Signature Elements ─── */
 .brand-dot {
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  background: linear-gradient(135deg, #7c3aed, #14b8a6);
+  background: linear-gradient(135deg, #4F46E5, #0EA5E9);
 }
 
 /* ─── Scroll Reveal ─── */

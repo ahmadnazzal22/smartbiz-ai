@@ -56,22 +56,22 @@ export default function Pricing() {
           {plans.map((plan, index) => (
             <motion.div key={plan.name} initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }} transition={{ delay: index * 0.1 }}
-              className={`relative glass-card p-8 flex flex-col group hover:bg-white/[0.04] ${
+              className={`relative glass-card p-8 flex flex-col group hover:bg-[#F0F4FF] ${
                 plan.popular ? 'scale-105' : ''
               }`}
               style={plan.popular ? { borderColor: 'rgba(124,58,237,0.3)', background: 'linear-gradient(135deg, rgba(124,58,237,0.08), rgba(99,102,241,0.05))' } : {}}>
               {plan.popular && (
-                <div className="absolute -top-4 left-1/2 -translate-x-1/2 px-5 py-1.5 rounded-full text-xs font-semibold text-white flex items-center gap-1.5 shadow-lg"
+                <div className="absolute -top-4 left-1/2 -translate-x-1/2 px-5 py-1.5 rounded-full text-xs font-semibold text-slate-900 flex items-center gap-1.5 shadow-lg"
                   style={{ background: 'linear-gradient(135deg, #7c3aed, #6366f1, #14b8a6)' }}>
                   <Star className="w-3 h-3" /> {plan.badge}
                 </div>
               )}
               
               <div className="mb-8">
-                <h3 className="text-xl font-semibold text-white mb-2">{plan.name}</h3>
+                <h3 className="text-xl font-semibold text-slate-900 mb-2">{plan.name}</h3>
                 <p className="text-dark-400 text-sm mb-4">{plan.description}</p>
                 <div className="flex items-baseline gap-1">
-                  <span className="text-5xl font-bold text-white">${plan.price}</span>
+                  <span className="text-5xl font-bold text-slate-900">${plan.price}</span>
                   <span className="text-dark-400">/month</span>
                 </div>
               </div>
@@ -91,8 +91,8 @@ export default function Pricing() {
               <Link to={plan.name === 'Enterprise' ? '#contact' : '/login'}
                 className={`w-full py-3.5 rounded-full text-sm font-semibold text-center transition-all duration-300 btn-premium ${
                   plan.popular
-                    ? 'text-white hover:shadow-xl'
-                    : 'glass-card text-dark-200 hover:text-white hover:border-brand-500/30'
+                    ? 'text-slate-900 hover:shadow-xl'
+                    : 'glass-card text-dark-200 hover:text-slate-900 hover:border-brand-500/30'
                 }`}
                 style={plan.popular ? { background: 'linear-gradient(135deg, #7c3aed, #6366f1, #14b8a6)' } : {}}>
                 {plan.cta}

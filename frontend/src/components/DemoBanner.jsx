@@ -15,7 +15,7 @@ export default function DemoBanner() {
         </span>
         <span className="text-dark-300">You're viewing a preview with sample data.</span>
         <Link to="/login"
-          className="px-4 py-1 rounded-full text-xs font-medium text-white transition-all hover:shadow-lg"
+          className="px-4 py-1 rounded-full text-xs font-medium text-slate-900 transition-all hover:shadow-lg"
           style={{ background: 'linear-gradient(135deg, #7c3aed, #6366f1)' }}>
           Sign Up Free
         </Link>

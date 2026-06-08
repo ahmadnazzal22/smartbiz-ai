@@ -101,7 +101,7 @@ export default function PricingPage() {
           Simple, Transparent Pricing
         </motion.div>
         <motion.h1 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }}
-          className="text-4xl sm:text-5xl lg:text-6xl font-display font-bold text-white mb-4">
+          className="text-4xl sm:text-5xl lg:text-6xl font-display font-bold text-slate-900 mb-4">
           The right plan for{' '}
           <span className="gradient-text">your business</span>
         </motion.h1>
@@ -113,12 +113,12 @@ export default function PricingPage() {
         {/* Toggle */}
         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.3 }}
           className="flex items-center justify-center gap-4 mt-10">
-          <span className={`text-sm font-medium ${!annual ? 'text-white' : 'text-dark-400'}`}>Monthly</span>
+          <span className={`text-sm font-medium ${!annual ? 'text-slate-900' : 'text-dark-400'}`}>Monthly</span>
           <button onClick={() => setAnnual(!annual)}
-            className={`relative w-14 h-7 rounded-full transition-all ${annual ? 'bg-brand-500' : 'bg-white/10'}`}>
+            className={`relative w-14 h-7 rounded-full transition-all ${annual ? 'bg-brand-500' : 'bg-[#F0F4FF]'}`}>
             <div className={`absolute top-1 w-5 h-5 rounded-full bg-white shadow transition-all ${annual ? 'translate-x-8' : 'translate-x-1'}`} />
           </button>
-          <span className={`text-sm font-medium ${annual ? 'text-white' : 'text-dark-400'}`}>
+          <span className={`text-sm font-medium ${annual ? 'text-slate-900' : 'text-dark-400'}`}>
             Annual <span className="text-accent-400 text-xs">Save 20%</span>
           </span>
         </motion.div>
@@ -132,16 +132,16 @@ export default function PricingPage() {
               className={`relative glass-card p-8 flex flex-col ${plan.popular ? 'scale-105 ring-1 ring-brand-500/30' : ''}`}
               style={plan.popular ? { background: 'linear-gradient(135deg, rgba(124,58,237,0.08), rgba(99,102,241,0.04))' } : {}}>
               {plan.popular && (
-                <div className="absolute -top-4 left-1/2 -translate-x-1/2 px-5 py-1.5 rounded-full text-xs font-semibold text-white flex items-center gap-1.5 shadow-lg whitespace-nowrap"
+                <div className="absolute -top-4 left-1/2 -translate-x-1/2 px-5 py-1.5 rounded-full text-xs font-semibold text-slate-900 flex items-center gap-1.5 shadow-lg whitespace-nowrap"
                   style={{ background: 'linear-gradient(135deg, #7c3aed, #6366f1, #14b8a6)' }}>
                   <Star className="w-3 h-3" /> {plan.badge}
                 </div>
               )}
               <div className="mb-6">
-                <h3 className="text-xl font-semibold text-white mb-1">{plan.name}</h3>
+                <h3 className="text-xl font-semibold text-slate-900 mb-1">{plan.name}</h3>
                 <p className="text-dark-400 text-sm mb-4">{plan.desc}</p>
                 <div className="flex items-baseline gap-1">
-                  <span className="text-5xl font-bold text-white">{annual ? plan.yearly : plan.monthly}</span>
+                  <span className="text-5xl font-bold text-slate-900">{annual ? plan.yearly : plan.monthly}</span>
                   {plan.monthly !== '$0' && <span className="text-dark-400">/month</span>}
                 </div>
                 {annual && plan.monthly !== '$0' && (
@@ -152,8 +152,8 @@ export default function PricingPage() {
               <Link to={plan.name === 'Enterprise' ? '#contact' : '/login'}
                 className={`w-full py-3.5 rounded-xl text-sm font-semibold text-center transition-all duration-300 mb-8 ${
                   plan.popular
-                    ? 'text-white hover:shadow-lg hover:scale-[1.02]'
-                    : 'glass-card text-dark-200 hover:text-white hover:border-brand-500/30'
+                    ? 'text-slate-900 hover:shadow-lg hover:scale-[1.02]'
+                    : 'glass-card text-dark-200 hover:text-slate-900 hover:border-brand-500/30'
                 }`}
                 style={plan.popular ? { background: 'linear-gradient(135deg, #7c3aed, #6366f1)' } : {}}>
                 {plan.cta}
@@ -193,7 +193,7 @@ export default function PricingPage() {
       {/* Feature Comparison Table */}
       <div className="max-w-5xl mx-auto px-4 pb-20">
         <motion.h2 initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}
-          className="text-3xl font-display font-bold text-white text-center mb-12">
+          className="text-3xl font-display font-bold text-slate-900 text-center mb-12">
           Full Feature <span className="gradient-text">Comparison</span>
         </motion.h2>
         <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
@@ -201,10 +201,10 @@ export default function PricingPage() {
           <div className="overflow-x-auto">
             <table className="w-full text-sm">
               <thead>
-                <tr className="border-b border-white/5">
+                <tr className="border-b border-[#DBEAFE]">
                   <th className="text-left px-6 py-4 text-dark-400 font-medium">Feature</th>
                   {plans.map(p => (
-                    <th key={p.name} className={`px-6 py-4 text-center font-semibold ${p.popular ? 'text-brand-300' : 'text-white'}`}>
+                    <th key={p.name} className={`px-6 py-4 text-center font-semibold ${p.popular ? 'text-brand-300' : 'text-slate-900'}`}>
                       {p.name}
                       {p.popular && <span className="block text-[10px] text-brand-400 font-normal">Most Popular</span>}
                     </th>
@@ -213,7 +213,7 @@ export default function PricingPage() {
               </thead>
               <tbody>
                 {allFeatures.map((f, i) => (
-                  <tr key={f} className={`${i < allFeatures.length - 1 ? 'border-b border-white/5' : ''} hover:bg-white/[0.02]`}>
+                  <tr key={f} className={`${i < allFeatures.length - 1 ? 'border-b border-[#DBEAFE]' : ''} hover:bg-[#F0F4FF]`}>
                     <td className="px-6 py-4 text-dark-200">{f}</td>
                     {plans.map(p => {
                       const val = p.features[f]
@@ -236,7 +236,7 @@ export default function PricingPage() {
       {/* FAQ */}
       <div className="max-w-3xl mx-auto px-4 pb-32">
         <motion.h2 initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}
-          className="text-3xl font-display font-bold text-white text-center mb-12">
+          className="text-3xl font-display font-bold text-slate-900 text-center mb-12">
           Frequently Asked <span className="gradient-text">Questions</span>
         </motion.h2>
         <div className="space-y-3">
@@ -245,7 +245,7 @@ export default function PricingPage() {
               className="glass-card overflow-hidden">
               <button onClick={() => setOpenFaq(openFaq === i ? null : i)}
                 className="w-full px-6 py-4 flex items-center justify-between text-left">
-                <span className="text-sm font-medium text-white">{faq.q}</span>
+                <span className="text-sm font-medium text-slate-900">{faq.q}</span>
                 <ChevronDown className={`w-4 h-4 text-dark-400 transition-transform ${openFaq === i ? 'rotate-180' : ''}`} />
               </button>
               {openFaq === i && (
@@ -262,12 +262,12 @@ export default function PricingPage() {
       <div className="text-center pb-32 px-4">
         <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
           className="max-w-2xl mx-auto">
-          <h2 className="text-3xl sm:text-4xl font-display font-bold text-white mb-4">
+          <h2 className="text-3xl sm:text-4xl font-display font-bold text-slate-900 mb-4">
             Still not sure? <span className="gradient-text">Try it free</span>
           </h2>
           <p className="text-dark-300 mb-8">Start your 14-day free trial. No credit card. No commitment.</p>
           <Link to="/try-demo"
-            className="inline-flex items-center gap-2 px-10 py-4 rounded-full text-white font-semibold text-lg hover:shadow-lg hover:scale-105 transition-all duration-300"
+            className="inline-flex items-center gap-2 px-10 py-4 rounded-full text-slate-900 font-semibold text-lg hover:shadow-lg hover:scale-105 transition-all duration-300"
             style={{ background: 'linear-gradient(135deg, #7c3aed, #6366f1, #14b8a6)' }}>
             Try Free Demo <ArrowRight className="w-5 h-5" />
           </Link>

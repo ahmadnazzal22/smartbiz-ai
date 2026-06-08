@@ -47,15 +47,15 @@ export default function Features() {
                 transition: 'all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)',
               }}>
               <div className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${feature.gradient} p-3 mb-6 relative overflow-hidden`}>
-                <feature.icon className="w-full h-full text-white relative z-10" />
+                <feature.icon className="w-full h-full text-slate-900 relative z-10" />
                 {hoveredIndex === index && (
                   <motion.div initial={{ scale: 0 }} animate={{ scale: 2 }}
-                    className="absolute inset-0 bg-white/20 rounded-full" />
+                    className="absolute inset-0 bg-[#F0F4FF] rounded-full" />
                 )}
               </div>
-              <h3 className="text-xl font-semibold text-white mb-3">{feature.title}</h3>
+              <h3 className="text-xl font-semibold text-slate-900 mb-3">{feature.title}</h3>
               <p className="text-dark-300 leading-relaxed text-sm">{feature.desc}</p>
-              <div className="mt-5 pt-4 border-t border-white/5 flex items-center justify-between">
+              <div className="mt-5 pt-4 border-t border-[#DBEAFE] flex items-center justify-between">
                 <span className="text-xs text-accent-400 font-medium">{feature.stats}</span>
                 <span className="text-dark-500 group-hover:text-brand-400 transition-colors text-sm">Learn more →</span>
               </div>

@@ -80,11 +80,11 @@ export default function Hero() {
                 <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </Link>
               <Link to="/pricing"
-                className="px-8 py-4 glass-card rounded-full text-dark-200 font-semibold text-lg flex items-center gap-2 hover:text-white hover:border-accent-500/30 transition-all duration-300">
+                className="px-8 py-4 glass-card rounded-full text-slate-700 font-semibold text-lg flex items-center gap-2 hover:text-brand-600 hover:border-accent-500/30 transition-all duration-300">
                 See Pricing
               </Link>
               <Link to="/login"
-                className="px-8 py-4 glass-card rounded-full text-dark-200 font-semibold text-lg flex items-center gap-2 hover:text-white hover:border-brand-500/30 transition-all duration-300">
+                className="px-8 py-4 glass-card rounded-full text-slate-700 font-semibold text-lg flex items-center gap-2 hover:text-brand-600 hover:border-brand-500/30 transition-all duration-300">
                 <Play className="w-5 h-5" />
                 Sign Up Free
               </Link>
@@ -103,7 +103,7 @@ export default function Hero() {
                 <div className="flex items-center gap-1">
                   {[...Array(5)].map((_, i) => <Star key={i} className="w-3 h-3 fill-yellow-500 text-yellow-500" />)}
                 </div>
-                <p className="text-dark-400 mt-0.5">Trusted by <span className="text-white font-semibold">3,000+</span> businesses</p>
+                <p className="text-dark-400 mt-0.5">Trusted by <span className="text-slate-900 font-semibold">3,000+</span> businesses</p>
               </div>
             </motion.div>
           </div>
@@ -122,7 +122,7 @@ export default function Hero() {
                   border: '1px solid rgba(255,255,255,0.06)',
                   boxShadow: '0 25px 80px rgba(0,0,0,0.5), 0 0 40px rgba(124,58,237,0.1)',
                 }}>
-                <div className="flex items-center gap-2 px-5 py-3 border-b border-white/5 bg-white/[0.02]">
+                <div className="flex items-center gap-2 px-5 py-3 border-b border-[#DBEAFE] bg-[#F0F4FF]">
                   <div className="w-3 h-3 rounded-full bg-red-500/80" />
                   <div className="w-3 h-3 rounded-full bg-yellow-500/80" />
                   <div className="w-3 h-3 rounded-full bg-green-500/80" />
@@ -133,7 +133,7 @@ export default function Hero() {
                   <div className="flex items-center justify-between">
                     <div className="flex gap-2">
                       {['Total Leads', 'Bookings', 'Revenue'].map(label => (
-                        <div key={label} className="px-3 py-1.5 rounded-lg bg-white/5 text-xs text-dark-300">{label}</div>
+                        <div key={label} className="px-3 py-1.5 rounded-lg bg-[#F0F4FF] text-xs text-dark-300">{label}</div>
                       ))}
                     </div>
                     <div className="flex items-center gap-1.5">
@@ -148,9 +148,9 @@ export default function Hero() {
                       { value: '45', label: 'Bookings', change: '+8%', color: 'from-accent-500 to-emerald-500' },
                       { value: '$12.4k', label: 'Revenue', change: '+23%', color: 'from-blue-500 to-cyan-500' },
                     ].map(s => (
-                      <div key={s.label} className="rounded-xl bg-white/[0.03] p-3 border border-white/5">
+                      <div key={s.label} className="rounded-xl bg-[#F0F4FF] p-3 border border-[#DBEAFE]">
                         <div className="flex items-center justify-between mb-1">
-                          <span className="text-lg font-bold text-white">{s.value}</span>
+                          <span className="text-lg font-bold text-slate-900">{s.value}</span>
                           <span className="text-xs text-green-400">{s.change}</span>
                         </div>
                         <p className="text-xs text-dark-400">{s.label}</p>
@@ -158,7 +158,7 @@ export default function Hero() {
                     ))}
                   </div>
 
-                  <div className="rounded-xl bg-white/[0.02] border border-white/5 p-3">
+                  <div className="rounded-xl bg-[#F0F4FF] border border-[#DBEAFE] p-3">
                     <div className="flex items-center gap-2 mb-2">
                       <MessageCircle className="w-3.5 h-3.5 text-brand-400" />
                       <span className="text-xs text-dark-400">Live WhatsApp Activity</span>
@@ -169,7 +169,7 @@ export default function Hero() {
                           animate={{ opacity: 1, x: 0 }} transition={{ delay: msg.delay }}
                           className={`flex ${msg.side === 'left' ? 'justify-start' : 'justify-end'}`}>
                           <div className={`px-3 py-1.5 rounded-xl text-xs max-w-[80%] ${
-                            msg.side === 'left' ? 'bg-white/5 text-dark-300' : 'bg-gradient-to-r from-brand-600 to-accent-600 text-white'
+                            msg.side === 'left' ? 'bg-[#F0F4FF] text-dark-300' : 'bg-gradient-to-r from-brand-600 to-accent-600 text-white'
                           }`}>{msg.text}</div>
                         </motion.div>
                       ))}
@@ -194,7 +194,7 @@ export default function Hero() {
                   left: `${x}%`, top: `${y}%`,
                   transform: `translate(${mousePos.x * (10 + i * 5)}px, ${mousePos.y * (10 + i * 5)}px)`,
                 }}>
-                <div className="flex items-center gap-2 px-3 py-2 rounded-xl glass-card border-white/10 backdrop-blur-xl whitespace-nowrap">
+                <div className="flex items-center gap-2 px-3 py-2 rounded-xl glass-card border-[#DBEAFE] backdrop-blur-xl whitespace-nowrap">
                   <div className={`w-7 h-7 rounded-lg bg-gradient-to-br ${color} flex items-center justify-center`}>
                     <Icon className="w-3.5 h-3.5 text-white" />
                   </div>

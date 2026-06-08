@@ -52,13 +52,13 @@ export default function AIChat() {
       <main className="lg:ml-64 flex-1 flex pb-16 lg:pb-0">
         {/* Chat Area */}
         <div className="flex-1 flex flex-col">
-          <div className="p-6 border-b border-white/5 flex items-center justify-between">
+          <div className="p-6 border-b border-[#DBEAFE] flex items-center justify-between">
             <div className="flex items-center gap-3">
               <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-primary-500 to-accent-500 flex items-center justify-center">
-                <Bot className="w-6 h-6 text-white" />
+                <Bot className="w-6 h-6 text-slate-900" />
               </div>
               <div>
-                <h2 className="text-lg font-semibold text-white">AI Business Assistant</h2>
+                <h2 className="text-lg font-semibold text-slate-900">AI Business Assistant</h2>
                 <p className="text-xs text-dark-400">Powered by SmartBiz AI Engine</p>
               </div>
             </div>
@@ -75,12 +75,12 @@ export default function AIChat() {
                   <div className={`w-8 h-8 rounded-full flex items-center justify-center shrink-0 ${
                     msg.role === 'user' ? 'bg-accent-500' : 'bg-gradient-to-br from-primary-500 to-accent-500'
                   }`}>
-                    {msg.role === 'user' ? <User className="w-4 h-4 text-white" /> : <Bot className="w-4 h-4 text-white" />}
+                    {msg.role === 'user' ? <User className="w-4 h-4 text-slate-900" /> : <Bot className="w-4 h-4 text-slate-900" />}
                   </div>
                   <div className={`rounded-2xl px-5 py-3 text-sm leading-relaxed ${
                     msg.role === 'user'
                       ? 'bg-gradient-to-r from-primary-500 to-accent-500 text-white rounded-tr-sm'
-                      : 'bg-white/5 text-dark-200 rounded-tl-sm'
+                      : 'bg-[#F0F4FF] text-dark-200 rounded-tl-sm'
                   }`}>{msg.content}</div>
                 </div>
               </motion.div>
@@ -89,9 +89,9 @@ export default function AIChat() {
               <div className="flex justify-start">
                 <div className="flex items-start gap-3">
                   <div className="w-8 h-8 rounded-full bg-gradient-to-br from-primary-500 to-accent-500 flex items-center justify-center">
-                    <Bot className="w-4 h-4 text-white" />
+                    <Bot className="w-4 h-4 text-slate-900" />
                   </div>
-                  <div className="bg-white/5 rounded-2xl px-5 py-3 rounded-tl-sm">
+                  <div className="bg-[#F0F4FF] rounded-2xl px-5 py-3 rounded-tl-sm">
                     <span className="inline-flex gap-1">
                       <span className="w-2 h-2 bg-dark-400 rounded-full animate-bounce" style={{ animationDelay: '0ms' }} />
                       <span className="w-2 h-2 bg-dark-400 rounded-full animate-bounce" style={{ animationDelay: '150ms' }} />
@@ -110,7 +110,7 @@ export default function AIChat() {
               <div className="flex flex-wrap gap-2">
                 {quickActions.map(qa => (
                   <button key={qa.label} onClick={() => sendMessage(qa.msg)}
-                    className="text-xs px-4 py-2 rounded-full glass-card text-dark-300 hover:text-white hover:border-primary-500/30 transition-all">
+                    className="text-xs px-4 py-2 rounded-full glass-card text-dark-300 hover:text-slate-900 hover:border-primary-500/30 transition-all">
                     {qa.label}
                   </button>
                 ))}
@@ -118,12 +118,12 @@ export default function AIChat() {
             </div>
           )}
 
-          <div className="p-6 border-t border-white/5">
-            <div className="flex items-center gap-2 rounded-2xl bg-white/5 border border-white/10 p-1.5 focus-within:border-primary-500/50 transition-all">
+          <div className="p-6 border-t border-[#DBEAFE]">
+            <div className="flex items-center gap-2 rounded-2xl bg-[#F0F4FF] border border-[#DBEAFE] p-1.5 focus-within:border-primary-500/50 transition-all">
               <input value={input} onChange={e => setInput(e.target.value)}
                 onKeyDown={e => e.key === 'Enter' && sendMessage(input)}
                 placeholder="Ask anything about SmartBiz AI..."
-                className="flex-1 bg-transparent px-4 py-2.5 text-sm text-white placeholder-dark-400 outline-none" />
+                className="flex-1 bg-transparent px-4 py-2.5 text-sm text-slate-900 placeholder-dark-400 outline-none" />
               <button onClick={() => sendMessage(input)} disabled={loading || !input.trim()}
                 className="w-10 h-10 rounded-full bg-gradient-to-r from-primary-500 to-accent-500 flex items-center justify-center text-white hover:shadow-lg transition-all disabled:opacity-40">
                 <Send className="w-4 h-4" />
@@ -133,10 +133,10 @@ export default function AIChat() {
         </div>
 
         {/* Insights Sidebar */}
-        <div className="w-72 border-l border-white/5 p-5 hidden xl:block">
+        <div className="w-72 border-l border-[#DBEAFE] p-5 hidden xl:block">
           <div className="flex items-center gap-2 mb-6">
             <Brain className="w-5 h-5 text-primary-400" />
-            <h3 className="text-sm font-semibold text-white">AI Insights</h3>
+            <h3 className="text-sm font-semibold text-slate-900">AI Insights</h3>
           </div>
           <div className="space-y-3 mb-8">
             {insights.map((ins, i) => (
@@ -145,7 +145,7 @@ export default function AIChat() {
                   <ins.icon className="w-4 h-4 text-primary-400" />
                   <span className="text-xs text-dark-400">{ins.label}</span>
                 </div>
-                <p className="text-lg font-bold text-white">{ins.value}</p>
+                <p className="text-lg font-bold text-slate-900">{ins.value}</p>
                 <p className="text-xs text-accent-400">{ins.change}</p>
               </div>
             ))}
@@ -165,7 +165,7 @@ export default function AIChat() {
               ].map(d => (
                 <div key={d.label} className="flex justify-between">
                   <span className="text-dark-400">{d.label}</span>
-                  <span className="text-white font-medium">{d.value}</span>
+                  <span className="text-slate-900 font-medium">{d.value}</span>
                 </div>
               ))}
             </div>

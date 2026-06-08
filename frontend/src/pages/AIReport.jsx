@@ -101,7 +101,7 @@ export default function AIReport() {
             className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
             <div>
               <div className="flex items-center gap-3 mb-1">
-                <h1 className="text-3xl font-bold text-white">AI Daily Report</h1>
+                <h1 className="text-3xl font-bold text-slate-900">AI Daily Report</h1>
                 <span className="px-2.5 py-0.5 rounded-full text-[10px] font-medium bg-brand-500/15 text-brand-300 border border-brand-500/20">
                   {today}
                 </span>
@@ -110,12 +110,12 @@ export default function AIReport() {
             </div>
             <div className="flex items-center gap-3">
               <button onClick={loadReport} disabled={loading}
-                className="flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm text-dark-300 bg-white/[0.03] border border-white/5 hover:bg-white/[0.06] transition-all">
+                className="flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm text-dark-300 bg-[#F0F4FF] border border-[#DBEAFE] hover:bg-[#F0F4FF] transition-all">
                 <RefreshCw className={`w-4 h-4 ${loading ? 'animate-spin' : ''}`} />
                 Refresh
               </button>
               <Link to="/dashboard"
-                className="flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm text-dark-300 bg-white/[0.03] border border-white/5 hover:bg-white/[0.06] transition-all">
+                className="flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm text-dark-300 bg-[#F0F4FF] border border-[#DBEAFE] hover:bg-[#F0F4FF] transition-all">
                 <ArrowRight className="w-4 h-4 rotate-180" />
                 Dashboard
               </Link>
@@ -129,11 +129,11 @@ export default function AIReport() {
               <div className="flex items-start gap-4">
                 <div className="w-12 h-12 rounded-xl flex items-center justify-center shrink-0"
                   style={{ background: 'linear-gradient(135deg, #7c3aed, #6366f1)' }}>
-                  <Sparkles className="w-6 h-6 text-white" />
+                  <Sparkles className="w-6 h-6 text-slate-900" />
                 </div>
                 <div className="flex-1">
                   <div className="flex items-center gap-2 mb-1">
-                    <h3 className="text-lg font-semibold text-white">AI Executive Summary</h3>
+                    <h3 className="text-lg font-semibold text-slate-900">AI Executive Summary</h3>
                     {report.focus_area && (
                       <span className="text-[10px] px-2 py-0.5 rounded-full bg-brand-500/15 text-brand-300 border border-brand-500/20">
                         Focus: {report.focus_area}
@@ -162,7 +162,7 @@ export default function AIReport() {
                       {Math.abs(card.change)}%
                     </span>
                   </div>
-                  <p className="text-2xl font-bold text-white">{card.value}</p>
+                  <p className="text-2xl font-bold text-slate-900">{card.value}</p>
                   <p className="text-xs text-dark-400 mt-0.5">{card.label}</p>
                 </div>
               )
@@ -173,7 +173,7 @@ export default function AIReport() {
             <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.15 }}
               className="glass-card p-6">
               <div className="flex items-center justify-between mb-6">
-                <h3 className="text-sm font-semibold text-white">Weekly Performance</h3>
+                <h3 className="text-sm font-semibold text-slate-900">Weekly Performance</h3>
                 <div className="flex items-center gap-4 text-xs">
                   <span className="flex items-center gap-1.5"><span className="w-2.5 h-2.5 rounded-sm" style={{ background: '#7c3aed' }} /> Leads</span>
                   <span className="flex items-center gap-1.5"><span className="w-2.5 h-2.5 rounded-sm" style={{ background: '#14b8a6' }} /> Bookings</span>
@@ -201,7 +201,7 @@ export default function AIReport() {
             <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }}
               className="glass-card p-6">
               <div className="flex items-center justify-between mb-6">
-                <h3 className="text-sm font-semibold text-white">Week-over-Week Comparison</h3>
+                <h3 className="text-sm font-semibold text-slate-900">Week-over-Week Comparison</h3>
                 <div className="flex items-center gap-4 text-xs">
                   <span className="flex items-center gap-1.5"><span className="w-2.5 h-2.5 rounded-sm bg-brand-500" /> This Week</span>
                   <span className="flex items-center gap-1.5"><span className="w-2.5 h-2.5 rounded-sm bg-dark-500" /> Last Week</span>
@@ -228,7 +228,7 @@ export default function AIReport() {
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.25 }}
             className="glass-card p-6">
             <div className="flex items-center justify-between mb-5">
-              <h3 className="text-sm font-semibold text-white flex items-center gap-2">
+              <h3 className="text-sm font-semibold text-slate-900 flex items-center gap-2">
                 <AlertTriangle className="w-4 h-4 text-red-400" />
                 Hot Leads — Needs Immediate Follow-up
               </h3>
@@ -239,15 +239,15 @@ export default function AIReport() {
             </div>
             <div className="space-y-3">
               {hotLeads.map((lead, i) => (
-                <div key={i} className="flex items-center gap-4 p-4 rounded-xl bg-white/[0.03] hover:bg-white/[0.05] transition-all group">
-                  <div className={`w-10 h-10 rounded-xl flex items-center justify-center text-sm font-bold text-white ${
+                <div key={i} className="flex items-center gap-4 p-4 rounded-xl bg-[#F0F4FF] hover:bg-[#F0F4FF] transition-all group">
+                  <div className={`w-10 h-10 rounded-xl flex items-center justify-center text-sm font-bold text-slate-900 ${
                     lead.status === 'hot' ? 'bg-gradient-to-br from-red-500 to-orange-500' : 'bg-gradient-to-br from-yellow-500 to-amber-500'
                   }`}>
                     {lead.name.split(' ').map(n => n[0]).join('')}
                   </div>
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center gap-2">
-                      <p className="text-sm font-medium text-white">{lead.name}</p>
+                      <p className="text-sm font-medium text-slate-900">{lead.name}</p>
                       {lead.score && <span className={`px-1.5 py-0.5 rounded text-[10px] font-medium ${
                         lead.score >= 80 ? 'bg-red-500/10 text-red-400' : 'bg-yellow-500/10 text-yellow-400'
                       }`}>{lead.score >= 80 ? 'HOT' : 'WARM'}</span>}
@@ -257,7 +257,7 @@ export default function AIReport() {
                   {lead.score && (
                     <div className="flex items-center gap-3">
                       <div className="text-right">
-                        <p className="text-lg font-bold text-white">{lead.score}</p>
+                        <p className="text-lg font-bold text-slate-900">{lead.score}</p>
                         <p className="text-[10px] text-dark-500">Score</p>
                       </div>
                     </div>
@@ -277,7 +277,7 @@ export default function AIReport() {
               </div>
               <div className="flex-1">
                 <div className="flex items-center gap-2 mb-1">
-                  <h3 className="text-lg font-semibold text-white">AI Daily Recommendation</h3>
+                  <h3 className="text-lg font-semibold text-slate-900">AI Daily Recommendation</h3>
                   <span className="text-[10px] px-2 py-0.5 rounded-full bg-accent-500/15 text-accent-300 border border-accent-500/20">Priority</span>
                 </div>
                 <p className="text-sm text-dark-300 leading-relaxed mb-4">
@@ -285,14 +285,14 @@ export default function AIReport() {
                 </p>
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                   {recommendations.map((item, i) => (
-                    <div key={i} className="p-4 rounded-xl bg-white/[0.03] border border-white/5">
+                    <div key={i} className="p-4 rounded-xl bg-[#F0F4FF] border border-[#DBEAFE]">
                       <div className="flex items-center justify-between mb-2">
                         <span className="text-xs text-dark-500">{item.time}</span>
                         <span className={`text-[10px] font-medium ${i === 0 ? 'text-red-400' : i === 1 ? 'text-yellow-400' : 'text-accent-400'}`}>
                           {i === 0 ? 'High' : i === 1 ? 'Medium' : 'Low'}
                         </span>
                       </div>
-                      <p className="text-sm font-medium text-white">{item.task}</p>
+                      <p className="text-sm font-medium text-slate-900">{item.task}</p>
                       <p className="text-xs text-dark-400 mt-1">{item.description}</p>
                     </div>
                   ))}
@@ -304,19 +304,19 @@ export default function AIReport() {
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.35 }}
             className="flex flex-wrap items-center gap-3 pt-2">
             <button onClick={() => handleShare('email')}
-              className="flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-medium text-white transition-all hover:shadow-lg"
+              className="flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-medium text-slate-900 transition-all hover:shadow-lg"
               style={{ background: sentTo === 'email' ? 'linear-gradient(135deg, #16a34a, #15803d)' : 'linear-gradient(135deg, #7c3aed, #6366f1)' }}>
               {sentTo === 'email' ? <CheckCircle2 className="w-4 h-4" /> : <Mail className="w-4 h-4" />}
               {sentTo === 'email' ? 'Sent!' : 'Send to Email'}
             </button>
             <button onClick={() => handleShare('whatsapp')}
-              className="flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-medium text-white transition-all hover:shadow-lg"
+              className="flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-medium text-slate-900 transition-all hover:shadow-lg"
               style={{ background: sentTo === 'whatsapp' ? 'linear-gradient(135deg, #16a34a, #15803d)' : 'linear-gradient(135deg, #25D366, #128C7E)' }}>
               {sentTo === 'whatsapp' ? <CheckCircle2 className="w-4 h-4" /> : <Smartphone className="w-4 h-4" />}
               {sentTo === 'whatsapp' ? 'Sent!' : 'Send to WhatsApp'}
             </button>
             <button onClick={() => handleShare('pdf')}
-              className="flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-medium text-dark-200 glass-card hover:bg-white/[0.08] transition-all">
+              className="flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-medium text-dark-200 glass-card hover:bg-[#F0F4FF] transition-all">
               <Download className="w-4 h-4" /> Download PDF
             </button>
           </motion.div>

@@ -106,45 +106,45 @@ export default function GuidedTour({ onComplete }) {
                 <div className="flex items-center gap-2">
                   {step.icon && (
                     <div className="w-8 h-8 rounded-lg gradient-brand flex items-center justify-center">
-                      <step.icon className="w-4 h-4 text-white" />
+                      <step.icon className="w-4 h-4 text-slate-900" />
                     </div>
                   )}
-                  <span className="text-[10px] text-dark-400 font-medium px-2 py-0.5 rounded-full bg-white/5">
+                  <span className="text-[10px] text-dark-400 font-medium px-2 py-0.5 rounded-full bg-[#F0F4FF]">
                     {current + 1} / {steps.length}
                   </span>
                 </div>
-                <button onClick={dismiss} className="text-dark-400 hover:text-white transition-colors">
+                <button onClick={dismiss} className="text-dark-400 hover:text-slate-900 transition-colors">
                   <X className="w-4 h-4" />
                 </button>
               </div>
 
-              <h3 className="text-lg font-bold text-white mb-2">{step.title}</h3>
+              <h3 className="text-lg font-bold text-slate-900 mb-2">{step.title}</h3>
               <p className="text-sm text-dark-300 leading-relaxed mb-6">{step.desc}</p>
 
               <div className="flex items-center justify-between">
                 <div className="flex gap-1.5">
                   {steps.map((_, i) => (
                     <div key={i} className={`w-1.5 h-1.5 rounded-full transition-all duration-300 ${
-                      i === current ? 'w-4 bg-brand-400' : 'bg-white/10'
+                      i === current ? 'w-4 bg-brand-400' : 'bg-[#F0F4FF]'
                     }`} />
                   ))}
                 </div>
                 <div className="flex items-center gap-2">
                   {!isFirst && (
                     <button onClick={() => go(-1)}
-                      className="px-3 py-2 rounded-xl text-xs text-dark-300 hover:text-white bg-white/[0.05] hover:bg-white/[0.1] transition-all flex items-center gap-1">
+                      className="px-3 py-2 rounded-xl text-xs text-dark-300 hover:text-slate-900 bg-[#F0F4FF] hover:bg-[#F0F4FF] transition-all flex items-center gap-1">
                       <ChevronLeft className="w-3 h-3" /> Back
                     </button>
                   )}
                   {isLast ? (
                     <button onClick={dismiss}
-                      className="px-5 py-2 rounded-xl text-xs font-medium text-white transition-all hover:shadow-lg"
+                      className="px-5 py-2 rounded-xl text-xs font-medium text-slate-900 transition-all hover:shadow-lg"
                       style={{ background: 'linear-gradient(135deg, #7c3aed, #6366f1)' }}>
                       Get Started <ArrowRight className="w-3 h-3 inline ml-1" />
                     </button>
                   ) : (
                     <button onClick={() => go(1)}
-                      className="px-5 py-2 rounded-xl text-xs font-medium text-white transition-all hover:shadow-lg"
+                      className="px-5 py-2 rounded-xl text-xs font-medium text-slate-900 transition-all hover:shadow-lg"
                       style={{ background: 'linear-gradient(135deg, #7c3aed, #6366f1)' }}>
                       Next <ChevronRight className="w-3 h-3 inline ml-1" />
                     </button>

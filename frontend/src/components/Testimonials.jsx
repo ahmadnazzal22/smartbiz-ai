@@ -69,7 +69,7 @@ export default function Testimonials() {
                       {testimonials[active].avatar}
                     </div>
                     <div>
-                      <h4 className="text-lg font-semibold text-white">{testimonials[active].name}</h4>
+                      <h4 className="text-lg font-semibold text-slate-900">{testimonials[active].name}</h4>
                       <p className="text-sm text-dark-400">{testimonials[active].role}</p>
                     </div>
                     <div className="ml-auto hidden sm:block">
@@ -94,7 +94,7 @@ export default function Testimonials() {
           </div>
 
           <div className="flex items-center justify-center gap-6 mt-8">
-            <button onClick={prev} className="w-12 h-12 rounded-full glass-card flex items-center justify-center text-dark-300 hover:text-white hover:border-primary-500/30 transition-all">
+            <button onClick={prev} className="w-12 h-12 rounded-full glass-card flex items-center justify-center text-dark-300 hover:text-slate-900 hover:border-primary-500/30 transition-all">
               <ChevronLeft className="w-5 h-5" />
             </button>
             <div className="flex gap-2">
@@ -105,7 +105,7 @@ export default function Testimonials() {
                   }`} />
               ))}
             </div>
-            <button onClick={next} className="w-12 h-12 rounded-full glass-card flex items-center justify-center text-dark-300 hover:text-white hover:border-primary-500/30 transition-all">
+            <button onClick={next} className="w-12 h-12 rounded-full glass-card flex items-center justify-center text-dark-300 hover:text-slate-900 hover:border-primary-500/30 transition-all">
               <ChevronRight className="w-5 h-5" />
             </button>
           </div>

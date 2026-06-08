@@ -5,7 +5,7 @@ const logos = ['TechVista', 'CloudNest', 'DataPulse', 'NovaSoft', 'QuantumLeap',
 
 export default function TrustBar() {
   return (
-    <section className="relative py-16 border-y border-white/5">
+    <section className="relative py-16 border-y border-[#DBEAFE]">
       <div className="absolute inset-0 bg-gradient-to-r from-brand-500/5 via-transparent to-accent-500/5" />
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.p initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}
@@ -32,7 +32,7 @@ export default function TrustBar() {
               viewport={{ once: true }} transition={{ delay: 0.3 + i * 0.08 }}
               className="text-center">
               <item.icon className="w-5 h-5 text-brand-400 mx-auto mb-2" />
-              <p className="text-sm font-semibold text-white">{item.label}</p>
+              <p className="text-sm font-semibold text-slate-900">{item.label}</p>
               <p className="text-xs text-dark-500 mt-0.5">{item.sub}</p>
             </motion.div>
           ))}
