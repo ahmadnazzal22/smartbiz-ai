@@ -6,6 +6,7 @@ import { Users, Calendar, MessageSquare, Bot, TrendingUp, ArrowUpRight, Star, Ac
 import Sidebar from '../components/Sidebar'
 import NotificationCenter from '../components/NotificationCenter'
 import SEO from '../components/SEO'
+import GuidedTour from '../components/GuidedTour'
 import { statsApi, aiApi } from '../utils/api'
 
 const weeklyData = [
@@ -102,7 +103,7 @@ export default function Dashboard() {
           {/* Daily AI Report Banner */}
           <AnimatePresence>
             {showReportBanner && (
-              <motion.div initial={{ opacity: 0, y: -10, scale: 0.95 }} animate={{ opacity: 1, y: 0, scale: 1 }} exit={{ opacity: 0, y: -10 }}
+              <motion.div id="ai-report-banner" initial={{ opacity: 0, y: -10, scale: 0.95 }} animate={{ opacity: 1, y: 0, scale: 1 }} exit={{ opacity: 0, y: -10 }}
                 className="relative overflow-hidden rounded-2xl p-5"
                 style={{ background: 'linear-gradient(135deg, rgba(124,58,237,0.12), rgba(20,184,166,0.06))', border: '1px solid rgba(124,58,237,0.15)' }}>
                 <button onClick={() => setShowReportBanner(false)} className="absolute top-3 right-3 text-dark-400 hover:text-white">
@@ -272,7 +273,7 @@ export default function Dashboard() {
           </motion.div>
 
           {/* Stat Cards */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
+          <div id="stat-cards" className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
             {statCards.map((stat, index) => (
               <motion.div key={stat.label} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.1 + index * 0.08 }}
@@ -296,7 +297,7 @@ export default function Dashboard() {
 
           {/* Charts Row */}
           <div className="grid lg:grid-cols-2 gap-6">
-            <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.4 }}
+            <motion.div id="activity-chart" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.4 }}
               className="glass-card p-6">
               <div className="flex items-center justify-between mb-6">
                 <h3 className="text-lg font-semibold text-white">Weekly Activity</h3>
@@ -417,6 +418,7 @@ export default function Dashboard() {
             </motion.div>
           </div>
         </div>
+        <GuidedTour />
       </main>
     </div>
     </>
