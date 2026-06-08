@@ -8,6 +8,7 @@ import Bookings from './pages/Bookings'
 import Messages from './pages/Messages'
 import Leads from './pages/Leads'
 import AIChat from './pages/AIChat'
+import AIReport from './pages/AIReport'
 import TryDemo from './pages/TryDemo'
 import Onboarding from './pages/Onboarding'
 import ProtectedRoute from './components/ProtectedRoute'
@@ -26,6 +27,7 @@ export default function App() {
         <Route path="/messages" element={<ProtectedRoute><Messages /></ProtectedRoute>} />
         <Route path="/leads" element={<ProtectedRoute><Leads /></ProtectedRoute>} />
         <Route path="/ai-chat" element={<ProtectedRoute><AIChat /></ProtectedRoute>} />
+        <Route path="/ai-report" element={<ProtectedRoute><AIReport /></ProtectedRoute>} />
       </Routes>
     </AuthProvider>
   )

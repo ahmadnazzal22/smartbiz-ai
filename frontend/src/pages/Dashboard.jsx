@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { Link } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, PieChart, Pie, Cell } from 'recharts'
 import { Users, Calendar, MessageSquare, Bot, TrendingUp, ArrowUpRight, Star, Activity, Target, Brain, Clock, Mail, Smartphone, Download, X, CheckCircle2, AlertTriangle, Sparkles } from 'lucide-react'
@@ -148,11 +149,11 @@ export default function Dashboard() {
                       ))}
                     </div>
                   </div>
-                  <button onClick={() => setShowReport(true)}
+                  <Link to="/ai-report"
                     className="px-5 py-2.5 rounded-xl text-sm font-medium text-white shrink-0 transition-all hover:shadow-lg"
                     style={{ background: 'linear-gradient(135deg, #7c3aed, #6366f1)' }}>
                     View Full Report
-                  </button>
+                  </Link>
                 </div>
               </motion.div>
             )}

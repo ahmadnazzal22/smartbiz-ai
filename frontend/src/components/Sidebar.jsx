@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { NavLink, useLocation } from 'react-router-dom'
-import { LayoutDashboard, Calendar, MessageSquare, Users, Bot, LogOut, Sparkles, Activity, Smartphone, Menu, X } from 'lucide-react'
+import { LayoutDashboard, Calendar, MessageSquare, Users, Bot, LogOut, Sparkles, Activity, Smartphone, Menu, X, FileText } from 'lucide-react'
 import { useAuth } from '../context/AuthContext'
 import DemoBanner from './DemoBanner'
 
@@ -11,6 +11,7 @@ const links = [
   { to: '/leads', icon: Users, label: 'Leads' },
   { to: '/ai-chat', icon: Bot, label: 'AI Chat' },
   { to: '/messages', icon: MessageSquare, label: 'Messages' },
+  { to: '/ai-report', icon: FileText, label: 'AI Report', badge: 'Daily' },
 ]
 
 export default function Sidebar() {
