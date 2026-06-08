@@ -131,12 +131,12 @@ export default function Chatbot() {
             }}>
             {/* Header */}
             <div className="p-4 relative overflow-hidden" style={{
-              background: 'linear-gradient(135deg, rgba(99,102,241,0.3), rgba(20,184,166,0.2))',
+              background: 'linear-gradient(135deg, rgba(99,102,241,0.3), rgba(245,158,11,0.2))',
               borderBottom: '1px solid rgba(255,255,255,0.06)',
             }}>
               <div className="flex items-center gap-3">
                 <div className="relative">
-                  <div className="w-12 h-12 rounded-full bg-gradient-to-br from-primary-500 to-accent-500 flex items-center justify-center">
+                  <div className="w-12 h-12 rounded-full bg-gradient-to-br from-brand-500 to-accent-500 flex items-center justify-center">
                     <Bot className="w-6 h-6 text-white" />
                   </div>
                   <div className="absolute -bottom-0.5 -right-0.5 w-4 h-4 rounded-full bg-green-500 border-2 border-dark-900" />
@@ -145,7 +145,7 @@ export default function Chatbot() {
                   <p className="text-sm font-semibold text-white">AI Sales Assistant</p>
                   <p className="text-xs text-green-400">● Online — Ready to help</p>
                 </div>
-                <button onClick={() => setOpen(false)} className="w-8 h-8 rounded-full bg-[#F0F4FF] flex items-center justify-center text-dark-400 hover:text-slate-900 hover:bg-[#F0F4FF] transition-all">
+                <button onClick={() => setOpen(false)} className="w-8 h-8 rounded-full bg-surface-alt flex items-center justify-center text-dark-400 hover:text-slate-900 hover:bg-surface-alt transition-all">
                   <X className="w-4 h-4" />
                 </button>
               </div>
@@ -159,14 +159,14 @@ export default function Chatbot() {
                   className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}>
                   <div className={`flex items-start gap-2 max-w-[85%] ${msg.role === 'user' ? 'flex-row-reverse' : ''}`}>
                     {msg.role === 'assistant' && (
-                      <div className="w-7 h-7 rounded-full bg-gradient-to-br from-primary-500 to-accent-500 flex items-center justify-center shrink-0 mt-0.5">
+                      <div className="w-7 h-7 rounded-full bg-gradient-to-br from-brand-500 to-accent-500 flex items-center justify-center shrink-0 mt-0.5">
                         <Bot className="w-3.5 h-3.5 text-white" />
                       </div>
                     )}
                     <div className={`rounded-2xl px-4 py-2.5 text-sm leading-relaxed whitespace-pre-line ${
                       msg.role === 'user'
-                        ? 'bg-gradient-to-r from-primary-500 to-accent-500 text-white rounded-tr-sm'
-                        : 'bg-[#F0F4FF] text-dark-200 rounded-tl-sm'
+                        ? 'bg-gradient-to-r from-brand-500 to-accent-500 text-white rounded-tr-sm'
+                        : 'bg-surface-alt text-dark-200 rounded-tl-sm'
                     }`}>
                       {msg.content}
                     </div>
@@ -178,10 +178,10 @@ export default function Chatbot() {
               {isTyping && (
                 <div className="flex justify-start">
                   <div className="flex items-start gap-2">
-                    <div className="w-7 h-7 rounded-full bg-gradient-to-br from-primary-500 to-accent-500 flex items-center justify-center">
+                    <div className="w-7 h-7 rounded-full bg-gradient-to-br from-brand-500 to-accent-500 flex items-center justify-center">
                       <Bot className="w-3.5 h-3.5 text-white" />
                     </div>
-                    <div className="bg-[#F0F4FF] rounded-2xl px-4 py-3 rounded-tl-sm">
+                    <div className="bg-surface-alt rounded-2xl px-4 py-3 rounded-tl-sm">
                       <div className="flex gap-1">
                         <span className="w-2 h-2 bg-dark-400 rounded-full animate-bounce" style={{ animationDelay: '0ms' }} />
                         <span className="w-2 h-2 bg-dark-400 rounded-full animate-bounce" style={{ animationDelay: '150ms' }} />
@@ -195,10 +195,10 @@ export default function Chatbot() {
               {loading && (
                 <div className="flex justify-start">
                   <div className="flex items-start gap-2">
-                    <div className="w-7 h-7 rounded-full bg-gradient-to-br from-primary-500 to-accent-500 flex items-center justify-center">
+                    <div className="w-7 h-7 rounded-full bg-gradient-to-br from-brand-500 to-accent-500 flex items-center justify-center">
                       <Bot className="w-3.5 h-3.5 text-white" />
                     </div>
-                    <div className="bg-[#F0F4FF] rounded-2xl px-4 py-3">
+                    <div className="bg-surface-alt rounded-2xl px-4 py-3">
                       <div className="flex gap-1">
                         <span className="w-2 h-2 bg-dark-400 rounded-full animate-bounce" style={{ animationDelay: '0ms' }} />
                         <span className="w-2 h-2 bg-dark-400 rounded-full animate-bounce" style={{ animationDelay: '150ms' }} />
@@ -218,7 +218,7 @@ export default function Chatbot() {
                 <div className="grid grid-cols-2 gap-2">
                   {suggestions.map((s) => (
                     <button key={s.label} onClick={s.action}
-                      className="text-xs px-3 py-2.5 rounded-xl glass-card text-dark-300 hover:text-slate-900 hover:border-primary-500/30 transition-all text-left flex items-center gap-1.5">
+                      className="text-xs px-3 py-2.5 rounded-xl glass-card text-dark-300 hover:text-slate-900 hover:border-brand-500/30 transition-all text-left flex items-center gap-1.5">
                       {s.label}
                       <ChevronRight className="w-3 h-3 ml-auto" />
                     </button>
@@ -232,7 +232,7 @@ export default function Chatbot() {
               <div className="px-4 pb-2 flex flex-wrap gap-1.5">
                 {leadQuestions[leadStage].options.map((opt) => (
                   <button key={opt} onClick={() => sendMessage(opt)}
-                    className="text-xs px-3 py-1.5 rounded-full glass-card text-dark-300 hover:text-slate-900 hover:border-primary-500/30 transition-all">
+                    className="text-xs px-3 py-1.5 rounded-full glass-card text-dark-300 hover:text-slate-900 hover:border-brand-500/30 transition-all">
                     {opt}
                   </button>
                 ))}
@@ -240,14 +240,14 @@ export default function Chatbot() {
             )}
 
             {/* Input */}
-            <div className="p-4 border-t border-[#DBEAFE]">
-              <div className="flex items-center gap-2 rounded-2xl bg-[#F0F4FF] border border-[#DBEAFE] p-1.5 focus-within:border-primary-500/50 transition-all">
+            <div className="p-4 border-t border-cream-dark">
+              <div className="flex items-center gap-2 rounded-2xl bg-surface-alt border border-cream-dark p-1.5 focus-within:border-brand-500/50 transition-all">
                 <input value={input} onChange={(e) => setInput(e.target.value)}
                   onKeyDown={(e) => e.key === 'Enter' && sendMessage(input)}
                   placeholder={leadStage >= 0 ? leadQuestions[leadStage]?.placeholder || 'Type your answer...' : 'Ask me anything...'}
                   className="flex-1 bg-transparent px-3 py-2 text-sm text-slate-900 placeholder-dark-400 outline-none" />
                 <button onClick={() => sendMessage(input)} disabled={loading || isTyping || !input.trim()}
-                  className="w-9 h-9 rounded-full bg-gradient-to-r from-primary-500 to-accent-500 flex items-center justify-center text-white hover:shadow-lg hover:shadow-primary-500/25 transition-all disabled:opacity-40 shrink-0">
+                  className="w-9 h-9 rounded-full bg-gradient-to-r from-brand-500 to-accent-500 flex items-center justify-center text-white hover:shadow-lg hover:shadow-brand-500/25 transition-all disabled:opacity-40 shrink-0">
                   <Send className="w-4 h-4" />
                 </button>
               </div>
@@ -260,7 +260,7 @@ export default function Chatbot() {
       {/* Floating button */}
       <motion.button whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}
         onClick={() => setOpen(!open)}
-        className="fixed bottom-6 right-6 w-14 h-14 rounded-full bg-gradient-to-r from-primary-500 via-primary-600 to-accent-500 text-white flex items-center justify-center shadow-xl z-40 btn-premium"
+        className="fixed bottom-6 right-6 w-14 h-14 rounded-full bg-gradient-to-r from-brand-500 via-brand-600 to-accent-500 text-white flex items-center justify-center shadow-xl z-40 btn-premium"
         style={{ boxShadow: '0 8px 32px rgba(99,102,241,0.3)' }}>
         {open ? <X className="w-6 h-6" /> : <MessageCircle className="w-6 h-6" />}
       </motion.button>

@@ -109,7 +109,7 @@ export default function GuidedTour({ onComplete }) {
                       <step.icon className="w-4 h-4 text-slate-900" />
                     </div>
                   )}
-                  <span className="text-[10px] text-dark-400 font-medium px-2 py-0.5 rounded-full bg-[#F0F4FF]">
+                  <span className="text-[10px] text-dark-400 font-medium px-2 py-0.5 rounded-full bg-surface-alt">
                     {current + 1} / {steps.length}
                   </span>
                 </div>
@@ -125,14 +125,14 @@ export default function GuidedTour({ onComplete }) {
                 <div className="flex gap-1.5">
                   {steps.map((_, i) => (
                     <div key={i} className={`w-1.5 h-1.5 rounded-full transition-all duration-300 ${
-                      i === current ? 'w-4 bg-brand-400' : 'bg-[#F0F4FF]'
+                      i === current ? 'w-4 bg-brand-400' : 'bg-surface-alt'
                     }`} />
                   ))}
                 </div>
                 <div className="flex items-center gap-2">
                   {!isFirst && (
                     <button onClick={() => go(-1)}
-                      className="px-3 py-2 rounded-xl text-xs text-dark-300 hover:text-slate-900 bg-[#F0F4FF] hover:bg-[#F0F4FF] transition-all flex items-center gap-1">
+                      className="px-3 py-2 rounded-xl text-xs text-dark-300 hover:text-slate-900 bg-surface-alt hover:bg-surface-alt transition-all flex items-center gap-1">
                       <ChevronLeft className="w-3 h-3" /> Back
                     </button>
                   )}

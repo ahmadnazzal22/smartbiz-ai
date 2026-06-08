@@ -56,10 +56,10 @@ export default function Leads() {
               <div className="relative">
                 <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-dark-400" />
                 <input value={search} onChange={e => setSearch(e.target.value)}
-                  className="bg-[#F0F4FF] border border-[#DBEAFE] rounded-xl pl-10 pr-4 py-2.5 text-sm text-slate-900 placeholder-dark-400 outline-none focus:border-primary-500/50 w-56" placeholder="Search leads..." />
+                  className="bg-surface-alt border border-cream-dark rounded-xl pl-10 pr-4 py-2.5 text-sm text-slate-900 placeholder-dark-400 outline-none focus:border-brand-500/50 w-56" placeholder="Search leads..." />
               </div>
               <select value={statusFilter} onChange={e => setStatusFilter(e.target.value)}
-                className="bg-[#F0F4FF] border border-[#DBEAFE] rounded-xl px-4 py-2.5 text-sm text-slate-900 outline-none focus:border-primary-500/50">
+                className="bg-surface-alt border border-cream-dark rounded-xl px-4 py-2.5 text-sm text-slate-900 outline-none focus:border-brand-500/50">
                 <option value="all">All Status</option>
                 <option value="hot">Hot 🔥</option>
                 <option value="warm">Warm 🟡</option>
@@ -95,11 +95,11 @@ export default function Leads() {
               const Icon = config.icon
               return (
                 <motion.div key={lead.id} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.05 }}
-                  className="glass-card p-5 group cursor-pointer hover:bg-[#F0F4FF]"
+                  className="glass-card p-5 group cursor-pointer hover:bg-surface-alt"
                   onClick={() => setActiveLead(lead)}>
                   <div className="flex items-start justify-between mb-4">
                     <div className="flex items-center gap-3">
-                      <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-primary-500 to-accent-500 flex items-center justify-center text-sm font-bold text-white">
+                      <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-brand-500 to-accent-500 flex items-center justify-center text-sm font-bold text-white">
                         {lead.avatar}
                       </div>
                       <div>
@@ -122,14 +122,14 @@ export default function Leads() {
                   </div>
 
                   {lead.notes && (
-                    <p className="text-xs text-dark-400 bg-[#F0F4FF] rounded-lg p-3 mb-3">{lead.notes}</p>
+                    <p className="text-xs text-dark-400 bg-surface-alt rounded-lg p-3 mb-3">{lead.notes}</p>
                   )}
 
-                  <div className="flex items-center justify-between pt-3 border-t border-[#DBEAFE]">
+                  <div className="flex items-center justify-between pt-3 border-t border-cream-dark">
                     <span className="text-xs text-dark-500">{lead.lastContact}</span>
                     <div className="flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
                       <button onClick={(e) => { e.stopPropagation(); moveToNextStage(lead.id) }}
-                        className="text-xs px-3 py-1.5 rounded-full bg-primary-500/10 text-primary-400 hover:bg-primary-500/20 transition-all">
+                        className="text-xs px-3 py-1.5 rounded-full bg-brand-500/10 text-brand-400 hover:bg-brand-500/20 transition-all">
                         Promote
                       </button>
                       <button className="text-xs px-3 py-1.5 rounded-full bg-accent-500/10 text-accent-400 hover:bg-accent-500/20 transition-all">

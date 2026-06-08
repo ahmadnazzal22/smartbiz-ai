@@ -16,7 +16,7 @@ const timeSlots = ['09:00', '09:30', '10:00', '10:30', '11:00', '11:30', '13:00'
 
 const serviceColors = {
   Consultation: { bg: 'rgba(124,58,237,0.15)', dot: '#7c3aed', text: '#a78bfa' },
-  'Product Demo': { bg: 'rgba(20,184,166,0.15)', dot: '#14b8a6', text: '#5eead4' },
+  'Product Demo': { bg: 'rgba(245,158,11,0.15)', dot: '#F59E0B', text: '#FDE68A' },
   Support: { bg: 'rgba(99,102,241,0.15)', dot: '#6366f1', text: '#a5b4fc' },
   Meeting: { bg: 'rgba(234,179,8,0.15)', dot: '#eab308', text: '#fde047' },
   Other: { bg: 'rgba(136,136,136,0.15)', dot: '#888', text: '#aaa' },
@@ -119,7 +119,7 @@ export default function Bookings() {
   const weekDateStr = (d) => `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`
 
   const statusBadge = (status) => {
-    const colors = { confirmed: '#14b8a6', completed: '#3b82f6', cancelled: '#ef4444', pending: '#eab308' }
+    const colors = { confirmed: '#F59E0B', completed: '#3b82f6', cancelled: '#ef4444', pending: '#eab308' }
     return { bg: `${colors[status]}15`, color: colors[status], text: status }
   }
 
@@ -136,7 +136,7 @@ export default function Bookings() {
               <p className="text-dark-400 mt-1">Manage appointments, schedules, and feedback.</p>
             </div>
             <div className="flex items-center gap-3">
-              <div className="flex items-center gap-1 p-1 rounded-xl bg-[#F0F4FF] border border-[#DBEAFE]">
+              <div className="flex items-center gap-1 p-1 rounded-xl bg-surface-alt border border-cream-dark">
                 <button onClick={() => setView('table')}
                   className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-all ${view === 'table' ? 'text-slate-900' : 'text-dark-400 hover:text-slate-900'}`}
                   style={view === 'table' ? { background: 'linear-gradient(135deg, rgba(124,58,237,0.2), rgba(99,102,241,0.1))' } : {}}>
@@ -154,7 +154,7 @@ export default function Bookings() {
                 </button>
               </div>
               <button onClick={() => setShowForm(!showForm)}
-                className="px-5 py-2.5 bg-gradient-to-r from-primary-500 to-accent-500 rounded-full text-sm font-medium text-white hover:shadow-lg hover:shadow-primary-500/25 transition-all flex items-center gap-2">
+                className="px-5 py-2.5 bg-gradient-to-r from-brand-500 to-accent-500 rounded-full text-sm font-medium text-white hover:shadow-lg hover:shadow-brand-500/25 transition-all flex items-center gap-2">
                 <CalendarIcon className="w-4 h-4" /> New Booking
               </button>
             </div>
@@ -164,9 +164,9 @@ export default function Bookings() {
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }}
             className="grid grid-cols-2 md:grid-cols-5 gap-4">
             {[
-              { label: 'Total', value: stats.total, color: 'from-primary-500 to-purple-500' },
-              { label: 'Confirmed', value: stats.confirmed, color: 'from-accent-500 to-emerald-500' },
-              { label: 'Completed', value: stats.completed, color: 'from-blue-500 to-cyan-500' },
+              { label: 'Total', value: stats.total, color: 'from-brand-500 to-purple-500' },
+              { label: 'Confirmed', value: stats.confirmed, color: 'from-accent-500 to-accent-600' },
+              { label: 'Completed', value: stats.completed, color: 'from-blue-500 to-accent-400' },
               { label: 'Cancelled', value: stats.cancelled, color: 'from-red-500 to-orange-500' },
               { label: 'Avg Rating', value: stats.avgRating.toFixed(1), color: 'from-yellow-500 to-amber-500', suffix: '⭐' },
             ].map(s => (
@@ -180,13 +180,13 @@ export default function Bookings() {
           {/* Feedback Modal */}
           {showFeedback && (
             <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}
-              className="glass-card-deep p-6 border-primary-500/20">
+              className="glass-card-deep p-6 border-brand-500/20">
               <h3 className="text-lg font-semibold text-slate-900 mb-4">Rate this booking ⭐</h3>
               <div className="flex gap-2 mb-4">
                 {[1,2,3,4,5].map(r => (
                   <button key={r} onClick={() => setFeedbackForm({ ...feedbackForm, rating: r })}
                     className={`w-10 h-10 rounded-full flex items-center justify-center transition-all ${
-                      r <= feedbackForm.rating ? 'bg-yellow-500/20 text-yellow-400 scale-110' : 'bg-[#F0F4FF] text-dark-500'
+                      r <= feedbackForm.rating ? 'bg-yellow-500/20 text-yellow-400 scale-110' : 'bg-surface-alt text-dark-500'
                     }`}>
                     <Star className={`w-5 h-5 ${r <= feedbackForm.rating ? 'fill-yellow-500' : ''}`} />
                   </button>
@@ -194,9 +194,9 @@ export default function Bookings() {
               </div>
               <textarea value={feedbackForm.review} onChange={e => setFeedbackForm({ ...feedbackForm, review: e.target.value })}
                 placeholder="Write a review..." rows={2}
-                className="w-full bg-[#F0F4FF] border border-[#DBEAFE] rounded-xl px-4 py-2.5 text-sm text-slate-900 placeholder-dark-400 outline-none focus:border-primary-500/50 mb-4" />
+                className="w-full bg-surface-alt border border-cream-dark rounded-xl px-4 py-2.5 text-sm text-slate-900 placeholder-dark-400 outline-none focus:border-brand-500/50 mb-4" />
               <div className="flex gap-3">
-                <button onClick={() => handleFeedback(showFeedback)} className="px-5 py-2 bg-gradient-to-r from-primary-500 to-accent-500 rounded-xl text-sm text-white">Submit</button>
+                <button onClick={() => handleFeedback(showFeedback)} className="px-5 py-2 bg-gradient-to-r from-brand-500 to-accent-500 rounded-xl text-sm text-white">Submit</button>
                 <button onClick={() => setShowFeedback(null)} className="px-5 py-2 glass-card rounded-xl text-sm text-dark-300">Skip</button>
               </div>
             </motion.div>
@@ -209,27 +209,27 @@ export default function Bookings() {
               <form onSubmit={handleCreate} className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
                 <div><label className="block text-xs text-dark-400 mb-1">Name</label>
                   <input type="text" value={form.customer_name} required onChange={e => setForm({ ...form, customer_name: e.target.value })}
-                    className="w-full bg-[#F0F4FF] border border-[#DBEAFE] rounded-xl px-4 py-2.5 text-sm text-slate-900 outline-none focus:border-primary-500/50" /></div>
+                    className="w-full bg-surface-alt border border-cream-dark rounded-xl px-4 py-2.5 text-sm text-slate-900 outline-none focus:border-brand-500/50" /></div>
                 <div><label className="block text-xs text-dark-400 mb-1">Phone</label>
                   <input type="text" value={form.customer_phone} onChange={e => setForm({ ...form, customer_phone: e.target.value })}
-                    className="w-full bg-[#F0F4FF] border border-[#DBEAFE] rounded-xl px-4 py-2.5 text-sm text-slate-900 outline-none focus:border-primary-500/50" /></div>
+                    className="w-full bg-surface-alt border border-cream-dark rounded-xl px-4 py-2.5 text-sm text-slate-900 outline-none focus:border-brand-500/50" /></div>
                 <div><label className="block text-xs text-dark-400 mb-1">Service</label>
                   <select value={form.service} onChange={e => setForm({ ...form, service: e.target.value })}
-                    className="w-full bg-[#F0F4FF] border border-[#DBEAFE] rounded-xl px-4 py-2.5 text-sm text-slate-900 outline-none focus:border-primary-500/50">
+                    className="w-full bg-surface-alt border border-cream-dark rounded-xl px-4 py-2.5 text-sm text-slate-900 outline-none focus:border-brand-500/50">
                     {services.map(s => <option key={s}>{s}</option>)}</select></div>
                 <div><label className="block text-xs text-dark-400 mb-1">Date</label>
                   <input type="date" value={form.date} min={today} required onChange={e => setForm({ ...form, date: e.target.value })}
-                    className="w-full bg-[#F0F4FF] border border-[#DBEAFE] rounded-xl px-4 py-2.5 text-sm text-slate-900 outline-none focus:border-primary-500/50" /></div>
+                    className="w-full bg-surface-alt border border-cream-dark rounded-xl px-4 py-2.5 text-sm text-slate-900 outline-none focus:border-brand-500/50" /></div>
                 <div><label className="block text-xs text-dark-400 mb-1">Time</label>
                   <select value={form.time} onChange={e => setForm({ ...form, time: e.target.value })} required
-                    className="w-full bg-[#F0F4FF] border border-[#DBEAFE] rounded-xl px-4 py-2.5 text-sm text-slate-900 outline-none focus:border-primary-500/50">
+                    className="w-full bg-surface-alt border border-cream-dark rounded-xl px-4 py-2.5 text-sm text-slate-900 outline-none focus:border-brand-500/50">
                     <option value="">Select</option>
                     {timeSlots.map(s => <option key={s}>{s}</option>)}</select></div>
                 <div className="md:col-span-3"><label className="block text-xs text-dark-400 mb-1">Notes</label>
                   <input type="text" value={form.notes} onChange={e => setForm({ ...form, notes: e.target.value })}
-                    className="w-full bg-[#F0F4FF] border border-[#DBEAFE] rounded-xl px-4 py-2.5 text-sm text-slate-900 outline-none focus:border-primary-500/50" /></div>
+                    className="w-full bg-surface-alt border border-cream-dark rounded-xl px-4 py-2.5 text-sm text-slate-900 outline-none focus:border-brand-500/50" /></div>
                 <div className="md:col-span-4 flex gap-3">
-                  <button type="submit" className="px-6 py-2.5 bg-gradient-to-r from-primary-500 to-accent-500 rounded-xl text-sm text-white">Create Booking</button>
+                  <button type="submit" className="px-6 py-2.5 bg-gradient-to-r from-brand-500 to-accent-500 rounded-xl text-sm text-white">Create Booking</button>
                   <button type="button" onClick={() => setShowForm(false)} className="px-6 py-2.5 glass-card rounded-xl text-sm text-dark-300">Cancel</button>
                 </div>
               </form>
@@ -242,11 +242,11 @@ export default function Bookings() {
               className="grid lg:grid-cols-3 gap-6">
               <div className="lg:col-span-2 glass-card p-6">
                 <div className="flex items-center justify-between mb-6">
-                  <button onClick={prevMonth} className="p-2 rounded-xl text-dark-400 hover:text-slate-900 hover:bg-[#F0F4FF] transition-all">
+                  <button onClick={prevMonth} className="p-2 rounded-xl text-dark-400 hover:text-slate-900 hover:bg-surface-alt transition-all">
                     <ChevronLeft className="w-5 h-5" />
                   </button>
                   <h3 className="text-lg font-semibold text-slate-900">{monthNames[calMonth]} {calYear}</h3>
-                  <button onClick={nextMonth} className="p-2 rounded-xl text-dark-400 hover:text-slate-900 hover:bg-[#F0F4FF] transition-all">
+                  <button onClick={nextMonth} className="p-2 rounded-xl text-dark-400 hover:text-slate-900 hover:bg-surface-alt transition-all">
                     <ChevronRight className="w-5 h-5" />
                   </button>
                 </div>
@@ -270,9 +270,9 @@ export default function Bookings() {
                           !day ? 'invisible' :
                           isSelected ? 'text-slate-900 scale-105 shadow-lg' :
                           isToday ? 'text-accent-400 border border-accent-500/30' :
-                          'text-dark-300 hover:text-slate-900 hover:bg-[#F0F4FF]'
+                          'text-dark-300 hover:text-slate-900 hover:bg-surface-alt'
                         }`}
-                        style={isSelected ? { background: 'linear-gradient(135deg, #7c3aed, #6366f1)' } : isToday ? { background: 'rgba(20,184,166,0.1)' } : {}}>
+                        style={isSelected ? { background: 'linear-gradient(135deg, #7c3aed, #6366f1)' } : isToday ? { background: 'rgba(245,158,11,0.1)' } : {}}>
                         <span>{day}</span>
                         {dayBks.length > 0 && !isSelected && (
                           <div className="flex gap-0.5 mt-1">
@@ -290,7 +290,7 @@ export default function Bookings() {
                     )
                   })}
                 </div>
-                <div className="flex items-center justify-between mt-4 pt-4 border-t border-[#DBEAFE]">
+                <div className="flex items-center justify-between mt-4 pt-4 border-t border-cream-dark">
                   <div className="flex items-center gap-4 text-xs text-dark-400">
                     {Object.entries(serviceColors).slice(0, 4).map(([svc, c]) => (
                       <span key={svc} className="flex items-center gap-1.5">
@@ -319,10 +319,10 @@ export default function Bookings() {
                           <button key={slot} onClick={() => quickBook(selectedDate, slot)}
                             className={`relative text-[10px] py-1.5 rounded-lg transition-all ${
                               bks.length === 0
-                                ? 'text-dark-500 hover:text-dark-300 hover:bg-[#F0F4FF] border border-dashed border-[#DBEAFE]'
+                                ? 'text-dark-500 hover:text-dark-300 hover:bg-surface-alt border border-dashed border-cream-dark'
                                 : conflict
                                 ? 'bg-red-500/15 text-red-400 border border-red-500/20'
-                                : 'bg-[#F0F4FF] text-dark-200 border border-[#DBEAFE]'
+                                : 'bg-surface-alt text-dark-200 border border-cream-dark'
                             }`}
                             title={bks.map(b => `${b.customer_name} — ${b.service} (${b.status})`).join('\n')}>
                             {slot}
@@ -395,7 +395,7 @@ export default function Bookings() {
               className="glass-card p-6">
               <div className="flex items-center justify-between mb-6">
                 <button onClick={() => { const d = new Date(weekStart); d.setDate(d.getDate() - 7); setWeekStart(d) }}
-                  className="p-2 rounded-xl text-dark-400 hover:text-slate-900 hover:bg-[#F0F4FF] transition-all">
+                  className="p-2 rounded-xl text-dark-400 hover:text-slate-900 hover:bg-surface-alt transition-all">
                   <ChevronLeft className="w-5 h-5" />
                 </button>
                 <div className="text-center">
@@ -405,7 +405,7 @@ export default function Bookings() {
                   <p className="text-xs text-dark-400">Week view — click a slot to book</p>
                 </div>
                 <button onClick={() => { const d = new Date(weekStart); d.setDate(d.getDate() + 7); setWeekStart(d) }}
-                  className="p-2 rounded-xl text-dark-400 hover:text-slate-900 hover:bg-[#F0F4FF] transition-all">
+                  className="p-2 rounded-xl text-dark-400 hover:text-slate-900 hover:bg-surface-alt transition-all">
                   <ChevronRight className="w-5 h-5" />
                 </button>
               </div>
@@ -438,10 +438,10 @@ export default function Bookings() {
                           <button key={col} onClick={() => quickBook(ds, slot)}
                             className={`relative min-h-[48px] rounded-lg transition-all ${
                               bks.length === 0
-                                ? 'hover:bg-[#F0F4FF] border border-dashed border-transparent hover:border-[#DBEAFE]'
+                                ? 'hover:bg-surface-alt border border-dashed border-transparent hover:border-cream-dark'
                                 : conflict
                                 ? 'bg-red-500/10 border border-red-500/20'
-                                : 'bg-[#F0F4FF] border border-[#DBEAFE]'
+                                : 'bg-surface-alt border border-cream-dark'
                             }`}>
                             {bks.map(b => (
                               <div key={b.id} className="px-1.5 py-0.5 rounded text-[9px] leading-tight truncate"
@@ -458,7 +458,7 @@ export default function Bookings() {
                 </div>
               </div>
 
-              <div className="flex items-center justify-between mt-4 pt-4 border-t border-[#DBEAFE]">
+              <div className="flex items-center justify-between mt-4 pt-4 border-t border-cream-dark">
                 <div className="flex items-center gap-4 text-xs text-dark-400">
                   {Object.entries(serviceColors).map(([svc, c]) => (
                     <span key={svc} className="flex items-center gap-1.5"><span className="w-2 h-2 rounded-full" style={{ background: c.dot }} /> {svc}</span>
@@ -478,7 +478,7 @@ export default function Bookings() {
               <div className="overflow-x-auto">
                 <table className="w-full">
                   <thead>
-                    <tr className="border-b border-[#DBEAFE]">
+                    <tr className="border-b border-cream-dark">
                       <th className="text-left px-6 py-4 text-xs font-medium text-dark-400 uppercase">Customer</th>
                       <th className="text-left px-6 py-4 text-xs font-medium text-dark-400 uppercase">Service</th>
                       <th className="text-left px-6 py-4 text-xs font-medium text-dark-400 uppercase">Date</th>
@@ -491,7 +491,7 @@ export default function Bookings() {
                   <tbody>
                     {bookings.map((b, i) => (
                       <motion.tr key={b.id} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: i * 0.03 }}
-                        className="border-b border-[#DBEAFE] hover:bg-[#F0F4FF] transition-colors">
+                        className="border-b border-cream-dark hover:bg-surface-alt transition-colors">
                         <td className="px-6 py-4">
                           <p className="text-sm text-slate-900">{b.customer_name}</p>
                           <p className="text-xs text-dark-400">{b.customer_phone}</p>

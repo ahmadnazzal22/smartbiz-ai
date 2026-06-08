@@ -8,74 +8,74 @@ html { scroll-behavior: smooth; }
 
 body {
   font-family: 'Inter', system-ui, sans-serif;
-  background: #EFF6FF;
-  color: #0F172A;
+  background: #FDF8F0;
+  color: #1A1225;
   overflow-x: hidden;
 }
 
 ::selection {
-  background: #4F46E5;
+  background: #7C3AED;
   color: white;
 }
 
 ::-webkit-scrollbar { width: 6px; }
-::-webkit-scrollbar-track { background: #E2E8F0; }
+::-webkit-scrollbar-track { background: #E0D7E6; }
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(180deg, #4F46E5, #0EA5E9);
+  background: linear-gradient(180deg, #7C3AED, #F59E0B);
   border-radius: 3px;
 }
 
-/* ─── Clean Cards ─── */
+/* ─── Premium Cards ─── */
 .glass {
   background: #FFFFFF;
-  border: 1px solid #DBEAFE;
+  border: 1px solid #E0D7E6;
 }
 
 .glass-card {
   background: #FFFFFF;
-  border: 1px solid #DBEAFE;
+  border: 1px solid #E0D7E6;
   border-radius: 16px;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.04), 0 1px 2px rgba(0,0,0,0.02);
-  transition: all 0.2s ease;
+  box-shadow: 0 1px 3px rgba(26,18,37,0.04), 0 1px 2px rgba(26,18,37,0.02);
+  transition: all 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 .glass-card:hover {
-  border-color: #A5B4FC;
-  box-shadow: 0 4px 12px rgba(79, 70, 229, 0.08);
-  transform: translateY(-1px);
+  border-color: #D4BFFF;
+  box-shadow: 0 8px 25px rgba(124, 58, 237, 0.1), 0 2px 8px rgba(124, 58, 237, 0.06);
+  transform: translateY(-2px);
 }
 
 .glass-card-deep {
   background: #FFFFFF;
-  border: 1px solid #DBEAFE;
+  border: 1px solid #E0D7E6;
   border-radius: 20px;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.03);
+  box-shadow: 0 4px 20px rgba(26,18,37,0.06);
 }
 
 /* ─── Signature Gradients ─── */
 .gradient-text {
-  background: linear-gradient(135deg, #4F46E5, #0EA5E9);
+  background: linear-gradient(135deg, #7C3AED, #F59E0B);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
 .gradient-text-brand {
-  background: linear-gradient(135deg, #4F46E5, #6366F1);
+  background: linear-gradient(135deg, #7C3AED, #9B6AFF);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
 .gradient-text-accent {
-  background: linear-gradient(135deg, #38BDF8, #0EA5E9);
+  background: linear-gradient(135deg, #F59E0B, #D97706);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
 .gradient-brand {
-  background: linear-gradient(135deg, #4F46E5, #6366F1, #0EA5E9);
+  background: linear-gradient(135deg, #7C3AED, #9B6AFF, #F59E0B);
 }
 
 /* ─── Gradient Border ─── */
@@ -84,7 +84,7 @@ body {
   position: absolute; inset: 0;
   border-radius: inherit;
   padding: 1px;
-  background: linear-gradient(135deg, #4F46E5, #0EA5E9);
+  background: linear-gradient(135deg, #7C3AED, #F59E0B);
   -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
   -webkit-mask-composite: xor;
   mask-composite: exclude;
@@ -93,18 +93,28 @@ body {
 
 /* ─── Glow Effects ─── */
 .glow-brand {
-  box-shadow: 0 0 20px rgba(79, 70, 229, 0.2), 0 0 40px rgba(79, 70, 229, 0.08);
+  box-shadow: 0 0 30px rgba(124, 58, 237, 0.2), 0 0 60px rgba(124, 58, 237, 0.08);
 }
 .glow-accent {
-  box-shadow: 0 0 20px rgba(14, 165, 233, 0.2), 0 0 40px rgba(14, 165, 233, 0.08);
+  box-shadow: 0 0 30px rgba(245, 158, 11, 0.2), 0 0 60px rgba(245, 158, 11, 0.08);
 }
 
 /* ─── Background Mesh ─── */
 .bg-mesh {
   background-image:
-    radial-gradient(at 100% 0%, rgba(79, 70, 229, 0.04) 0px, transparent 50%),
-    radial-gradient(at 0% 100%, rgba(14, 165, 233, 0.03) 0px, transparent 50%),
-    radial-gradient(at 50% 50%, rgba(99, 102, 241, 0.02) 0px, transparent 50%);
+    radial-gradient(at 100% 0%, rgba(124, 58, 237, 0.05) 0px, transparent 50%),
+    radial-gradient(at 0% 100%, rgba(245, 158, 11, 0.04) 0px, transparent 50%),
+    radial-gradient(at 50% 50%, rgba(155, 106, 255, 0.03) 0px, transparent 50%);
+}
+
+/* ─── Warm Geometric Background ─── */
+.bg-geometric {
+  background-image:
+    linear-gradient(30deg, rgba(124, 58, 237, 0.03) 12%, transparent 12.5%, transparent 87%, rgba(124, 58, 237, 0.03) 87.5%),
+    linear-gradient(150deg, rgba(245, 158, 11, 0.03) 12%, transparent 12.5%, transparent 87%, rgba(245, 158, 11, 0.03) 87.5%),
+    linear-gradient(30deg, rgba(124, 58, 237, 0.03) 12%, transparent 12.5%, transparent 87%, rgba(124, 58, 237, 0.03) 87.5%),
+    linear-gradient(150deg, rgba(245, 158, 11, 0.03) 12%, transparent 12.5%, transparent 87%, rgba(245, 158, 11, 0.03) 87.5%);
+  background-size: 80px 140px;
 }
 
 .hero-glow {
@@ -113,8 +123,16 @@ body {
   height: 600px;
   border-radius: 50%;
   filter: blur(120px);
-  opacity: 0.08;
+  opacity: 0.1;
   pointer-events: none;
+}
+
+.hero-glow-purple {
+  background: radial-gradient(circle, rgba(124,58,237,0.25), transparent);
+}
+
+.hero-glow-gold {
+  background: radial-gradient(circle, rgba(245,158,11,0.2), transparent);
 }
 
 #particles-canvas {
@@ -124,6 +142,76 @@ body {
   height: 100vh;
   pointer-events: none;
   z-index: 0;
+}
+
+/* ─── Premium Button ─── */
+.btn-premium {
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  background: linear-gradient(135deg, #7C3AED, #6D28D9);
+  color: white;
+}
+.btn-premium::before {
+  content: '';
+  position: absolute;
+  top: -50%; left: -50%;
+  width: 200%; height: 200%;
+  background: conic-gradient(from 0deg, transparent, rgba(255,255,255,0.15), transparent, rgba(255,255,255,0.15), transparent);
+  animation: rotate 4s linear infinite;
+  opacity: 0;
+  transition: opacity 0.4s;
+}
+.btn-premium:hover::before { opacity: 1; }
+.btn-premium:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(124, 58, 237, 0.3);
+}
+@keyframes rotate { to { transform: rotate(360deg); } }
+
+/* ─── Warm Button ─── */
+.btn-warm {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(135deg, #F59E0B, #D97706);
+  color: white;
+  transition: all 0.3s ease;
+}
+.btn-warm:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(245, 158, 11, 0.3);
+}
+
+/* ─── Skeleton ─── */
+.skeleton {
+  background: linear-gradient(90deg, #F0EBF2 25%, #E0D7E6 50%, #F0EBF2 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s ease-in-out infinite;
+  border-radius: 8px;
+}
+
+/* ─── Status Badges ─── */
+.badge-hot { background: linear-gradient(135deg, rgba(239,68,68,0.1), rgba(239,68,68,0.04)); border: 1px solid rgba(239,68,68,0.2); color: #DC2626; }
+.badge-warm { background: linear-gradient(135deg, rgba(245,158,11,0.1), rgba(245,158,11,0.04)); border: 1px solid rgba(245,158,11,0.2); color: #D97706; }
+.badge-cold { background: linear-gradient(135deg, rgba(100,116,139,0.1), rgba(100,116,139,0.04)); border: 1px solid rgba(100,116,139,0.2); color: #64748B; }
+
+/* ─── Brand Signature ─── */
+.brand-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #7C3AED, #F59E0B);
+}
+
+/* ─── Scroll Reveal ─── */
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 /* ─── Animations ─── */
@@ -167,54 +255,3 @@ body {
 .animate-gradient { background-size: 300% 300%; animation: gradientShift 8s ease infinite; }
 .animate-orb { animation: orbFloat 12s ease-in-out infinite; }
 .animate-orb-reverse { animation: orbFloat 15s ease-in-out infinite reverse; }
-
-/* ─── Premium Button ─── */
-.btn-premium {
-  position: relative;
-  overflow: hidden;
-  transition: all 0.2s ease;
-}
-.btn-premium::before {
-  content: '';
-  position: absolute;
-  top: -50%; left: -50%;
-  width: 200%; height: 200%;
-  background: conic-gradient(from 0deg, transparent, rgba(255,255,255,0.12), transparent, rgba(255,255,255,0.12), transparent);
-  animation: rotate 4s linear infinite;
-  opacity: 0;
-  transition: opacity 0.4s;
-}
-.btn-premium:hover::before { opacity: 1; }
-@keyframes rotate { to { transform: rotate(360deg); } }
-
-/* ─── Skeleton ─── */
-.skeleton {
-  background: linear-gradient(90deg, #F1F5F9 25%, #E2E8F0 50%, #F1F5F9 75%);
-  background-size: 200% 100%;
-  animation: shimmer 1.5s ease-in-out infinite;
-  border-radius: 8px;
-}
-
-/* ─── Status Badges ─── */
-.badge-hot { background: linear-gradient(135deg, rgba(239,68,68,0.1), rgba(239,68,68,0.04)); border: 1px solid rgba(239,68,68,0.2); color: #DC2626; }
-.badge-warm { background: linear-gradient(135deg, rgba(234,179,8,0.1), rgba(234,179,8,0.04)); border: 1px solid rgba(234,179,8,0.2); color: #D97706; }
-.badge-cold { background: linear-gradient(135deg, rgba(100,116,139,0.1), rgba(100,116,139,0.04)); border: 1px solid rgba(100,116,139,0.2); color: #64748B; }
-
-/* ─── Brand Signature Elements ─── */
-.brand-dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, #4F46E5, #0EA5E9);
-}
-
-/* ─── Scroll Reveal ─── */
-.reveal {
-  opacity: 0;
-  transform: translateY(30px);
-  transition: all 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-}
-.reveal.visible {
-  opacity: 1;
-  transform: translateY(0);
-}

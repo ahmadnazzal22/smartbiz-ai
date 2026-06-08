@@ -5,6 +5,7 @@ import { Sparkles, TrendingUp, TrendingDown, Users, Calendar, MessageSquare, Ale
 import Sidebar from '../components/Sidebar'
 import { Link } from 'react-router-dom'
 import { aiApi } from '../utils/api'
+import { ReportSkeleton } from '../components/Skeleton'
 
 const weekData = [
   { day: 'Mon', leads: 12, bookings: 5, msgs: 45 },
@@ -66,10 +67,10 @@ export default function AIReport() {
     change: parseInt(m.change),
     icon: m.label === 'New Leads' ? Users : m.label === 'Bookings' ? Calendar : m.label === 'Messages' ? MessageSquare : TrendingUp,
     color: m.label === 'New Leads' ? 'text-brand-400' : m.label === 'Bookings' ? 'text-accent-400' : m.label === 'Messages' ? 'text-blue-400' : 'text-green-400',
-    bg: m.label === 'New Leads' ? 'rgba(124,58,237,0.1)' : m.label === 'Bookings' ? 'rgba(20,184,166,0.1)' : m.label === 'Messages' ? 'rgba(99,102,241,0.1)' : 'rgba(34,197,94,0.1)',
+    bg: m.label === 'New Leads' ? 'rgba(124,58,237,0.1)' : m.label === 'Bookings' ? 'rgba(245,158,11,0.1)' : m.label === 'Messages' ? 'rgba(99,102,241,0.1)' : 'rgba(34,197,94,0.1)',
   })) : [
     { label: 'New Leads', value: currLeads.reduce((s, v) => s + v, 0), change: calcChange(currLeads, prevLeads), icon: Users, color: 'text-brand-400', bg: 'rgba(124,58,237,0.1)' },
-    { label: 'Bookings', value: currBookings.reduce((s, v) => s + v, 0), change: calcChange(currBookings, prevBookings), icon: Calendar, color: 'text-accent-400', bg: 'rgba(20,184,166,0.1)' },
+    { label: 'Bookings', value: currBookings.reduce((s, v) => s + v, 0), change: calcChange(currBookings, prevBookings), icon: Calendar, color: 'text-accent-400', bg: 'rgba(245,158,11,0.1)' },
     { label: 'Messages', value: currMsgs.reduce((s, v) => s + v, 0), change: calcChange(currMsgs, prevMsgs), icon: MessageSquare, color: 'text-blue-400', bg: 'rgba(99,102,241,0.1)' },
     { label: 'Conversion', value: '24.6%', change: 8, icon: TrendingUp, color: 'text-green-400', bg: 'rgba(34,197,94,0.1)' },
   ], [report])
@@ -87,7 +88,64 @@ export default function AIReport() {
     { time: '2:00 PM', task: 'Follow up with Sarah', description: 'Send pricing comparison & case study' },
   ]
 
+  function buildReportText() {
+    const s = report ? report.summary : `Bookings: ${currBookings.reduce((s,v)=>s+v,0)}, Leads: ${currLeads.reduce((s,v)=>s+v,0)}`
+    return `SmartBiz AI — Daily Report (${today})\n\n${s}\n\nRecommendations:\n${
+      (report ? report.recommendations : recommendations).map(r => `  ${r.time} — ${r.task}: ${r.description}`).join('\n')
+    }\n\nHot Leads:\n${
+      (report ? report.hot_leads : hotLeads).map(l => `  ${l.name} (${l.score}): ${l.note}`).join('\n')
+    }\n\n— SmartBiz AI`
+  }
+
+  function buildReportHTML() {
+    const r = report
+    const m = r ? r.key_metrics : summaryCards.map(c => ({ label: c.label, value: c.value, change: c.change }))
+    const recs = r ? r.recommendations : recommendations
+    const hots = r ? r.hot_leads : hotLeads
+    return `<!DOCTYPE html><html><head><meta charset="utf-8"><title>SmartBiz AI Report</title>
+    <style>
+      *{margin:0;padding:0;box-sizing:border-box}
+      body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:#FDF0E0;color:#1e293b;padding:40px}
+      h1{font-size:28px;font-weight:800;background:linear-gradient(135deg,#7C3AED,#F59E0B);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:4px}
+      .date{color:#78716c;font-size:14px;margin-bottom:24px}
+      .summary{background:#fff;border-radius:16px;padding:24px;margin-bottom:24px;border:1px solid #E0D7E6;line-height:1.6}
+      .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-bottom:24px}
+      .card{background:#fff;border-radius:12px;padding:16px;border:1px solid #E0D7E6}
+      .card .lbl{font-size:12px;color:#78716c;text-transform:uppercase;letter-spacing:0.5px}
+      .card .val{font-size:22px;font-weight:700;margin-top:4px}
+      .card .chg{font-size:13px;font-weight:500}
+      h2{font-size:16px;font-weight:700;margin:20px 0 12px;color:#7C3AED}
+      .rec,.hot{background:#fff;border-radius:12px;padding:14px 16px;margin-bottom:8px;border:1px solid #E0D7E6;display:flex;justify-content:space-between;align-items:center}
+      .rec .time{color:#F59E0B;font-weight:600;font-size:13px}
+      .hot .score{color:#DC2626;font-weight:600;font-size:13px}
+      .footer{margin-top:32px;color:#78716c;font-size:13px;text-align:center;border-top:1px solid #E0D7E6;padding-top:16px}
+    </style></head><body>
+      <h1>SmartBiz AI</h1>
+      <div class="date">Daily Report — ${today}</div>
+      <div class="summary">${r ? r.summary : 'Your daily business performance overview.'}</div>
+      <div class="grid">
+        ${m.map(c => `<div class="card"><div class="lbl">${c.label}</div><div class="val">${c.value}</div><div class="chg" style="color:${parseInt(c.change) >= 0 ? '#16a34a' : '#dc2626'}">${c.change}% vs last week</div></div>`).join('')}
+      </div>
+      <h2>Recommendations</h2>
+      ${recs.map(r => `<div class="rec"><div><strong>${r.task}</strong><br><span style="color:#78716c;font-size:13px">${r.description}</span></div><div class="time">${r.time}</div></div>`).join('')}
+      <h2>Hot Leads</h2>
+      ${hots.map(l => `<div class="hot"><div><strong>${l.name}</strong><br><span style="color:#78716c;font-size:13px">${l.note}</span></div><div class="score">Score: ${l.score}</div></div>`).join('')}
+      <div class="footer">Generated by SmartBiz AI — smartbiz-ai.com</div>
+    </body></html>`
+  }
+
   const handleShare = (method) => {
+    if (method === 'email') {
+      window.open(`mailto:?subject=SmartBiz AI Daily Report — ${today}&body=${encodeURIComponent(buildReportText())}`)
+    } else if (method === 'whatsapp') {
+      window.open(`https://wa.me/?text=${encodeURIComponent(buildReportText())}`, '_blank')
+    } else if (method === 'pdf') {
+      const w = window.open('', '_blank')
+      w.document.write(buildReportHTML())
+      w.document.close()
+      w.focus()
+      setTimeout(() => w.print(), 500)
+    }
     setSentTo(method)
     setTimeout(() => setSentTo(null), 2500)
   }
@@ -96,6 +154,7 @@ export default function AIReport() {
     <div className="min-h-screen bg-dark-950 flex">
       <Sidebar />
       <main className="lg:ml-64 flex-1 p-4 sm:p-8 pb-20 lg:pb-8">
+        {loading ? <ReportSkeleton /> : (
         <div className="max-w-6xl mx-auto space-y-8">
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
             className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
@@ -110,12 +169,12 @@ export default function AIReport() {
             </div>
             <div className="flex items-center gap-3">
               <button onClick={loadReport} disabled={loading}
-                className="flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm text-dark-300 bg-[#F0F4FF] border border-[#DBEAFE] hover:bg-[#F0F4FF] transition-all">
+                className="flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm text-dark-300 bg-surface-alt border border-cream-dark hover:bg-surface-alt transition-all">
                 <RefreshCw className={`w-4 h-4 ${loading ? 'animate-spin' : ''}`} />
                 Refresh
               </button>
               <Link to="/dashboard"
-                className="flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm text-dark-300 bg-[#F0F4FF] border border-[#DBEAFE] hover:bg-[#F0F4FF] transition-all">
+                className="flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm text-dark-300 bg-surface-alt border border-cream-dark hover:bg-surface-alt transition-all">
                 <ArrowRight className="w-4 h-4 rotate-180" />
                 Dashboard
               </Link>
@@ -125,7 +184,7 @@ export default function AIReport() {
           {report && (
             <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.05 }}
               className="relative overflow-hidden rounded-2xl p-6"
-              style={{ background: 'linear-gradient(135deg, rgba(124,58,237,0.1), rgba(20,184,166,0.05))', border: '1px solid rgba(124,58,237,0.15)' }}>
+              style={{ background: 'linear-gradient(135deg, rgba(124,58,237,0.1), rgba(245,158,11,0.05))', border: '1px solid rgba(124,58,237,0.15)' }}>
               <div className="flex items-start gap-4">
                 <div className="w-12 h-12 rounded-xl flex items-center justify-center shrink-0"
                   style={{ background: 'linear-gradient(135deg, #7c3aed, #6366f1)' }}>
@@ -176,22 +235,22 @@ export default function AIReport() {
                 <h3 className="text-sm font-semibold text-slate-900">Weekly Performance</h3>
                 <div className="flex items-center gap-4 text-xs">
                   <span className="flex items-center gap-1.5"><span className="w-2.5 h-2.5 rounded-sm" style={{ background: '#7c3aed' }} /> Leads</span>
-                  <span className="flex items-center gap-1.5"><span className="w-2.5 h-2.5 rounded-sm" style={{ background: '#14b8a6' }} /> Bookings</span>
+                  <span className="flex items-center gap-1.5"><span className="w-2.5 h-2.5 rounded-sm" style={{ background: '#F59E0B' }} /> Bookings</span>
                   <span className="flex items-center gap-1.5"><span className="w-2.5 h-2.5 rounded-sm" style={{ background: '#6366f1' }} /> Messages</span>
                 </div>
               </div>
               <div className="h-64">
                 <ResponsiveContainer width="100%" height="100%">
                   <BarChart data={weekData} barSize={18} barGap={4}>
-                    <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.05)" />
-                    <XAxis dataKey="day" stroke="rgba(255,255,255,0.15)" tick={{ fill: '#888', fontSize: 12 }} />
-                    <YAxis stroke="rgba(255,255,255,0.15)" tick={{ fill: '#888', fontSize: 12 }} />
+                    <CartesianGrid strokeDasharray="3 3" stroke="rgba(0,0,0,0.05)" />
+                    <XAxis dataKey="day" stroke="rgba(0,0,0,0.15)" tick={{ fill: '#64748b', fontSize: 12 }} />
+                    <YAxis stroke="rgba(0,0,0,0.15)" tick={{ fill: '#64748b', fontSize: 12 }} />
                     <Tooltip
-                      contentStyle={{ background: '#0a0a12', border: '1px solid rgba(124,58,237,0.2)', borderRadius: '12px' }}
-                      labelStyle={{ color: '#fff' }}
+                      contentStyle={{ background: '#fff', border: '1px solid rgba(79,70,229,0.15)', borderRadius: '12px', boxShadow: '0 10px 30px rgba(0,0,0,0.1)' }}
+                      labelStyle={{ color: '#1e293b' }}
                     />
                     <Bar dataKey="leads" fill="#7c3aed" radius={[4, 4, 0, 0]} />
-                    <Bar dataKey="bookings" fill="#14b8a6" radius={[4, 4, 0, 0]} />
+                    <Bar dataKey="bookings" fill="#F59E0B" radius={[4, 4, 0, 0]} />
                     <Bar dataKey="msgs" fill="#6366f1" radius={[4, 4, 0, 0]} />
                   </BarChart>
                 </ResponsiveContainer>
@@ -210,12 +269,12 @@ export default function AIReport() {
               <div className="h-64">
                 <ResponsiveContainer width="100%" height="100%">
                   <AreaChart data={weekData.map((d, i) => ({ day: d.day, current: d.leads, previous: prevWeekData[i].leads }))}>
-                    <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.05)" />
-                    <XAxis dataKey="day" stroke="rgba(255,255,255,0.15)" tick={{ fill: '#888', fontSize: 12 }} />
-                    <YAxis stroke="rgba(255,255,255,0.15)" tick={{ fill: '#888', fontSize: 12 }} />
+                    <CartesianGrid strokeDasharray="3 3" stroke="rgba(0,0,0,0.05)" />
+                    <XAxis dataKey="day" stroke="rgba(0,0,0,0.15)" tick={{ fill: '#64748b', fontSize: 12 }} />
+                    <YAxis stroke="rgba(0,0,0,0.15)" tick={{ fill: '#64748b', fontSize: 12 }} />
                     <Tooltip
-                      contentStyle={{ background: '#0a0a12', border: '1px solid rgba(124,58,237,0.2)', borderRadius: '12px' }}
-                      labelStyle={{ color: '#fff' }}
+                      contentStyle={{ background: '#fff', border: '1px solid rgba(79,70,229,0.15)', borderRadius: '12px', boxShadow: '0 10px 30px rgba(0,0,0,0.1)' }}
+                      labelStyle={{ color: '#1e293b' }}
                     />
                     <Area type="monotone" dataKey="current" stroke="#7c3aed" fill="rgba(124,58,237,0.15)" strokeWidth={2} />
                     <Area type="monotone" dataKey="previous" stroke="#555" fill="rgba(255,255,255,0.03)" strokeWidth={2} strokeDasharray="4 4" />
@@ -239,7 +298,7 @@ export default function AIReport() {
             </div>
             <div className="space-y-3">
               {hotLeads.map((lead, i) => (
-                <div key={i} className="flex items-center gap-4 p-4 rounded-xl bg-[#F0F4FF] hover:bg-[#F0F4FF] transition-all group">
+                <div key={i} className="flex items-center gap-4 p-4 rounded-xl bg-surface-alt hover:bg-surface-alt transition-all group">
                   <div className={`w-10 h-10 rounded-xl flex items-center justify-center text-sm font-bold text-slate-900 ${
                     lead.status === 'hot' ? 'bg-gradient-to-br from-red-500 to-orange-500' : 'bg-gradient-to-br from-yellow-500 to-amber-500'
                   }`}>
@@ -269,10 +328,10 @@ export default function AIReport() {
 
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 }}
             className="glass-card p-6"
-            style={{ borderColor: 'rgba(20,184,166,0.2)' }}>
+            style={{ borderColor: 'rgba(245,158,11,0.2)' }}>
             <div className="flex items-start gap-4">
               <div className="w-12 h-12 rounded-xl flex items-center justify-center shrink-0"
-                style={{ background: 'linear-gradient(135deg, rgba(20,184,166,0.2), rgba(124,58,237,0.1))' }}>
+                style={{ background: 'linear-gradient(135deg, rgba(245,158,11,0.2), rgba(124,58,237,0.1))' }}>
                 <Bot className="w-6 h-6 text-accent-400" />
               </div>
               <div className="flex-1">
@@ -285,7 +344,7 @@ export default function AIReport() {
                 </p>
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                   {recommendations.map((item, i) => (
-                    <div key={i} className="p-4 rounded-xl bg-[#F0F4FF] border border-[#DBEAFE]">
+                    <div key={i} className="p-4 rounded-xl bg-surface-alt border border-cream-dark">
                       <div className="flex items-center justify-between mb-2">
                         <span className="text-xs text-dark-500">{item.time}</span>
                         <span className={`text-[10px] font-medium ${i === 0 ? 'text-red-400' : i === 1 ? 'text-yellow-400' : 'text-accent-400'}`}>
@@ -304,23 +363,22 @@ export default function AIReport() {
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.35 }}
             className="flex flex-wrap items-center gap-3 pt-2">
             <button onClick={() => handleShare('email')}
-              className="flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-medium text-slate-900 transition-all hover:shadow-lg"
-              style={{ background: sentTo === 'email' ? 'linear-gradient(135deg, #16a34a, #15803d)' : 'linear-gradient(135deg, #7c3aed, #6366f1)' }}>
+              className={`flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-medium text-white transition-all shadow-md hover:shadow-lg ${sentTo === 'email' ? 'opacity-80' : 'btn-premium'}`}>
               {sentTo === 'email' ? <CheckCircle2 className="w-4 h-4" /> : <Mail className="w-4 h-4" />}
               {sentTo === 'email' ? 'Sent!' : 'Send to Email'}
             </button>
             <button onClick={() => handleShare('whatsapp')}
-              className="flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-medium text-slate-900 transition-all hover:shadow-lg"
-              style={{ background: sentTo === 'whatsapp' ? 'linear-gradient(135deg, #16a34a, #15803d)' : 'linear-gradient(135deg, #25D366, #128C7E)' }}>
+              className={`flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-medium text-white transition-all shadow-md hover:shadow-lg ${sentTo === 'whatsapp' ? 'opacity-80' : 'btn-premium'}`}>
               {sentTo === 'whatsapp' ? <CheckCircle2 className="w-4 h-4" /> : <Smartphone className="w-4 h-4" />}
               {sentTo === 'whatsapp' ? 'Sent!' : 'Send to WhatsApp'}
             </button>
             <button onClick={() => handleShare('pdf')}
-              className="flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-medium text-dark-200 glass-card hover:bg-[#F0F4FF] transition-all">
+              className="flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-medium text-white btn-premium">
               <Download className="w-4 h-4" /> Download PDF
             </button>
           </motion.div>
         </div>
+        )}
       </main>
     </div>
   )

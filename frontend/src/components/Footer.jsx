@@ -10,13 +10,13 @@ const footerLinks = {
 
 export default function Footer() {
   return (
-    <footer className="relative border-t border-[#DBEAFE] bg-dark-950/50 backdrop-blur-xl">
+    <footer className="relative border-t border-cream-dark bg-dark-950/50 backdrop-blur-xl">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <div className="grid grid-cols-2 md:grid-cols-5 gap-8 mb-12">
           <div className="col-span-2 md:col-span-1">
             <Link to="/" className="flex items-center gap-2.5 mb-4 group">
               <div className="w-9 h-9 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform shadow-lg shadow-brand-500/20"
-                style={{ background: 'linear-gradient(135deg, #7c3aed, #6366f1, #14b8a6)' }}>
+                style={{ background: 'linear-gradient(135deg, #7c3aed, #6366f1, #F59E0B)' }}>
                 <Sparkles className="w-5 h-5 text-slate-900" />
               </div>
               <span className="text-lg font-bold">
@@ -51,7 +51,7 @@ export default function Footer() {
           ))}
         </div>
 
-        <div className="pt-8 border-t border-[#DBEAFE] flex flex-col sm:flex-row justify-between items-center gap-4">
+        <div className="pt-8 border-t border-cream-dark flex flex-col sm:flex-row justify-between items-center gap-4">
           <p className="text-sm text-dark-500">© 2025 SmartBiz AI. All rights reserved. <span className="inline-flex items-center gap-1">Made with <Heart className="w-3 h-3 text-red-400" /> for businesses</span></p>
           <div className="flex items-center gap-2 text-xs text-dark-500">
             <span className="brand-dot animate-pulse" />

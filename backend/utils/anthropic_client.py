@@ -128,23 +128,48 @@ def _fallback_response(message: str) -> str:
 
 def _mock_report(stats, leads, bookings) -> dict:
     today = datetime.now().strftime("%A, %B %d")
+    hot = [l for l in leads if l.get("status") == "hot"][:3]
+    hot_leads = []
+    for l in hot:
+        hot_leads.append({
+            "name": l["name"],
+            "score": 95 if l.get("status") == "hot" else 70,
+            "note": l.get("notes", f"Lead from {l.get('source', 'whatsapp')} — needs follow-up"),
+            "status": l.get("status", "hot"),
+        })
+    if not hot_leads:
+        hot_leads = [
+            {"name": l["name"], "score": 80, "note": l.get("notes", "Recent lead — follow up soon"), "status": l.get("status", "new")}
+            for l in leads[:3]
+        ]
+
+    recommendations = []
+    if hot_leads:
+        recommendations.append({
+            "time": "9:00 AM", "task": f"Follow up with {hot_leads[0]['name']}",
+            "description": f"{hot_leads[0]['note']}",
+        })
+    recommendations.append({
+        "time": "12:00 PM", "task": "Review weekly analytics",
+        "description": "Check conversion rates and adjust campaigns",
+    })
+    if bookings:
+        recommendations.append({
+            "time": "3:00 PM", "task": f"Prepare for {len(bookings)} upcoming bookings",
+            "description": f"Review {bookings[0].get('customer_name', 'next client')}'s appointment",
+        })
+
     return {
-        "summary": f"Good morning! Here's your {today} business snapshot. Your team is performing well with consistent engagement across all channels.",
+        "summary": f"Good morning! Here's your {today} business snapshot. {stats.get('new_leads', 0)} new leads, {stats.get('today_bookings', 0)} bookings today, {stats.get('hot_leads', 0)} hot leads needing priority attention.",
         "key_metrics": [
-            {"label": "New Leads", "value": stats.get("new_leads", 12), "change": "+23%"},
-            {"label": "Bookings", "value": stats.get("today_bookings", 3), "change": "+8%"},
-            {"label": "Messages", "value": stats.get("total_messages", 45), "change": "+15%"},
-            {"label": "Hot Leads", "value": stats.get("hot_leads", 3), "change": "+12%"},
+            {"label": "New Leads", "value": stats.get("new_leads", 0), "change": "+12%"},
+            {"label": "Bookings", "value": stats.get("today_bookings", 0), "change": "+8%"},
+            {"label": "Messages", "value": stats.get("total_messages", 0), "change": "+15%"},
+            {"label": "Hot Leads", "value": stats.get("hot_leads", 0), "change": "+10%"},
         ],
-        "hot_leads": [
-            {"name": "Robert Kim", "score": 95, "note": "Visited pricing page 3 times. Ready for follow-up.", "status": "hot"},
-            {"name": "Lisa Park", "score": 71, "note": "Engaged with WhatsApp demo bot", "status": "warm"},
-            {"name": "James Wilson", "score": 88, "note": "Asked about enterprise plan", "status": "hot"},
+        "hot_leads": hot_leads if hot_leads else [
+            {"name": "No hot leads", "score": 0, "note": "All leads have been followed up", "status": "cold"},
         ],
-        "recommendations": [
-            {"time": "9:00 AM", "task": "Follow up with hot leads", "description": "Contact Robert Kim and James Wilson for personalized demos"},
-            {"time": "12:00 PM", "task": "Review weekly analytics", "description": "Check conversion rates and adjust WhatsApp campaigns"},
-            {"time": "3:00 PM", "task": "Team sync", "description": "Review booking conflicts and optimize service slots"},
-        ],
-        "focus_area": "Lead response time - current avg is 4.2min, target is under 2min",
+        "recommendations": recommendations,
+        "focus_area": "Lead response time — aim for under 2 minutes for WhatsApp inquiries",
     }

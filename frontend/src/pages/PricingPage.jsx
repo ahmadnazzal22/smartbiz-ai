@@ -115,7 +115,7 @@ export default function PricingPage() {
           className="flex items-center justify-center gap-4 mt-10">
           <span className={`text-sm font-medium ${!annual ? 'text-slate-900' : 'text-dark-400'}`}>Monthly</span>
           <button onClick={() => setAnnual(!annual)}
-            className={`relative w-14 h-7 rounded-full transition-all ${annual ? 'bg-brand-500' : 'bg-[#F0F4FF]'}`}>
+            className={`relative w-14 h-7 rounded-full transition-all ${annual ? 'bg-brand-500' : 'bg-surface-alt'}`}>
             <div className={`absolute top-1 w-5 h-5 rounded-full bg-white shadow transition-all ${annual ? 'translate-x-8' : 'translate-x-1'}`} />
           </button>
           <span className={`text-sm font-medium ${annual ? 'text-slate-900' : 'text-dark-400'}`}>
@@ -133,7 +133,7 @@ export default function PricingPage() {
               style={plan.popular ? { background: 'linear-gradient(135deg, rgba(124,58,237,0.08), rgba(99,102,241,0.04))' } : {}}>
               {plan.popular && (
                 <div className="absolute -top-4 left-1/2 -translate-x-1/2 px-5 py-1.5 rounded-full text-xs font-semibold text-slate-900 flex items-center gap-1.5 shadow-lg whitespace-nowrap"
-                  style={{ background: 'linear-gradient(135deg, #7c3aed, #6366f1, #14b8a6)' }}>
+                  style={{ background: 'linear-gradient(135deg, #7c3aed, #6366f1, #F59E0B)' }}>
                   <Star className="w-3 h-3" /> {plan.badge}
                 </div>
               )}
@@ -165,7 +165,7 @@ export default function PricingPage() {
                   return (
                     <li key={f} className="flex items-center gap-3 text-sm">
                       {val === true ? (
-                        <div className="w-5 h-5 rounded-full flex items-center justify-center shrink-0" style={{ background: 'rgba(20,184,166,0.1)' }}>
+                        <div className="w-5 h-5 rounded-full flex items-center justify-center shrink-0" style={{ background: 'rgba(245,158,11,0.1)' }}>
                           <Check className="w-3 h-3 text-accent-400" />
                         </div>
                       ) : val === false ? (
@@ -201,7 +201,7 @@ export default function PricingPage() {
           <div className="overflow-x-auto">
             <table className="w-full text-sm">
               <thead>
-                <tr className="border-b border-[#DBEAFE]">
+                <tr className="border-b border-cream-dark">
                   <th className="text-left px-6 py-4 text-dark-400 font-medium">Feature</th>
                   {plans.map(p => (
                     <th key={p.name} className={`px-6 py-4 text-center font-semibold ${p.popular ? 'text-brand-300' : 'text-slate-900'}`}>
@@ -213,7 +213,7 @@ export default function PricingPage() {
               </thead>
               <tbody>
                 {allFeatures.map((f, i) => (
-                  <tr key={f} className={`${i < allFeatures.length - 1 ? 'border-b border-[#DBEAFE]' : ''} hover:bg-[#F0F4FF]`}>
+                  <tr key={f} className={`${i < allFeatures.length - 1 ? 'border-b border-cream-dark' : ''} hover:bg-surface-alt`}>
                     <td className="px-6 py-4 text-dark-200">{f}</td>
                     {plans.map(p => {
                       const val = p.features[f]
@@ -268,7 +268,7 @@ export default function PricingPage() {
           <p className="text-dark-300 mb-8">Start your 14-day free trial. No credit card. No commitment.</p>
           <Link to="/try-demo"
             className="inline-flex items-center gap-2 px-10 py-4 rounded-full text-slate-900 font-semibold text-lg hover:shadow-lg hover:scale-105 transition-all duration-300"
-            style={{ background: 'linear-gradient(135deg, #7c3aed, #6366f1, #14b8a6)' }}>
+            style={{ background: 'linear-gradient(135deg, #7c3aed, #6366f1, #F59E0B)' }}>
             Try Free Demo <ArrowRight className="w-5 h-5" />
           </Link>
         </motion.div>

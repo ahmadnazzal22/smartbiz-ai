@@ -3,8 +3,8 @@ import { Smartphone, MessageCircle, CalendarCheck, BarChart3, ArrowDown, Sparkle
 
 const steps = [
   { icon: Smartphone, title: 'Connect WhatsApp', desc: 'Link your WhatsApp Business number in 1 click. No technical setup needed.', color: 'from-brand-500 to-purple-500', step: '01' },
-  { icon: MessageCircle, title: 'AI Handles Conversations', desc: 'Your AI assistant automatically responds to customers 24/7 — answers questions, captures leads, books appointments.', color: 'from-primary-500 to-cyan-500', step: '02' },
-  { icon: CalendarCheck, title: 'Smart Booking', desc: 'Customers book directly from WhatsApp. AI checks availability, confirms instantly, sends reminders.', color: 'from-accent-500 to-emerald-500', step: '03' },
+  { icon: MessageCircle, title: 'AI Handles Conversations', desc: 'Your AI assistant automatically responds to customers 24/7 — answers questions, captures leads, books appointments.', color: 'from-brand-500 to-accent-400', step: '02' },
+  { icon: CalendarCheck, title: 'Smart Booking', desc: 'Customers book directly from WhatsApp. AI checks availability, confirms instantly, sends reminders.', color: 'from-accent-500 to-accent-600', step: '03' },
   { icon: BarChart3, title: 'Track & Grow', desc: 'Monitor leads, bookings, and revenue in your Executive Dashboard. AI gives daily insights and recommendations.', color: 'from-orange-500 to-pink-500', step: '04' },
 ]
 

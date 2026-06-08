@@ -56,13 +56,13 @@ export default function Pricing() {
           {plans.map((plan, index) => (
             <motion.div key={plan.name} initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }} transition={{ delay: index * 0.1 }}
-              className={`relative glass-card p-8 flex flex-col group hover:bg-[#F0F4FF] ${
+              className={`relative glass-card p-8 flex flex-col group hover:bg-surface-alt ${
                 plan.popular ? 'scale-105' : ''
               }`}
               style={plan.popular ? { borderColor: 'rgba(124,58,237,0.3)', background: 'linear-gradient(135deg, rgba(124,58,237,0.08), rgba(99,102,241,0.05))' } : {}}>
               {plan.popular && (
                 <div className="absolute -top-4 left-1/2 -translate-x-1/2 px-5 py-1.5 rounded-full text-xs font-semibold text-slate-900 flex items-center gap-1.5 shadow-lg"
-                  style={{ background: 'linear-gradient(135deg, #7c3aed, #6366f1, #14b8a6)' }}>
+                  style={{ background: 'linear-gradient(135deg, #7c3aed, #6366f1, #F59E0B)' }}>
                   <Star className="w-3 h-3" /> {plan.badge}
                 </div>
               )}
@@ -80,7 +80,7 @@ export default function Pricing() {
                 {plan.features.map((feature) => (
                   <li key={feature} className="flex items-start gap-3 text-sm text-dark-300">
                     <div className="w-5 h-5 rounded-full flex items-center justify-center shrink-0 mt-0.5"
-                      style={{ background: 'rgba(20,184,166,0.1)' }}>
+                      style={{ background: 'rgba(245,158,11,0.1)' }}>
                       <Check className="w-3 h-3 text-accent-400" />
                     </div>
                     {feature}
@@ -94,7 +94,7 @@ export default function Pricing() {
                     ? 'text-slate-900 hover:shadow-xl'
                     : 'glass-card text-dark-200 hover:text-slate-900 hover:border-brand-500/30'
                 }`}
-                style={plan.popular ? { background: 'linear-gradient(135deg, #7c3aed, #6366f1, #14b8a6)' } : {}}>
+                style={plan.popular ? { background: 'linear-gradient(135deg, #7c3aed, #6366f1, #F59E0B)' } : {}}>
                 {plan.cta}
               </Link>
             </motion.div>

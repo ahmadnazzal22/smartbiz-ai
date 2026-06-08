@@ -6,13 +6,13 @@ export default function CTADemo() {
   return (
     <section id="demo" className="relative py-32 overflow-hidden">
       <div className="absolute inset-0 bg-gradient-to-b from-dark-950 via-dark-900/30 to-dark-950" />
-      <div className="hero-glow" style={{ background: '#14b8a6', top: '20%', left: '30%' }} />
+      <div className="hero-glow" style={{ background: '#F59E0B', top: '20%', left: '30%' }} />
       
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
           className="relative rounded-3xl overflow-hidden">
-          <div className="absolute inset-0" style={{ background: 'linear-gradient(135deg, rgba(124,58,237,0.15), rgba(10,10,18,0.9), rgba(20,184,166,0.15))' }} />
-          <div className="absolute inset-0 backdrop-blur-3xl" style={{ background: 'linear-gradient(135deg, rgba(124,58,237,0.05), rgba(20,184,166,0.05))' }} />
+          <div className="absolute inset-0" style={{ background: 'linear-gradient(135deg, rgba(124,58,237,0.15), rgba(10,10,18,0.9), rgba(245,158,11,0.15))' }} />
+          <div className="absolute inset-0 backdrop-blur-3xl" style={{ background: 'linear-gradient(135deg, rgba(124,58,237,0.05), rgba(245,158,11,0.05))' }} />
 
           <div className="relative px-8 py-20 sm:px-20 sm:py-28 text-center space-y-8">
             <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
@@ -36,7 +36,7 @@ export default function CTADemo() {
               className="flex flex-wrap justify-center gap-4 pt-4">
               <Link to="/try-demo"
                 className="group btn-premium px-10 py-5 rounded-full text-white font-semibold text-lg flex items-center gap-2 hover:shadow-xl transition-all duration-300"
-                style={{ background: 'linear-gradient(135deg, #7c3aed, #6366f1, #14b8a6)' }}>
+                style={{ background: 'linear-gradient(135deg, #7c3aed, #6366f1, #F59E0B)' }}>
                 Try Free Demo
                 <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </Link>

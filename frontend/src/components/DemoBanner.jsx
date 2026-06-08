@@ -7,7 +7,7 @@ export default function DemoBanner() {
 
   return (
     <div className="relative z-50 px-4 py-2.5 text-center text-sm"
-      style={{ background: 'linear-gradient(135deg, rgba(124,58,237,0.15), rgba(20,184,166,0.1))', borderBottom: '1px solid rgba(124,58,237,0.2)' }}>
+      style={{ background: 'linear-gradient(135deg, rgba(124,58,237,0.15), rgba(245,158,11,0.1))', borderBottom: '1px solid rgba(124,58,237,0.2)' }}>
       <div className="flex items-center justify-center gap-3 flex-wrap">
         <span className="flex items-center gap-1.5 text-brand-300 font-medium">
           <Sparkles className="w-4 h-4" />

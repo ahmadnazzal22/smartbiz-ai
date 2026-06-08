@@ -102,9 +102,9 @@ export default function NotificationCenter() {
         {open && (
           <motion.div initial={{ opacity: 0, y: 10, scale: 0.95 }} animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 10, scale: 0.95 }} transition={{ duration: 0.15 }}
-            className="absolute right-0 top-full mt-2 w-80 sm:w-96 rounded-2xl overflow-hidden shadow-2xl z-50"
-            style={{ background: '#0a0a12', border: '1px solid rgba(255,255,255,0.08)' }}>
-            <div className="p-4 border-b border-[#DBEAFE] flex items-center justify-between">
+            className="absolute right-0 top-full mt-2 w-80 sm:w-96 rounded-2xl overflow-hidden shadow-2xl z-50 bg-white"
+            style={{ border: '1px solid rgba(79,70,229,0.1)' }}>
+            <div className="p-4 border-b border-cream-dark flex items-center justify-between">
               <div className="flex items-center gap-2">
                 <Bell className="w-4 h-4 text-brand-400" />
                 <h3 className="text-sm font-semibold text-slate-900">Notifications</h3>
@@ -135,8 +135,8 @@ export default function NotificationCenter() {
                   const Icon = nt.icon
                   return (
                     <button key={n.id} onClick={() => markRead(n.id)}
-                      className={`w-full p-3 text-left border-b border-[#DBEAFE] transition-all hover:bg-[#F0F4FF] flex items-start gap-3 ${
-                        !n.read ? 'bg-[#F0F4FF]' : ''
+                      className={`w-full p-3 text-left border-b border-cream-dark transition-all hover:bg-surface-alt flex items-start gap-3 ${
+                        !n.read ? 'bg-surface-alt' : ''
                       }`}>
                       <div className={`w-8 h-8 rounded-xl ${nt.bg} flex items-center justify-center shrink-0 ${nt.color}`}>
                         <Icon className="w-4 h-4" />
@@ -156,9 +156,9 @@ export default function NotificationCenter() {
             </div>
 
             {notifications.length > 0 && (
-              <div className="p-2 border-t border-[#DBEAFE]">
+              <div className="p-2 border-t border-cream-dark">
                 <button onClick={clearAll}
-                  className="w-full py-2 rounded-xl text-xs text-dark-400 hover:text-slate-900 hover:bg-[#F0F4FF] transition-all text-center">
+                  className="w-full py-2 rounded-xl text-xs text-dark-400 hover:text-slate-900 hover:bg-surface-alt transition-all text-center">
                   Clear all notifications
                 </button>
               </div>

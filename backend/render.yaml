@@ -9,3 +9,18 @@ services:
         value: 3.11.0
       - key: PORT
         value: 10000
+      # === REQUIRED: Generate with: python -c "import secrets; print(secrets.token_hex(32))"
+      - key: JWT_SECRET
+        sync: false
+      # === Frontend URL (replace with your Vercel domain)
+      - key: CORS_ORIGINS
+        value: https://smartbiz-ai.vercel.app
+      # === PostgreSQL (Render auto-provisions this — set manually if using Neon/Supabase)
+      - key: DATABASE_URL
+        sync: false
+      # === WhatsApp verify token (set in Meta Developer Console)
+      - key: WHATSAPP_VERIFY_TOKEN
+        sync: false
+      # === Optional: AI
+      - key: ANTHROPIC_API_KEY
+        sync: false

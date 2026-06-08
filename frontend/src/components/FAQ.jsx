@@ -17,7 +17,7 @@ export default function FAQ() {
   return (
     <section className="relative py-32 overflow-hidden">
       <div className="absolute inset-0 bg-gradient-to-b from-dark-950 via-dark-900/10 to-dark-950" />
-      <div className="hero-glow" style={{ background: '#14b8a6', top: '60%', left: '70%' }} />
+      <div className="hero-glow" style={{ background: '#F59E0B', top: '60%', left: '70%' }} />
 
       <div className="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
@@ -40,7 +40,7 @@ export default function FAQ() {
               <button onClick={() => setOpenIndex(openIndex === i ? null : i)}
                 className="w-full flex items-center justify-between p-5 text-left">
                 <span className="text-sm font-medium text-slate-900 pr-4">{faq.q}</span>
-                <div className="w-8 h-8 rounded-full bg-[#F0F4FF] flex items-center justify-center shrink-0">
+                <div className="w-8 h-8 rounded-full bg-surface-alt flex items-center justify-center shrink-0">
                   {openIndex === i ? <Minus className="w-4 h-4 text-accent-400" /> : <Plus className="w-4 h-4 text-dark-400" />}
                 </div>
               </button>

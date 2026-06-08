@@ -1,23 +1,24 @@
 from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
 from database import get_db
-from models import Message, Lead, User
-from schemas import AIChatRequest, AIChatResponse, AIReportRequest, AIReportResponse, MessageCreate
+from models import Message, Lead, Booking, User
+from schemas import AIChatRequest, AIChatResponse, AIReportRequest, AIReportResponse
 from auth import get_current_user
 from utils.ai_assistant import get_ai_response, generate_daily_report
+from utils.sanitize import strip_html
 from datetime import datetime, timedelta
 
 router = APIRouter(prefix="/api/ai", tags=["ai"])
 
 
 @router.post("/chat", response_model=AIChatResponse)
-def chat(data: AIChatRequest, db: Session = Depends(get_db)):
-    reply = get_ai_response(data.message, data.conversation_history)
+def chat(data: AIChatRequest, user: User = Depends(get_current_user)):
+    reply = get_ai_response(strip_html(data.message), data.conversation_history)
     return AIChatResponse(reply=reply)
 
 
 @router.post("/whatsapp-reply", response_model=AIChatResponse)
-def whatsapp_reply(data: AIChatRequest, db: Session = Depends(get_db)):
+def whatsapp_reply(data: AIChatRequest):
     reply = get_ai_response(data.message, data.conversation_history)
     return AIChatResponse(reply=reply)
 
@@ -31,12 +32,12 @@ def generate_report(data: AIReportRequest, db: Session = Depends(get_db), curren
         Lead.created_at >= week_ago
     ).all() if data.include_leads else []
 
-    recent_bookings = db.query(Message).filter(
-        Message.created_at >= week_ago
+    recent_bookings = db.query(Booking).filter(
+        Booking.created_at >= week_ago
     ).all() if data.include_messages else []
 
     total_leads = len(recent_leads)
-    total_bookings = db.query(Message).count()
+    total_bookings = db.query(Booking).count()
     total_messages = db.query(Message).count()
     hot_count = sum(1 for l in recent_leads if l.status == "hot")
 
@@ -50,14 +51,14 @@ def generate_report(data: AIReportRequest, db: Session = Depends(get_db), curren
     }
 
     leads_data = [{"name": l.name, "status": l.status, "phone": l.phone, "notes": l.notes, "source": l.source} for l in recent_leads[:10]]
-    bookings_data = [{"customer_name": b.sender, "date": str(b.created_at)} for b in recent_bookings[:10]]
+    bookings_data = [{"customer_name": b.customer_name, "date": b.date} for b in recent_bookings[:10]]
 
     report = generate_daily_report(stats, leads_data, bookings_data)
     return AIReportResponse(**report)
 
 
 @router.post("/conversation/clear")
-def clear_conversation(data: dict, db: Session = Depends(get_db)):
+def clear_conversation(data: dict, user: User = Depends(get_current_user)):
     from utils.ai_assistant import clear_conversation as cc
     cc(data.get("conversation_id", "default"))
     return {"status": "cleared"}

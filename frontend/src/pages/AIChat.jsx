@@ -52,9 +52,9 @@ export default function AIChat() {
       <main className="lg:ml-64 flex-1 flex pb-16 lg:pb-0">
         {/* Chat Area */}
         <div className="flex-1 flex flex-col">
-          <div className="p-6 border-b border-[#DBEAFE] flex items-center justify-between">
+          <div className="p-6 border-b border-cream-dark flex items-center justify-between">
             <div className="flex items-center gap-3">
-              <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-primary-500 to-accent-500 flex items-center justify-center">
+              <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-brand-500 to-accent-500 flex items-center justify-center">
                 <Bot className="w-6 h-6 text-slate-900" />
               </div>
               <div>
@@ -73,14 +73,14 @@ export default function AIChat() {
                 className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}>
                 <div className={`flex items-start gap-3 max-w-[75%] ${msg.role === 'user' ? 'flex-row-reverse' : ''}`}>
                   <div className={`w-8 h-8 rounded-full flex items-center justify-center shrink-0 ${
-                    msg.role === 'user' ? 'bg-accent-500' : 'bg-gradient-to-br from-primary-500 to-accent-500'
+                    msg.role === 'user' ? 'bg-accent-500' : 'bg-gradient-to-br from-brand-500 to-accent-500'
                   }`}>
                     {msg.role === 'user' ? <User className="w-4 h-4 text-slate-900" /> : <Bot className="w-4 h-4 text-slate-900" />}
                   </div>
                   <div className={`rounded-2xl px-5 py-3 text-sm leading-relaxed ${
                     msg.role === 'user'
-                      ? 'bg-gradient-to-r from-primary-500 to-accent-500 text-white rounded-tr-sm'
-                      : 'bg-[#F0F4FF] text-dark-200 rounded-tl-sm'
+                      ? 'bg-gradient-to-r from-brand-500 to-accent-500 text-white rounded-tr-sm'
+                      : 'bg-surface-alt text-dark-200 rounded-tl-sm'
                   }`}>{msg.content}</div>
                 </div>
               </motion.div>
@@ -88,10 +88,10 @@ export default function AIChat() {
             {loading && (
               <div className="flex justify-start">
                 <div className="flex items-start gap-3">
-                  <div className="w-8 h-8 rounded-full bg-gradient-to-br from-primary-500 to-accent-500 flex items-center justify-center">
+                  <div className="w-8 h-8 rounded-full bg-gradient-to-br from-brand-500 to-accent-500 flex items-center justify-center">
                     <Bot className="w-4 h-4 text-slate-900" />
                   </div>
-                  <div className="bg-[#F0F4FF] rounded-2xl px-5 py-3 rounded-tl-sm">
+                  <div className="bg-surface-alt rounded-2xl px-5 py-3 rounded-tl-sm">
                     <span className="inline-flex gap-1">
                       <span className="w-2 h-2 bg-dark-400 rounded-full animate-bounce" style={{ animationDelay: '0ms' }} />
                       <span className="w-2 h-2 bg-dark-400 rounded-full animate-bounce" style={{ animationDelay: '150ms' }} />
@@ -110,7 +110,7 @@ export default function AIChat() {
               <div className="flex flex-wrap gap-2">
                 {quickActions.map(qa => (
                   <button key={qa.label} onClick={() => sendMessage(qa.msg)}
-                    className="text-xs px-4 py-2 rounded-full glass-card text-dark-300 hover:text-slate-900 hover:border-primary-500/30 transition-all">
+                    className="text-xs px-4 py-2 rounded-full glass-card text-dark-300 hover:text-slate-900 hover:border-brand-500/30 transition-all">
                     {qa.label}
                   </button>
                 ))}
@@ -118,14 +118,14 @@ export default function AIChat() {
             </div>
           )}
 
-          <div className="p-6 border-t border-[#DBEAFE]">
-            <div className="flex items-center gap-2 rounded-2xl bg-[#F0F4FF] border border-[#DBEAFE] p-1.5 focus-within:border-primary-500/50 transition-all">
+          <div className="p-6 border-t border-cream-dark">
+            <div className="flex items-center gap-2 rounded-2xl bg-surface-alt border border-cream-dark p-1.5 focus-within:border-brand-500/50 transition-all">
               <input value={input} onChange={e => setInput(e.target.value)}
                 onKeyDown={e => e.key === 'Enter' && sendMessage(input)}
                 placeholder="Ask anything about SmartBiz AI..."
                 className="flex-1 bg-transparent px-4 py-2.5 text-sm text-slate-900 placeholder-dark-400 outline-none" />
               <button onClick={() => sendMessage(input)} disabled={loading || !input.trim()}
-                className="w-10 h-10 rounded-full bg-gradient-to-r from-primary-500 to-accent-500 flex items-center justify-center text-white hover:shadow-lg transition-all disabled:opacity-40">
+                className="w-10 h-10 rounded-full bg-gradient-to-r from-brand-500 to-accent-500 flex items-center justify-center text-white hover:shadow-lg transition-all disabled:opacity-40">
                 <Send className="w-4 h-4" />
               </button>
             </div>
@@ -133,16 +133,16 @@ export default function AIChat() {
         </div>
 
         {/* Insights Sidebar */}
-        <div className="w-72 border-l border-[#DBEAFE] p-5 hidden xl:block">
+        <div className="w-72 border-l border-cream-dark p-5 hidden xl:block">
           <div className="flex items-center gap-2 mb-6">
-            <Brain className="w-5 h-5 text-primary-400" />
+            <Brain className="w-5 h-5 text-brand-400" />
             <h3 className="text-sm font-semibold text-slate-900">AI Insights</h3>
           </div>
           <div className="space-y-3 mb-8">
             {insights.map((ins, i) => (
               <div key={i} className="glass-card p-4">
                 <div className="flex items-center gap-2 mb-2">
-                  <ins.icon className="w-4 h-4 text-primary-400" />
+                  <ins.icon className="w-4 h-4 text-brand-400" />
                   <span className="text-xs text-dark-400">{ins.label}</span>
                 </div>
                 <p className="text-lg font-bold text-slate-900">{ins.value}</p>
@@ -153,7 +153,7 @@ export default function AIChat() {
 
           <div className="glass-card p-4">
             <div className="flex items-center gap-2 mb-3">
-              <BarChart3 className="w-4 h-4 text-primary-400" />
+              <BarChart3 className="w-4 h-4 text-brand-400" />
               <span className="text-xs text-dark-400">Today's Activity</span>
             </div>
             <div className="space-y-2 text-xs">

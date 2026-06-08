@@ -3,7 +3,7 @@ from sqlalchemy.orm import Session
 from typing import List
 from database import get_db
 from models import BusinessHour, User
-from schemas import BusinessHourCreate, BusinessHourResponse
+from schemas import BusinessHourCreate, BusinessHourResponse, BusinessHourBulkUpdate
 from auth import get_current_user
 
 router = APIRouter(prefix="/api/business-hours", tags=["business-hours"])
@@ -33,3 +33,25 @@ def set_hours(data: BusinessHourCreate, user: User = Depends(get_current_user), 
     db.commit()
     db.refresh(bh)
     return BusinessHourResponse.model_validate(bh)
+
+
+@router.put("/", response_model=List[BusinessHourResponse])
+def bulk_update_hours(data: BusinessHourBulkUpdate, user: User = Depends(get_current_user), db: Session = Depends(get_db)):
+    results = []
+    for entry in data.hours:
+        existing = db.query(BusinessHour).filter(
+            BusinessHour.day_of_week == entry.day_of_week
+        ).first()
+        if existing:
+            existing.open_time = entry.open_time
+            existing.close_time = entry.close_time
+            existing.is_available = entry.is_available
+            results.append(existing)
+        else:
+            bh = BusinessHour(**entry.model_dump())
+            db.add(bh)
+            results.append(bh)
+    db.commit()
+    for r in results:
+        db.refresh(r)
+    return [BusinessHourResponse.model_validate(r) for r in results]

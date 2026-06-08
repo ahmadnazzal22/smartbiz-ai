@@ -115,6 +115,7 @@ export const authApi = {
   login: (data) => api.post('/auth/login', data),
   register: (data) => api.post('/auth/register', data),
   me: () => api.get('/auth/me'),
+  updateProfile: (data) => api.put('/auth/profile', data),
 }
 
 export const leadsApi = {
@@ -168,6 +169,14 @@ export const statsApi = {
     const res = await safeRequest(() => api.get('/stats'))
     return res.data ? res : { data: MOCK.stats }
   },
+}
+
+export const businessHoursApi = {
+  getAll: async () => {
+    const res = await safeRequest(() => api.get('/business-hours'))
+    return res.data ? res : { data: [] }
+  },
+  update: (hours) => api.put('/business-hours', { hours }),
 }
 
 export default api

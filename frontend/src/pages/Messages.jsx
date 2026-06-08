@@ -188,12 +188,11 @@ export default function Messages() {
       <Sidebar />
       <main className="lg:ml-64 flex-1 flex pb-16 lg:pb-0" style={{ height: '100vh' }}>
         {/* Contact List */}
-        <div className={`w-80 lg:w-96 border-r border-[#DBEAFE] flex flex-col shrink-0 ${showMobileList ? 'flex' : 'hidden lg:flex'}`}
-          style={{ background: '#0a0a12' }}>
-          <div className="p-3 border-b border-[#DBEAFE] flex items-center gap-3">
+        <div className={`w-80 lg:w-96 bg-white border-r border-slate-200 flex flex-col shrink-0 ${showMobileList ? 'flex' : 'hidden lg:flex'}`}>
+          <div className="p-3 border-b border-slate-200 flex items-center gap-3">
             <div className="flex items-center gap-3 flex-1">
-              <div className="w-10 h-10 rounded-full flex items-center justify-center" style={{ background: 'linear-gradient(135deg, #25D366, #128C7E)' }}>
-                <Smartphone className="w-5 h-5 text-slate-900" />
+              <div className="w-10 h-10 rounded-full flex items-center justify-center" style={{ background: 'linear-gradient(135deg, #4F46E5, #6366F1)' }}>
+                <Smartphone className="w-5 h-5 text-white" />
               </div>
               <div>
                 <h2 className="text-lg font-semibold text-slate-900">WhatsApp</h2>
@@ -210,22 +209,22 @@ export default function Messages() {
             <div className="relative">
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-dark-400" />
               <input value={search} onChange={e => setSearch(e.target.value)}
-                className="w-full bg-[#F0F4FF] border border-[#DBEAFE] rounded-xl pl-10 pr-4 py-2 text-sm text-slate-900 placeholder-dark-400 outline-none focus:border-brand-500/50"
+                className="w-full bg-surface-alt border border-cream-dark rounded-xl pl-10 pr-4 py-2 text-sm text-slate-900 placeholder-dark-400 outline-none focus:border-brand-500/50"
                 placeholder="Search conversations..." />
             </div>
           </div>
           <div className="flex-1 overflow-y-auto">
             {filtered.map(conv => (
               <button key={conv.id} onClick={() => { setSelectedId(conv.id); setShowMobileList(false) }}
-                className={`w-full p-3 text-left transition-all border-b border-[#DBEAFE] hover:bg-[#F0F4FF] ${
-                  selectedId === conv.id ? 'bg-[#F0F4FF]' : ''
+                className={`w-full p-3 text-left transition-all border-b border-cream-dark hover:bg-surface-alt ${
+                  selectedId === conv.id ? 'bg-surface-alt' : ''
                 }`}>
                 <div className="flex items-start gap-3">
                   <div className="relative shrink-0">
                     <div className="w-12 h-12 rounded-full flex items-center justify-center text-sm font-bold text-slate-900"
                       style={{ background: 'linear-gradient(135deg, #7c3aed, #6366f1)' }}>{conv.avatar}</div>
                     {conv.online && (
-                      <div className="absolute -bottom-0.5 -right-0.5 w-3.5 h-3.5 rounded-full border-2" style={{ background: '#25D366', borderColor: '#0a0a12' }} />
+                      <div className="absolute -bottom-0.5 -right-0.5 w-3.5 h-3.5 rounded-full border-2 border-white" style={{ background: '#4F46E5' }} />
                     )}
                   </div>
                   <div className="flex-1 min-w-0 pt-0.5">
@@ -242,8 +241,8 @@ export default function Messages() {
                       <div className="flex items-center gap-1.5">
                         <span className={`text-[9px] font-medium ${statusColors[conv.status]}`}>{conv.status}</span>
                         {conv.unread > 0 && (
-                          <span className="w-5 h-5 rounded-full text-[10px] text-slate-900 flex items-center justify-center shrink-0"
-                            style={{ background: '#25D366' }}>{conv.unread}</span>
+                          <span className="w-5 h-5 rounded-full text-[10px] text-white flex items-center justify-center shrink-0"
+                            style={{ background: '#4F46E5' }}>{conv.unread}</span>
                         )}
                       </div>
                     </div>
@@ -259,12 +258,12 @@ export default function Messages() {
           {simOpen ? (
             <>
               {/* Simulator Header */}
-              <div className="p-3 border-b border-[#DBEAFE] flex items-center gap-3" style={{ background: '#0a0a12' }}>
-                <button onClick={() => setSimOpen(false)} className="lg:hidden text-dark-300 hover:text-slate-900">
+              <div className="p-3 bg-white border-b border-slate-200 flex items-center gap-3">
+                <button onClick={() => setSimOpen(false)} className="lg:hidden text-dark-400 hover:text-slate-900">
                   <ArrowLeft className="w-5 h-5" />
                 </button>
-                <div className="w-10 h-10 rounded-full flex items-center justify-center" style={{ background: 'linear-gradient(135deg, #25D366, #128C7E)' }}>
-                  <Smartphone className="w-5 h-5 text-slate-900" />
+                <div className="w-10 h-10 rounded-full flex items-center justify-center" style={{ background: 'linear-gradient(135deg, #4F46E5, #6366F1)' }}>
+                  <Smartphone className="w-5 h-5 text-white" />
                 </div>
                 <div className="flex-1">
                   <p className="text-sm font-medium text-slate-900">WhatsApp Booking Simulator</p>
@@ -278,11 +277,11 @@ export default function Messages() {
               </div>
 
               {/* Simulator Contact Info */}
-              <div className="p-3 border-b border-[#DBEAFE] flex gap-2" style={{ background: '#0a0a12' }}>
+              <div className="p-3 bg-white border-b border-slate-200 flex gap-2">
                 <input value={simName} onChange={e => setSimName(e.target.value)} placeholder="Your name"
-                  className="flex-1 bg-[#F0F4FF] border border-[#DBEAFE] rounded-xl px-3 py-2 text-xs text-slate-900 placeholder-dark-400 outline-none focus:border-brand-500/50" />
+                  className="flex-1 bg-surface-alt border border-slate-200 rounded-xl px-3 py-2 text-xs text-slate-900 placeholder-dark-400 outline-none focus:border-brand-500/50" />
                 <input value={simPhone} onChange={e => setSimPhone(e.target.value)}
-                  className="flex-1 bg-[#F0F4FF] border border-[#DBEAFE] rounded-xl px-3 py-2 text-xs text-slate-900 placeholder-dark-400 outline-none focus:border-brand-500/50" />
+                  className="flex-1 bg-surface-alt border border-slate-200 rounded-xl px-3 py-2 text-xs text-slate-900 placeholder-dark-400 outline-none focus:border-brand-500/50" />
               </div>
 
               {/* Simulator Chat */}
@@ -296,22 +295,19 @@ export default function Messages() {
                   </div>
                 )}
                 {simChat.map((msg, i) => (
-                  <motion.div key={i} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }}
-                    className={`flex ${msg.sender === 'ai' ? 'justify-start' : 'justify-end'} mb-0.5`}>
-                    <div className={`max-w-[80%] rounded-lg px-3.5 py-2 ${
+                  <motion.div key={i} initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.3 }}
+                    className={`flex ${msg.sender === 'ai' ? 'justify-start' : 'justify-end'} mb-1`}>
+                    <div className={`relative max-w-[80%] px-3.5 py-2.5 ${
                       msg.sender === 'ai'
-                        ? 'rounded-tl-none'
-                        : 'rounded-tr-none'
+                        ? 'bg-white rounded-2xl rounded-tl-sm shadow-sm border border-slate-100'
+                        : 'rounded-2xl rounded-tr-sm shadow-md'
                     }`}
-                      style={{
-                        background: msg.sender === 'ai'
-                          ? 'linear-gradient(135deg, #075E54, #128C7E)'
-                          : 'rgba(255,255,255,0.08)',
-                        borderTopRightRadius: msg.sender === 'ai' ? '8px' : '4px',
-                        borderTopLeftRadius: msg.sender === 'customer' ? '8px' : '4px',
-                      }}>
-                      <p className="text-sm text-slate-900 whitespace-pre-line leading-relaxed">{msg.content}</p>
-                      <p className="text-[10px] mt-0.5" style={{ color: msg.sender === 'ai' ? 'rgba(255,255,255,0.6)' : 'rgba(255,255,255,0.4)' }}>
+                      style={msg.sender !== 'ai' ? { background: 'linear-gradient(135deg, #4F46E5, #6366F1)' } : {}}>
+                      {msg.sender === 'ai' && (
+                        <div className="absolute left-0 top-0 w-1 h-full bg-brand-500 rounded-l-2xl" />
+                      )}
+                      <p className={`text-sm whitespace-pre-line leading-relaxed ${msg.sender === 'ai' ? 'text-slate-800' : 'text-white'}`}>{msg.content}</p>
+                      <p className={`text-[10px] mt-1 ${msg.sender === 'ai' ? 'text-slate-400' : 'text-white/60'}`}>
                         {msg.time}
                       </p>
                     </div>
@@ -320,7 +316,7 @@ export default function Messages() {
                 {confirmedBooking && (
                   <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }}
                     className="flex justify-center my-4">
-                    <div className="bg-[#F0F4FF] border border-accent-500/20 rounded-2xl p-4 text-center max-w-xs">
+                    <div className="bg-surface-alt border border-accent-500/20 rounded-2xl p-4 text-center max-w-xs">
                       <CheckCircle2 className="w-8 h-8 text-accent-400 mx-auto mb-2" />
                       <p className="text-sm font-medium text-slate-900 mb-1">Booking Confirmed! 🎉</p>
                       <p className="text-xs text-dark-400">{confirmedBooking.service} — {confirmedBooking.date} @ {confirmedBooking.time}</p>
@@ -330,19 +326,19 @@ export default function Messages() {
               </div>
 
               {/* Simulator Input */}
-              <div className="p-3 border-t border-[#DBEAFE] space-y-2" style={{ background: '#0a0a12' }}>
+              <div className="p-3 bg-white border-t border-slate-200 space-y-2">
                 {!bookingStep && (
                   <div className="flex gap-1.5 overflow-x-auto pb-1">
                     <button onClick={() => setSimMsg('I want to book an appointment')}
-                      className="shrink-0 text-[10px] px-3 py-1.5 rounded-full bg-[#F0F4FF] border border-[#DBEAFE] text-dark-300 hover:text-slate-900 transition-colors">
+                      className="shrink-0 text-[10px] px-3 py-1.5 rounded-full bg-surface-alt border border-slate-200 text-dark-400 hover:text-slate-900 transition-colors">
                       📅 Book now
                     </button>
                     <button onClick={() => setSimMsg('What services do you offer?')}
-                      className="shrink-0 text-[10px] px-3 py-1.5 rounded-full bg-[#F0F4FF] border border-[#DBEAFE] text-dark-300 hover:text-slate-900 transition-colors">
+                      className="shrink-0 text-[10px] px-3 py-1.5 rounded-full bg-surface-alt border border-slate-200 text-dark-400 hover:text-slate-900 transition-colors">
                       📋 Services
                     </button>
                     <button onClick={() => setSimMsg('How much does it cost?')}
-                      className="shrink-0 text-[10px] px-3 py-1.5 rounded-full bg-[#F0F4FF] border border-[#DBEAFE] text-dark-300 hover:text-slate-900 transition-colors">
+                      className="shrink-0 text-[10px] px-3 py-1.5 rounded-full bg-surface-alt border border-slate-200 text-dark-400 hover:text-slate-900 transition-colors">
                       💰 Pricing
                     </button>
                   </div>
@@ -351,10 +347,10 @@ export default function Messages() {
                   <input value={simMsg} onChange={e => setSimMsg(e.target.value)}
                     onKeyDown={e => e.key === 'Enter' && sendSimulated()}
                     placeholder={bookingStep ? 'Type your response...' : 'Type a message...'}
-                    className="flex-1 bg-[#F0F4FF] border border-[#DBEAFE] rounded-xl px-4 py-2.5 text-sm text-slate-900 placeholder-dark-400 outline-none focus:border-brand-500/50" />
+                    className="flex-1 bg-surface-alt border border-slate-200 rounded-xl px-4 py-2.5 text-sm text-slate-900 placeholder-dark-400 outline-none focus:border-brand-500/50" />
                   <button onClick={sendSimulated}
-                    className="w-10 h-10 rounded-full flex items-center justify-center text-slate-900 shrink-0"
-                    style={{ background: 'linear-gradient(135deg, #25D366, #128C7E)' }}>
+                    className="w-10 h-10 rounded-full flex items-center justify-center text-white shrink-0 shadow-md hover:shadow-lg transition-shadow"
+                    style={{ background: 'linear-gradient(135deg, #4F46E5, #6366F1)' }}>
                     <Send className="w-4 h-4" />
                   </button>
                 </div>
@@ -364,25 +360,25 @@ export default function Messages() {
             <>
               {/* Chat Header */}
               {selected && (
-                <div className="p-3 border-b border-[#DBEAFE] flex items-center gap-3" style={{ background: '#0a0a12' }}>
-                  <button onClick={() => setShowMobileList(true)} className="lg:hidden text-dark-300 hover:text-slate-900">
+                <div className="p-3 bg-white border-b border-slate-200 flex items-center gap-3">
+                  <button onClick={() => setShowMobileList(true)} className="lg:hidden text-dark-400 hover:text-slate-900">
                     <ArrowLeft className="w-5 h-5" />
                   </button>
                   <div className="relative shrink-0">
-                    <div className="w-10 h-10 rounded-full flex items-center justify-center text-sm font-bold text-slate-900"
-                      style={{ background: 'linear-gradient(135deg, #7c3aed, #6366f1)' }}>{selected.avatar}</div>
-                    {selected.online && <div className="absolute -bottom-0.5 -right-0.5 w-3 h-3 rounded-full border-2" style={{ background: '#25D366', borderColor: '#0a0a12' }} />}
+                    <div className="w-10 h-10 rounded-full flex items-center justify-center text-sm font-bold text-white"
+                      style={{ background: 'linear-gradient(135deg, #4F46E5, #6366F1)' }}>{selected.avatar}</div>
+                    {selected.online && <div className="absolute -bottom-0.5 -right-0.5 w-3 h-3 rounded-full border-2 border-white" style={{ background: '#4F46E5' }} />}
                   </div>
                   <div className="flex-1">
                     <p className="text-sm font-medium text-slate-900">{selected.name}</p>
-                    <p className="text-[10px] flex items-center gap-2" style={{ color: selected.online ? '#25D366' : '#6b7280' }}>
+                    <p className="text-[10px] flex items-center gap-2" style={{ color: selected.online ? '#4F46E5' : '#6b7280' }}>
                       {selected.online ? 'online' : selected.lastSeen ? `last seen ${selected.lastSeen}` : 'offline'}
                       {aiMode && <span className="text-brand-400">· AI assistant active</span>}
                     </p>
                   </div>
                   <div className="flex items-center gap-3">
                     <button onClick={() => setAiMode(!aiMode)}
-                      className={`flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg text-[10px] transition-all ${aiMode ? 'bg-brand-500/15 text-brand-300 border border-brand-500/20' : 'bg-[#F0F4FF] text-dark-400 border border-transparent'}`}>
+                      className={`flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg text-[10px] transition-all ${aiMode ? 'bg-brand-500/15 text-brand-300 border border-brand-500/20' : 'bg-surface-alt text-dark-400 border border-transparent'}`}>
                       <Bot className="w-3 h-3" /> AI
                     </button>
                     <Phone className="w-5 h-5 text-dark-400 hover:text-slate-900 cursor-pointer transition-colors" />
@@ -394,46 +390,46 @@ export default function Messages() {
 
               {/* Chat Messages */}
               <div className="flex-1 overflow-y-auto p-4 space-y-1"
-                style={{ background: 'radial-gradient(ellipse at center, rgba(124,58,237,0.03), transparent)' }}>
+                style={{ background: 'radial-gradient(ellipse at center, rgba(79,70,229,0.03), transparent)' }}>
                 <div className="text-center mb-4">
-                  <div className="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-2"
-                    style={{ background: 'linear-gradient(135deg, #25D366, #128C7E)' }}>
-                    <Smartphone className="w-8 h-8 text-slate-900" />
+                  <div className="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-2 shadow-lg"
+                    style={{ background: 'linear-gradient(135deg, #4F46E5, #6366F1)' }}>
+                    <Smartphone className="w-8 h-8 text-white" />
                   </div>
                   <p className="text-sm text-dark-300 font-medium">WhatsApp Business</p>
                   <p className="text-xs text-dark-500 mt-0.5">Messages are end-to-end encrypted.</p>
                 </div>
                 {messages.map((msg, i) => (
-                  <motion.div key={msg.id} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }}
-                    className={`flex ${msg.sender === 'me' ? 'justify-end' : 'justify-start'} mb-0.5`}>
-                    <div className={`max-w-[75%] lg:max-w-[60%] rounded-lg px-3.5 py-2 ${
-                      msg.sender === 'me' ? 'rounded-tr-none' : 'rounded-tl-none'
+                  <motion.div key={msg.id} initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.3 }}
+                    className={`flex ${msg.sender === 'me' ? 'justify-end' : 'justify-start'} mb-1`}>
+                    <div className={`relative max-w-[75%] lg:max-w-[60%] px-3.5 py-2.5 ${
+                      msg.sender === 'me'
+                        ? 'rounded-2xl rounded-tr-sm shadow-md'
+                        : 'bg-white rounded-2xl rounded-tl-sm shadow-sm border border-slate-100'
                     }`}
-                      style={{
-                        background: msg.sender === 'me'
-                          ? 'linear-gradient(135deg, #075E54, #128C7E)'
-                          : 'rgba(255,255,255,0.06)',
-                        borderTopRightRadius: msg.sender === 'me' ? '4px' : '8px',
-                        borderTopLeftRadius: msg.sender === 'them' ? '4px' : '8px',
-                      }}>
-                      <p className="text-sm text-slate-900 leading-relaxed">{msg.content}</p>
-                      <div className="flex items-center justify-end gap-1 mt-0.5">
-                        <span className="text-[10px]" style={{ color: msg.sender === 'me' ? 'rgba(255,255,255,0.6)' : 'rgba(255,255,255,0.4)' }}>
+                      style={msg.sender === 'me' ? { background: 'linear-gradient(135deg, #4F46E5, #6366F1)' } : {}}>
+                      {msg.sender !== 'me' && (
+                        <div className="absolute left-0 top-0 w-1 h-full bg-brand-500 rounded-l-2xl" />
+                      )}
+                      <p className={`text-sm leading-relaxed ${msg.sender === 'me' ? 'text-white' : 'text-slate-800'}`}>{msg.content}</p>
+                      <div className="flex items-center justify-end gap-1 mt-1">
+                        <span className={`text-[10px] ${msg.sender === 'me' ? 'text-white/60' : 'text-slate-400'}`}>
                           {msg.time}
                         </span>
-                        {msg.sender === 'me' && getStatusIcon(msg.status)}
+                        {msg.sender === 'me' && (
+                          <span className="text-white/60">{getStatusIcon(msg.status)}</span>
+                        )}
                       </div>
                     </div>
                   </motion.div>
                 ))}
                 {sending && (
-                  <div className="flex justify-start mb-0.5">
-                    <div className="max-w-[75%] rounded-lg px-3.5 py-3 rounded-tl-none"
-                      style={{ background: 'rgba(255,255,255,0.06)', borderTopLeftRadius: '4px' }}>
+                  <div className="flex justify-start mb-1">
+                    <div className="bg-white rounded-2xl rounded-tl-sm px-4 py-3 shadow-sm border border-slate-100">
                       <div className="flex gap-1">
-                        <span className="w-2 h-2 bg-dark-400 rounded-full animate-bounce" style={{ animationDelay: '0ms' }} />
-                        <span className="w-2 h-2 bg-dark-400 rounded-full animate-bounce" style={{ animationDelay: '150ms' }} />
-                        <span className="w-2 h-2 bg-dark-400 rounded-full animate-bounce" style={{ animationDelay: '300ms' }} />
+                        <span className="w-2 h-2 bg-brand-300 rounded-full animate-bounce" style={{ animationDelay: '0ms' }} />
+                        <span className="w-2 h-2 bg-brand-400 rounded-full animate-bounce" style={{ animationDelay: '150ms' }} />
+                        <span className="w-2 h-2 bg-brand-500 rounded-full animate-bounce" style={{ animationDelay: '300ms' }} />
                       </div>
                     </div>
                   </div>
@@ -441,17 +437,17 @@ export default function Messages() {
               </div>
 
               {/* Input */}
-              <div className="p-3 border-t border-[#DBEAFE]" style={{ background: '#0a0a12' }}>
+              <div className="p-3 bg-white border-t border-slate-200">
                 <div className="flex items-center gap-2">
                   <button className="p-2 text-dark-400 hover:text-slate-900 transition-colors"><Image className="w-5 h-5" /></button>
                   <button className="p-2 text-dark-400 hover:text-slate-900 transition-colors"><Paperclip className="w-5 h-5" /></button>
                   <input value={newMsg} onChange={e => setNewMsg(e.target.value)}
                     onKeyDown={e => e.key === 'Enter' && sendMessage()}
                     placeholder={aiMode ? "Type a message (AI will auto-reply)..." : "Type a message..."}
-                    className="flex-1 bg-[#F0F4FF] border border-[#DBEAFE] rounded-xl px-4 py-2.5 text-sm text-slate-900 placeholder-dark-400 outline-none focus:border-brand-500/50" />
+                    className="flex-1 bg-surface-alt border border-slate-200 rounded-xl px-4 py-2.5 text-sm text-slate-900 placeholder-dark-400 outline-none focus:border-brand-500/50" />
                   <button onClick={sendMessage}
-                    className="w-10 h-10 rounded-full flex items-center justify-center text-slate-900 shrink-0"
-                    style={{ background: 'linear-gradient(135deg, #25D366, #128C7E)' }}>
+                    className="w-10 h-10 rounded-full flex items-center justify-center text-white shrink-0 shadow-md hover:shadow-lg transition-shadow"
+                    style={{ background: 'linear-gradient(135deg, #4F46E5, #6366F1)' }}>
                     <Send className="w-4 h-4" />
                   </button>
                 </div>

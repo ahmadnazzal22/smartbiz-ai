@@ -71,39 +71,38 @@ export default function WhatsAppViewer() {
       <Sidebar />
       <main className="lg:ml-64 flex-1 flex pb-16 lg:pb-0" style={{ height: '100vh' }}>
         {/* Contact List */}
-        <div className={`w-80 lg:w-96 border-r border-[#DBEAFE] flex flex-col shrink-0 ${showMobileList ? 'flex' : 'hidden lg:flex'}`}
-          style={{ background: '#0a0a12' }}>
-          <div className="p-3 border-b border-[#DBEAFE] flex items-center gap-3">
+        <div className={`w-80 lg:w-96 bg-white border-r border-slate-200 flex flex-col shrink-0 ${showMobileList ? 'flex' : 'hidden lg:flex'}`}>
+          <div className="p-3 border-b border-slate-200 flex items-center gap-3">
             <div className="flex items-center gap-3 flex-1">
-              <div className="w-10 h-10 rounded-full flex items-center justify-center" style={{ background: 'linear-gradient(135deg, #25D366, #128C7E)' }}>
-                <Smartphone className="w-5 h-5 text-slate-900" />
+              <div className="w-10 h-10 rounded-full flex items-center justify-center" style={{ background: 'linear-gradient(135deg, #4F46E5, #6366F1)' }}>
+                <Smartphone className="w-5 h-5 text-white" />
               </div>
               <h2 className="text-lg font-semibold text-slate-900">WhatsApp</h2>
             </div>
             <div className="flex items-center gap-2">
-              <span className="text-[10px] text-dark-500 px-2 py-1 rounded-full bg-[#F0F4FF] border border-[#DBEAFE]">{contacts.filter(c => c.online).length} online</span>
+              <span className="text-[10px] text-dark-500 px-2 py-1 rounded-full bg-surface-alt border border-slate-200">{contacts.filter(c => c.online).length} online</span>
             </div>
           </div>
           <div className="px-3 py-2">
             <div className="relative">
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-dark-400" />
               <input value={search} onChange={e => setSearch(e.target.value)}
-                className="w-full bg-[#F0F4FF] border border-[#DBEAFE] rounded-xl pl-10 pr-4 py-2 text-sm text-slate-900 placeholder-dark-400 outline-none focus:border-brand-500/50"
+                className="w-full bg-surface-alt border border-slate-200 rounded-xl pl-10 pr-4 py-2 text-sm text-slate-900 placeholder-dark-400 outline-none focus:border-brand-500/50"
                 placeholder="Search or start new chat" />
             </div>
           </div>
           <div className="flex-1 overflow-y-auto">
             {filtered.map(conv => (
               <button key={conv.id} onClick={() => { setSelectedId(conv.id); setShowMobileList(false) }}
-                className={`w-full p-3 text-left transition-all border-b border-[#DBEAFE] hover:bg-[#F0F4FF] ${
-                  selectedId === conv.id ? 'bg-[#F0F4FF]' : ''
+                className={`w-full p-3 text-left transition-all border-b border-slate-100 hover:bg-surface-alt ${
+                  selectedId === conv.id ? 'bg-surface-alt' : ''
                 }`}>
                 <div className="flex items-start gap-3">
                   <div className="relative shrink-0">
-                    <div className="w-12 h-12 rounded-full flex items-center justify-center text-sm font-bold text-slate-900"
-                      style={{ background: 'linear-gradient(135deg, #7c3aed, #6366f1)' }}>{conv.avatar}</div>
+                    <div className="w-12 h-12 rounded-full flex items-center justify-center text-sm font-bold text-white"
+                      style={{ background: 'linear-gradient(135deg, #4F46E5, #6366F1)' }}>{conv.avatar}</div>
                     {conv.online && (
-                      <div className="absolute -bottom-0.5 -right-0.5 w-3.5 h-3.5 rounded-full border-2" style={{ background: '#25D366', borderColor: '#0a0a12' }} />
+                      <div className="absolute -bottom-0.5 -right-0.5 w-3.5 h-3.5 rounded-full border-2 border-white" style={{ background: '#4F46E5' }} />
                     )}
                   </div>
                   <div className="flex-1 min-w-0 pt-0.5">
@@ -118,8 +117,8 @@ export default function WhatsAppViewer() {
                         ) : conv.lastMsg}
                       </p>
                       {conv.unread > 0 && (
-                        <span className="w-5 h-5 rounded-full text-[10px] text-slate-900 flex items-center justify-center shrink-0"
-                          style={{ background: '#25D366' }}>{conv.unread}</span>
+                        <span className="w-5 h-5 rounded-full text-[10px] text-white flex items-center justify-center shrink-0"
+                          style={{ background: '#4F46E5' }}>{conv.unread}</span>
                       )}
                     </div>
                   </div>
@@ -133,18 +132,18 @@ export default function WhatsAppViewer() {
         <div className={`flex-1 flex flex-col ${!showMobileList ? 'flex' : 'hidden lg:flex'}`}>
           {/* Chat Header */}
           {selected && (
-            <div className="p-3 border-b border-[#DBEAFE] flex items-center gap-3" style={{ background: '#0a0a12' }}>
-              <button onClick={() => setShowMobileList(true)} className="lg:hidden text-dark-300 hover:text-slate-900">
+            <div className="p-3 bg-white border-b border-slate-200 flex items-center gap-3">
+              <button onClick={() => setShowMobileList(true)} className="lg:hidden text-dark-400 hover:text-slate-900">
                 <ArrowLeft className="w-5 h-5" />
               </button>
               <div className="relative shrink-0">
-                <div className="w-10 h-10 rounded-full flex items-center justify-center text-sm font-bold text-slate-900"
-                  style={{ background: 'linear-gradient(135deg, #7c3aed, #6366f1)' }}>{selected.avatar}</div>
-                {selected.online && <div className="absolute -bottom-0.5 -right-0.5 w-3 h-3 rounded-full border-2" style={{ background: '#25D366', borderColor: '#0a0a12' }} />}
+                <div className="w-10 h-10 rounded-full flex items-center justify-center text-sm font-bold text-white"
+                  style={{ background: 'linear-gradient(135deg, #4F46E5, #6366F1)' }}>{selected.avatar}</div>
+                {selected.online && <div className="absolute -bottom-0.5 -right-0.5 w-3 h-3 rounded-full border-2 border-white" style={{ background: '#4F46E5' }} />}
               </div>
               <div className="flex-1">
                 <p className="text-sm font-medium text-slate-900">{selected.name}</p>
-                <p className="text-[10px]" style={{ color: selected.online ? '#25D366' : '#6b7280' }}>
+                <p className="text-[10px]" style={{ color: selected.online ? '#4F46E5' : '#6b7280' }}>
                   {selected.online ? 'online' : selected.lastSeen ? `last seen ${selected.lastSeen}` : 'offline'}
                 </p>
               </div>
@@ -158,36 +157,35 @@ export default function WhatsAppViewer() {
 
           {/* Chat Messages */}
           <div className="flex-1 overflow-y-auto p-4 space-y-1"
-            style={{ background: 'radial-gradient(ellipse at center, rgba(124,58,237,0.03), transparent)' }}>
+            style={{ background: 'radial-gradient(ellipse at center, rgba(79,70,229,0.03), transparent)' }}>
             <div className="text-center mb-4">
-              <div className="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-2"
-                style={{ background: 'linear-gradient(135deg, #25D366, #128C7E)' }}>
-                <Smartphone className="w-8 h-8 text-slate-900" />
+              <div className="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-2 shadow-lg"
+                style={{ background: 'linear-gradient(135deg, #4F46E5, #6366F1)' }}>
+                <Smartphone className="w-8 h-8 text-white" />
               </div>
               <p className="text-sm text-dark-300 font-medium">WhatsApp Business</p>
               <p className="text-xs text-dark-500 mt-0.5">Messages and calls are end-to-end encrypted.</p>
             </div>
             {messages.map((msg, i) => (
-              <motion.div key={msg.id} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }}
-                className={`flex ${msg.sender === 'me' ? 'justify-end' : 'justify-start'} mb-0.5`}>
-                <div className={`max-w-[75%] lg:max-w-[60%] rounded-lg px-3.5 py-2 ${
+              <motion.div key={msg.id} initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.3 }}
+                className={`flex ${msg.sender === 'me' ? 'justify-end' : 'justify-start'} mb-1`}>
+                <div className={`relative max-w-[75%] lg:max-w-[60%] px-3.5 py-2.5 ${
                   msg.sender === 'me'
-                    ? 'rounded-tr-none'
-                    : 'rounded-tl-none'
+                    ? 'rounded-2xl rounded-tr-sm shadow-md'
+                    : 'bg-white rounded-2xl rounded-tl-sm shadow-sm border border-slate-100'
                 }`}
-                  style={{
-                    background: msg.sender === 'me'
-                      ? 'linear-gradient(135deg, #075E54, #128C7E)'
-                      : 'rgba(255,255,255,0.06)',
-                    borderTopRightRadius: msg.sender === 'me' ? '4px' : '8px',
-                    borderTopLeftRadius: msg.sender === 'them' ? '4px' : '8px',
-                  }}>
-                  <p className="text-sm text-slate-900 leading-relaxed">{msg.content}</p>
-                  <div className="flex items-center justify-end gap-1 mt-0.5">
-                    <span className="text-[10px]" style={{ color: msg.sender === 'me' ? 'rgba(255,255,255,0.6)' : 'rgba(255,255,255,0.4)' }}>
+                  style={msg.sender === 'me' ? { background: 'linear-gradient(135deg, #4F46E5, #6366F1)' } : {}}>
+                  {msg.sender !== 'me' && (
+                    <div className="absolute left-0 top-0 w-1 h-full bg-brand-500 rounded-l-2xl" />
+                  )}
+                  <p className={`text-sm leading-relaxed ${msg.sender === 'me' ? 'text-white' : 'text-slate-800'}`}>{msg.content}</p>
+                  <div className="flex items-center justify-end gap-1 mt-1">
+                    <span className={`text-[10px] ${msg.sender === 'me' ? 'text-white/60' : 'text-slate-400'}`}>
                       {msg.time}
                     </span>
-                    {msg.sender === 'me' && getStatusIcon(msg.status)}
+                    {msg.sender === 'me' && (
+                      <span className="text-white/60">{getStatusIcon(msg.status)}</span>
+                    )}
                   </div>
                 </div>
               </motion.div>
@@ -195,16 +193,16 @@ export default function WhatsAppViewer() {
           </div>
 
           {/* Input */}
-          <div className="p-3 border-t border-[#DBEAFE]" style={{ background: '#0a0a12' }}>
+          <div className="p-3 bg-white border-t border-slate-200">
             <div className="flex items-center gap-2">
               <button className="p-2 text-dark-400 hover:text-slate-900 transition-colors"><Image className="w-5 h-5" /></button>
               <button className="p-2 text-dark-400 hover:text-slate-900 transition-colors"><Paperclip className="w-5 h-5" /></button>
               <input value={newMsg} onChange={e => setNewMsg(e.target.value)}
                 onKeyDown={e => e.key === 'Enter' && setNewMsg('')}
                 placeholder="Type a message"
-                className="flex-1 bg-[#F0F4FF] border border-[#DBEAFE] rounded-xl px-4 py-2.5 text-sm text-slate-900 placeholder-dark-400 outline-none focus:border-brand-500/50" />
-              <button className="w-10 h-10 rounded-full flex items-center justify-center text-slate-900 shrink-0"
-                style={{ background: 'linear-gradient(135deg, #25D366, #128C7E)' }}>
+                className="flex-1 bg-surface-alt border border-slate-200 rounded-xl px-4 py-2.5 text-sm text-slate-900 placeholder-dark-400 outline-none focus:border-brand-500/50" />
+              <button className="w-10 h-10 rounded-full flex items-center justify-center text-white shrink-0 shadow-md hover:shadow-lg transition-shadow"
+                style={{ background: 'linear-gradient(135deg, #4F46E5, #6366F1)' }}>
                 <Send className="w-4 h-4" />
               </button>
             </div>

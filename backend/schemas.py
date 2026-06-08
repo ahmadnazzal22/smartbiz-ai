@@ -10,6 +10,12 @@ class UserCreate(BaseModel):
     business_name: Optional[str] = ""
 
 
+class UserUpdate(BaseModel):
+    name: Optional[str] = None
+    business_name: Optional[str] = None
+    whatsapp_number: Optional[str] = None
+
+
 class UserLogin(BaseModel):
     email: str
     password: str
@@ -165,3 +171,7 @@ class BusinessHourResponse(BaseModel):
 
     class Config:
         from_attributes = True
+
+
+class BusinessHourBulkUpdate(BaseModel):
+    hours: List[BusinessHourCreate]

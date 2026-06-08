@@ -24,6 +24,7 @@ export function AuthProvider({ children }) {
   }, [])
 
   const login = async (email, password) => {
+    if (!email || !password) throw { response: { data: { detail: 'Email and password are required' } } }
     const userData = { ...DEMO_USER, email }
     localStorage.setItem('token', 'demo-token-123')
     localStorage.setItem('user', JSON.stringify(userData))
