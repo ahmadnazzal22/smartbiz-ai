@@ -79,6 +79,10 @@ export default function Hero() {
                 Try Free Demo
                 <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </Link>
+              <Link to="/pricing"
+                className="px-8 py-4 glass-card rounded-full text-dark-200 font-semibold text-lg flex items-center gap-2 hover:text-white hover:border-accent-500/30 transition-all duration-300">
+                See Pricing
+              </Link>
               <Link to="/login"
                 className="px-8 py-4 glass-card rounded-full text-dark-200 font-semibold text-lg flex items-center gap-2 hover:text-white hover:border-brand-500/30 transition-all duration-300">
                 <Play className="w-5 h-5" />

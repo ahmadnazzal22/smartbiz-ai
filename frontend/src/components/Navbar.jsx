@@ -5,8 +5,8 @@ import { Link } from 'react-router-dom'
 
 const navLinks = [
   { label: 'Features', href: '#features' },
+  { label: 'Pricing', href: '/pricing', external: true },
   { label: 'Testimonials', href: '#testimonials' },
-  { label: 'Pricing', href: '#pricing' },
   { label: 'Demo', href: '#demo' },
 ]
 
@@ -39,11 +39,19 @@ export default function Navbar() {
 
           <div className="hidden md:flex items-center gap-8">
             {navLinks.map((link) => (
-              <a key={link.label} href={link.href}
-                className="text-sm text-dark-300 hover:text-white transition-colors duration-300 relative group">
-                {link.label}
-                <span className="absolute -bottom-1 left-0 w-0 h-0.5 rounded-full bg-gradient-to-r from-brand-500 to-accent-500 group-hover:w-full transition-all duration-300" />
-              </a>
+              link.external ? (
+                <Link key={link.label} to={link.href}
+                  className="text-sm text-dark-300 hover:text-white transition-colors duration-300 relative group">
+                  {link.label}
+                  <span className="absolute -bottom-1 left-0 w-0 h-0.5 rounded-full bg-gradient-to-r from-brand-500 to-accent-500 group-hover:w-full transition-all duration-300" />
+                </Link>
+              ) : (
+                <a key={link.label} href={link.href}
+                  className="text-sm text-dark-300 hover:text-white transition-colors duration-300 relative group">
+                  {link.label}
+                  <span className="absolute -bottom-1 left-0 w-0 h-0.5 rounded-full bg-gradient-to-r from-brand-500 to-accent-500 group-hover:w-full transition-all duration-300" />
+                </a>
+              )
             ))}
             <Link to="/login"
               className="text-sm text-dark-300 hover:text-white transition-colors duration-300">
@@ -68,8 +76,13 @@ export default function Navbar() {
             exit={{ opacity: 0, height: 0 }} className="md:hidden border-t border-white/5 bg-dark-950/95 backdrop-blur-xl">
             <div className="px-4 py-6 space-y-3">
               {navLinks.map((link) => (
-                <a key={link.label} href={link.href} onClick={() => setMobileOpen(false)}
-                  className="block py-2 text-dark-300 hover:text-white transition-colors">{link.label}</a>
+                link.external ? (
+                  <Link key={link.label} to={link.href} onClick={() => setMobileOpen(false)}
+                    className="block py-2 text-dark-300 hover:text-white transition-colors">{link.label}</Link>
+                ) : (
+                  <a key={link.label} href={link.href} onClick={() => setMobileOpen(false)}
+                    className="block py-2 text-dark-300 hover:text-white transition-colors">{link.label}</a>
+                )
               ))}
               <Link to="/login" onClick={() => setMobileOpen(false)}
                 className="block py-2 text-dark-300 hover:text-white transition-colors">Sign In</Link>
