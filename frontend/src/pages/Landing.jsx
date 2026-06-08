@@ -1,5 +1,6 @@
 import { useEffect } from 'react'
 import { motion, useScroll } from 'framer-motion'
+import SEO from '../components/SEO'
 import Navbar from '../components/Navbar'
 import Hero from '../components/Hero'
 import TrustBar from '../components/TrustBar'
@@ -27,7 +28,12 @@ export default function Landing() {
   }, [])
 
   return (
-    <div className="min-h-screen bg-dark-950">
+    <>
+      <SEO title="Automated Business Assistant Platform"
+        description="Turn your WhatsApp into a 24/7 AI sales team. Automate bookings, leads, and customer communication with SmartBiz AI."
+        keywords="AI business assistant, WhatsApp automation, smart booking, lead management, AI chatbot, small business AI"
+        url="/" />
+      <div className="min-h-screen bg-dark-950">
       <Particles />
       <Navbar />
       <Hero />
@@ -41,5 +47,6 @@ export default function Landing() {
       <Footer />
       <Chatbot />
     </div>
+    </>
   )
 }

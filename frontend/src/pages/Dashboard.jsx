@@ -5,6 +5,7 @@ import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContaine
 import { Users, Calendar, MessageSquare, Bot, TrendingUp, ArrowUpRight, Star, Activity, Target, Brain, Clock, Mail, Smartphone, Download, X, CheckCircle2, AlertTriangle, Sparkles } from 'lucide-react'
 import Sidebar from '../components/Sidebar'
 import NotificationCenter from '../components/NotificationCenter'
+import SEO from '../components/SEO'
 import { statsApi } from '../utils/api'
 
 const weeklyData = [
@@ -90,7 +91,11 @@ export default function Dashboard() {
   ]
 
   return (
-    <div className="min-h-screen bg-dark-950 flex">
+    <>
+      <SEO title="Dashboard"
+        description="SmartBiz AI business dashboard — manage leads, bookings, messages, and AI conversations in one place."
+        url="/dashboard" />
+      <div className="min-h-screen bg-dark-950 flex">
       <Sidebar />
       <main className="lg:ml-64 flex-1 p-4 sm:p-8 pb-20 lg:pb-8 overflow-y-auto">
         <div className="max-w-7xl mx-auto space-y-8">
@@ -430,5 +435,6 @@ export default function Dashboard() {
         </div>
       </main>
     </div>
+    </>
   )
 }

@@ -3,6 +3,7 @@ import { motion } from 'framer-motion'
 import { Sparkles, Mail, Lock, User, Building2, Eye, EyeOff } from 'lucide-react'
 import { Link, useNavigate } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
+import SEO from '../components/SEO'
 
 export default function Login() {
   const [isRegister, setIsRegister] = useState(false)
@@ -37,6 +38,9 @@ export default function Login() {
         <div className="hero-glow" style={{ background: '#14b8a6', bottom: '20%', right: '-10%' }} />
       </div>
 
+      <SEO title={isRegister ? 'Create Account' : 'Sign In'}
+        description="Sign in to SmartBiz AI dashboard or create a free account. No credit card required."
+        url="/login" />
       <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
         className="relative w-full max-w-md">
         <Link to="/" className="flex items-center justify-center gap-2.5 mb-8 group">
