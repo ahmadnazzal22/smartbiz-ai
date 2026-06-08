@@ -111,6 +111,38 @@ class AIChatResponse(BaseModel):
     reply: str
 
 
+class AIReportRequest(BaseModel):
+    include_leads: Optional[bool] = True
+    include_messages: Optional[bool] = True
+
+
+class KeyMetric(BaseModel):
+    label: str
+    value: int
+    change: str
+
+
+class HotLeadItem(BaseModel):
+    name: str
+    score: int
+    note: str
+    status: str
+
+
+class Recommendation(BaseModel):
+    time: str
+    task: str
+    description: str
+
+
+class AIReportResponse(BaseModel):
+    summary: str
+    key_metrics: List[KeyMetric]
+    hot_leads: List[HotLeadItem]
+    recommendations: List[Recommendation]
+    focus_area: str
+
+
 class WhatsAppIncoming(BaseModel):
     From: str
     Body: str

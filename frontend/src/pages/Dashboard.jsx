@@ -2,11 +2,11 @@ import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, PieChart, Pie, Cell } from 'recharts'
-import { Users, Calendar, MessageSquare, Bot, TrendingUp, ArrowUpRight, Star, Activity, Target, Brain, Clock, Mail, Smartphone, Download, X, CheckCircle2, AlertTriangle, Sparkles } from 'lucide-react'
+import { Users, Calendar, MessageSquare, Bot, TrendingUp, ArrowUpRight, Star, Activity, Target, Brain, Clock, Mail, Smartphone, Download, X, CheckCircle2, AlertTriangle, Sparkles, RefreshCw } from 'lucide-react'
 import Sidebar from '../components/Sidebar'
 import NotificationCenter from '../components/NotificationCenter'
 import SEO from '../components/SEO'
-import { statsApi } from '../utils/api'
+import { statsApi, aiApi } from '../utils/api'
 
 const weeklyData = [
   { name: 'Mon', messages: 45, bookings: 5, leads: 12 },
@@ -39,28 +39,6 @@ const aiInsights = [
   { icon: TrendingUp, title: 'Best Source', desc: 'WhatsApp leads convert 3x better than web', color: 'from-accent-500 to-emerald-500' },
 ]
 
-const generateDailyReport = () => {
-  const today = new Date().toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })
-  return {
-    date: today,
-    summary: 'Your business is performing well today. Lead generation is up 23% compared to yesterday.',
-    totalCustomers: 128,
-    newLeads: 12,
-    upcomingBookings: [
-      { name: 'Sarah Johnson', service: 'Consultation', time: '10:00 AM' },
-      { name: 'Mike Chen', service: 'Product Demo', time: '2:30 PM' },
-      { name: 'Emily Watson', service: 'Consultation', time: '11:00 AM' },
-    ],
-    hotLeads: [
-      { name: 'Robert Kim', phone: '+1 (555) 678-9012', score: 95, note: 'Ready to sign up for Pro!' },
-      { name: 'Lisa Park', phone: '+1 (555) 567-8901', score: 88, note: 'Asked about services — high intent' },
-      { name: 'Sarah Johnson', phone: '+1 (555) 123-4567', score: 82, note: 'Interested in Pro plan' },
-    ],
-    conversionRate: '75%',
-    totalMessages: 892,
-    aiMessages: 534,
-  }
-}
 
 export default function Dashboard() {
   const [stats, setStats] = useState(null)
@@ -68,8 +46,7 @@ export default function Dashboard() {
   const [showReport, setShowReport] = useState(false)
   const [reportSent, setReportSent] = useState(false)
   const [showReportBanner, setShowReportBanner] = useState(true)
-
-  const report = generateDailyReport()
+  const [aiReport, setAiReport] = useState(null)
 
   useEffect(() => {
     const hour = new Date().getHours()
@@ -81,6 +58,7 @@ export default function Dashboard() {
       try { const res = await statsApi.get(); setStats(res.data) } catch {}
     }
     fetchStats()
+    aiApi.report().then(res => setAiReport(res.data))
   }, [])
 
   const statCards = [
@@ -140,15 +118,15 @@ export default function Dashboard() {
                       <h3 className="text-base font-semibold text-white">AI Daily Report</h3>
                       <span className="text-[10px] px-2 py-0.5 rounded-full bg-brand-500/20 text-brand-300 border border-brand-500/20">Delivered 8:00 AM</span>
                     </div>
-                    <p className="text-sm text-dark-300">Good morning! Here's your business snapshot for {report.date}.</p>
+                    <p className="text-sm text-dark-300">Good morning! Here's your business snapshot for {new Date().toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}.</p>
                     <div className="flex flex-wrap gap-4 mt-3">
-                      {[
-                        { label: 'New Leads', value: '+12', color: 'text-green-400' },
-                        { label: 'Today Bookings', value: '3', color: 'text-accent-400' },
-                        { label: 'Hot Leads', value: '3', color: 'text-red-400' },
-                      ].map(item => (
+                      {(aiReport?.key_metrics || [
+                        { label: 'New Leads', value: '12', change: '+23%' },
+                        { label: 'Today Bookings', value: '3', change: '+8%' },
+                        { label: 'Hot Leads', value: '3', change: '+12%' },
+                      ]).slice(0, 3).map(item => (
                         <div key={item.label} className="flex items-center gap-1.5 text-sm">
-                          <span className={`font-bold ${item.color}`}>{item.value}</span>
+                          <span className="font-bold text-green-400">{item.value}</span>
                           <span className="text-dark-400">{item.label}</span>
                         </div>
                       ))}
@@ -168,8 +146,10 @@ export default function Dashboard() {
           <AnimatePresence>
             {showReport && (
               <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
-                className="fixed inset-0 z-50 flex items-center justify-center p-4" style={{ background: 'rgba(0,0,0,0.7)' }}>
+                className="fixed inset-0 z-50 flex items-center justify-center p-4" style={{ background: 'rgba(0,0,0,0.7)' }}
+                onClick={() => setShowReport(false)}>
                 <motion.div initial={{ scale: 0.9, y: 20 }} animate={{ scale: 1, y: 0 }} exit={{ scale: 0.9, y: 20 }}
+                  onClick={e => e.stopPropagation()}
                   className="w-full max-w-2xl max-h-[90vh] overflow-y-auto rounded-2xl p-6 space-y-6"
                   style={{ background: '#0a0a12', border: '1px solid rgba(124,58,237,0.2)' }}>
                   <div className="flex items-center justify-between">
@@ -179,7 +159,7 @@ export default function Dashboard() {
                       </div>
                       <div>
                         <h2 className="text-lg font-semibold text-white">AI Daily Report</h2>
-                        <p className="text-xs text-dark-400">{report.date}</p>
+                        <p className="text-xs text-dark-400">{new Date().toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}</p>
                       </div>
                     </div>
                     <button onClick={() => setShowReport(false)} className="text-dark-400 hover:text-white">
@@ -190,64 +170,68 @@ export default function Dashboard() {
                   <div className="p-4 rounded-xl text-sm text-dark-200 leading-relaxed"
                     style={{ background: 'rgba(124,58,237,0.06)', border: '1px solid rgba(124,58,237,0.1)' }}>
                     <Bot className="w-4 h-4 text-brand-400 inline mr-2" />
-                    {report.summary}
+                    {aiReport?.summary || 'Your business is performing well today. Lead generation is up 23% compared to yesterday.'}
                   </div>
 
                   <div className="grid grid-cols-3 gap-3">
                     <div className="glass-card p-4 text-center">
-                      <p className="text-2xl font-bold text-white">{report.totalCustomers}</p>
+                      <p className="text-2xl font-bold text-white">{stats?.total_leads ?? 128}</p>
                       <p className="text-xs text-dark-400 mt-1">Total Customers</p>
                     </div>
                     <div className="glass-card p-4 text-center">
-                      <p className="text-2xl font-bold text-accent-400">{report.upcomingBookings.length}</p>
+                      <p className="text-2xl font-bold text-accent-400">{stats?.today_bookings ?? 3}</p>
                       <p className="text-xs text-dark-400 mt-1">Today Bookings</p>
                     </div>
                     <div className="glass-card p-4 text-center">
-                      <p className="text-2xl font-bold text-red-400">{report.hotLeads.length}</p>
+                      <p className="text-2xl font-bold text-red-400">{aiReport?.hot_leads?.length ?? 3}</p>
                       <p className="text-xs text-dark-400 mt-1">Hot Leads</p>
                     </div>
                   </div>
 
-                  <div>
-                    <h3 className="text-sm font-semibold text-white mb-3 flex items-center gap-2">
-                      <Calendar className="w-4 h-4 text-accent-400" /> Today's Bookings
-                    </h3>
-                    <div className="space-y-2">
-                      {report.upcomingBookings.map((b, i) => (
-                        <div key={i} className="flex items-center gap-3 p-3 rounded-xl bg-white/5">
-                          <div className="w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold text-white"
-                            style={{ background: 'linear-gradient(135deg, #7c3aed, #14b8a6)' }}>{b.name.split(' ').map(n => n[0]).join('')}</div>
-                          <div className="flex-1">
-                            <p className="text-sm text-white">{b.name}</p>
-                            <p className="text-xs text-dark-400">{b.service}</p>
+                  {aiReport?.recommendations && (
+                    <div>
+                      <h3 className="text-sm font-semibold text-white mb-3 flex items-center gap-2">
+                        <Calendar className="w-4 h-4 text-accent-400" /> Today's Recommendations
+                      </h3>
+                      <div className="space-y-2">
+                        {aiReport.recommendations.map((r, i) => (
+                          <div key={i} className="flex items-center gap-3 p-3 rounded-xl bg-white/5">
+                            <div className="w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold text-white"
+                              style={{ background: 'linear-gradient(135deg, #7c3aed, #14b8a6)' }}>{i + 1}</div>
+                            <div className="flex-1">
+                              <p className="text-sm text-white">{r.task}</p>
+                              <p className="text-xs text-dark-400">{r.description}</p>
+                            </div>
+                            <span className="text-sm text-accent-400 font-medium">{r.time}</span>
                           </div>
-                          <span className="text-sm text-accent-400 font-medium">{b.time}</span>
-                        </div>
-                      ))}
+                        ))}
+                      </div>
                     </div>
-                  </div>
+                  )}
 
-                  <div>
-                    <h3 className="text-sm font-semibold text-white mb-3 flex items-center gap-2">
-                      <AlertTriangle className="w-4 h-4 text-red-400" /> Hot Leads — Needs Follow-up
-                    </h3>
-                    <div className="space-y-2">
-                      {report.hotLeads.map((l, i) => (
-                        <div key={i} className="flex items-center gap-3 p-3 rounded-xl bg-white/5">
-                          <div className="w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold text-white"
-                            style={{ background: 'linear-gradient(135deg, #ef4444, #f97316)' }}>{l.name.split(' ').map(n => n[0]).join('')}</div>
-                          <div className="flex-1">
-                            <p className="text-sm text-white">{l.name}</p>
-                            <p className="text-xs text-dark-400">{l.phone} · Score: {l.score}</p>
-                            <p className="text-xs text-red-300 mt-0.5">{l.note}</p>
+                  {aiReport?.hot_leads && (
+                    <div>
+                      <h3 className="text-sm font-semibold text-white mb-3 flex items-center gap-2">
+                        <AlertTriangle className="w-4 h-4 text-red-400" /> Hot Leads — Needs Follow-up
+                      </h3>
+                      <div className="space-y-2">
+                        {aiReport.hot_leads.map((l, i) => (
+                          <div key={i} className="flex items-center gap-3 p-3 rounded-xl bg-white/5">
+                            <div className="w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold text-white"
+                              style={{ background: 'linear-gradient(135deg, #ef4444, #f97316)' }}>{l.name.split(' ').map(n => n[0]).join('')}</div>
+                            <div className="flex-1">
+                              <p className="text-sm text-white">{l.name}</p>
+                              <p className="text-xs text-dark-400">{l.score && `Score: ${l.score}`}</p>
+                              <p className="text-xs text-red-300 mt-0.5">{l.note}</p>
+                            </div>
+                            <span className="px-2 py-1 rounded-full text-[10px] font-medium bg-red-500/10 text-red-400 border border-red-500/20">
+                              Score: {l.score}
+                            </span>
                           </div>
-                          <span className="px-2 py-1 rounded-full text-[10px] font-medium bg-red-500/10 text-red-400 border border-red-500/20">
-                            Score: {l.score}
-                          </span>
-                        </div>
-                      ))}
+                        ))}
+                      </div>
                     </div>
-                  </div>
+                  )}
 
                   <div className="flex items-center gap-3 pt-2">
                     <button onClick={() => { setReportSent(true); setTimeout(() => setReportSent(false), 2000) }}

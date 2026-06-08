@@ -1,9 +1,10 @@
-import { useState, useMemo } from 'react'
+import { useState, useEffect, useMemo } from 'react'
 import { motion } from 'framer-motion'
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, AreaChart, Area } from 'recharts'
-import { Sparkles, TrendingUp, TrendingDown, Users, Calendar, MessageSquare, AlertTriangle, Bot, Target, Clock, Mail, Smartphone, Download, CheckCircle2, ArrowRight, Star, Activity } from 'lucide-react'
+import { Sparkles, TrendingUp, TrendingDown, Users, Calendar, MessageSquare, AlertTriangle, Bot, Target, Clock, Mail, Smartphone, Download, CheckCircle2, ArrowRight, Star, Activity, RefreshCw } from 'lucide-react'
 import Sidebar from '../components/Sidebar'
 import { Link } from 'react-router-dom'
+import { aiApi } from '../utils/api'
 
 const weekData = [
   { day: 'Mon', leads: 12, bookings: 5, msgs: 45 },
@@ -34,6 +35,19 @@ function calcChange(current, prev) {
 
 export default function AIReport() {
   const [sentTo, setSentTo] = useState(null)
+  const [loading, setLoading] = useState(true)
+  const [report, setReport] = useState(null)
+
+  useEffect(() => {
+    loadReport()
+  }, [])
+
+  async function loadReport() {
+    setLoading(true)
+    const res = await aiApi.report()
+    setReport(res.data)
+    setLoading(false)
+  }
 
   const today = new Date().toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })
   const hour = new Date().getHours()
@@ -46,18 +60,31 @@ export default function AIReport() {
   const currMsgs = weekData.map(d => d.msgs)
   const prevMsgs = prevWeekData.map(d => d.msgs)
 
-  const summaryCards = useMemo(() => [
+  const summaryCards = useMemo(() => report ? report.key_metrics.map(m => ({
+    label: m.label,
+    value: m.value,
+    change: parseInt(m.change),
+    icon: m.label === 'New Leads' ? Users : m.label === 'Bookings' ? Calendar : m.label === 'Messages' ? MessageSquare : TrendingUp,
+    color: m.label === 'New Leads' ? 'text-brand-400' : m.label === 'Bookings' ? 'text-accent-400' : m.label === 'Messages' ? 'text-blue-400' : 'text-green-400',
+    bg: m.label === 'New Leads' ? 'rgba(124,58,237,0.1)' : m.label === 'Bookings' ? 'rgba(20,184,166,0.1)' : m.label === 'Messages' ? 'rgba(99,102,241,0.1)' : 'rgba(34,197,94,0.1)',
+  })) : [
     { label: 'New Leads', value: currLeads.reduce((s, v) => s + v, 0), change: calcChange(currLeads, prevLeads), icon: Users, color: 'text-brand-400', bg: 'rgba(124,58,237,0.1)' },
     { label: 'Bookings', value: currBookings.reduce((s, v) => s + v, 0), change: calcChange(currBookings, prevBookings), icon: Calendar, color: 'text-accent-400', bg: 'rgba(20,184,166,0.1)' },
     { label: 'Messages', value: currMsgs.reduce((s, v) => s + v, 0), change: calcChange(currMsgs, prevMsgs), icon: MessageSquare, color: 'text-blue-400', bg: 'rgba(99,102,241,0.1)' },
     { label: 'Conversion', value: '24.6%', change: 8, icon: TrendingUp, color: 'text-green-400', bg: 'rgba(34,197,94,0.1)' },
-  ], [])
+  ], [report])
 
-  const hotLeads = [
+  const hotLeads = report ? report.hot_leads : [
     { name: 'Robert Kim', phone: '+1 (555) 678-9012', score: 95, service: 'Pro Plan', note: 'Ready to sign — send proposal now', status: 'hot' },
     { name: 'Lisa Park', phone: '+1 (555) 567-8901', score: 88, service: 'Consultation', note: 'High intent — offer demo today', status: 'hot' },
     { name: 'Sarah Johnson', phone: '+1 (555) 123-4567', score: 82, service: 'Growth Plan', note: 'Interested — follow up with pricing', status: 'warm' },
     { name: 'Mike Chen', phone: '+1 (555) 234-5678', score: 71, service: 'Demo', note: 'Asked about features — send case study', status: 'warm' },
+  ]
+
+  const recommendations = report ? report.recommendations : [
+    { time: '9:00 AM', task: 'Contact Robert Kim', description: 'Send proposal & schedule closing call' },
+    { time: '11:00 AM', task: 'Demo with Lisa Park', description: 'Product demo — focus on Growth plan features' },
+    { time: '2:00 PM', task: 'Follow up with Sarah', description: 'Send pricing comparison & case study' },
   ]
 
   const handleShare = (method) => {
@@ -70,7 +97,6 @@ export default function AIReport() {
       <Sidebar />
       <main className="lg:ml-64 flex-1 p-4 sm:p-8 pb-20 lg:pb-8">
         <div className="max-w-6xl mx-auto space-y-8">
-          {/* Header */}
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
             className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
             <div>
@@ -83,10 +109,11 @@ export default function AIReport() {
               <p className="text-dark-400">{greeting}! Here's your complete business performance overview.</p>
             </div>
             <div className="flex items-center gap-3">
-              <div className="flex items-center gap-2 px-3 py-2 rounded-xl bg-white/[0.03] border border-white/5">
-                <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
-                <span className="text-xs text-dark-400">Auto-generated daily</span>
-              </div>
+              <button onClick={loadReport} disabled={loading}
+                className="flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm text-dark-300 bg-white/[0.03] border border-white/5 hover:bg-white/[0.06] transition-all">
+                <RefreshCw className={`w-4 h-4 ${loading ? 'animate-spin' : ''}`} />
+                Refresh
+              </button>
               <Link to="/dashboard"
                 className="flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm text-dark-300 bg-white/[0.03] border border-white/5 hover:bg-white/[0.06] transition-all">
                 <ArrowRight className="w-4 h-4 rotate-180" />
@@ -95,28 +122,30 @@ export default function AIReport() {
             </div>
           </motion.div>
 
-          {/* AI Summary */}
-          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.05 }}
-            className="relative overflow-hidden rounded-2xl p-6"
-            style={{ background: 'linear-gradient(135deg, rgba(124,58,237,0.1), rgba(20,184,166,0.05))', border: '1px solid rgba(124,58,237,0.15)' }}>
-            <div className="flex items-start gap-4">
-              <div className="w-12 h-12 rounded-xl flex items-center justify-center shrink-0"
-                style={{ background: 'linear-gradient(135deg, #7c3aed, #6366f1)' }}>
-                <Sparkles className="w-6 h-6 text-white" />
+          {report && (
+            <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.05 }}
+              className="relative overflow-hidden rounded-2xl p-6"
+              style={{ background: 'linear-gradient(135deg, rgba(124,58,237,0.1), rgba(20,184,166,0.05))', border: '1px solid rgba(124,58,237,0.15)' }}>
+              <div className="flex items-start gap-4">
+                <div className="w-12 h-12 rounded-xl flex items-center justify-center shrink-0"
+                  style={{ background: 'linear-gradient(135deg, #7c3aed, #6366f1)' }}>
+                  <Sparkles className="w-6 h-6 text-white" />
+                </div>
+                <div className="flex-1">
+                  <div className="flex items-center gap-2 mb-1">
+                    <h3 className="text-lg font-semibold text-white">AI Executive Summary</h3>
+                    {report.focus_area && (
+                      <span className="text-[10px] px-2 py-0.5 rounded-full bg-brand-500/15 text-brand-300 border border-brand-500/20">
+                        Focus: {report.focus_area}
+                      </span>
+                    )}
+                  </div>
+                  <p className="text-sm text-dark-300 leading-relaxed">{report.summary}</p>
+                </div>
               </div>
-              <div>
-                <h3 className="text-lg font-semibold text-white mb-1">AI Executive Summary</h3>
-                <p className="text-sm text-dark-300 leading-relaxed">
-                  Your business had a <span className="text-green-400 font-medium">strong week</span> with lead generation up 23% compared to last week.
-                  WhatsApp continues to be your highest-converting channel at 3x the web average.
-                  <span className="text-brand-300 font-medium"> 4 hot leads</span> require immediate follow-up.
-                  Recommended focus: convert Robert Kim and Lisa Park today.
-                </p>
-              </div>
-            </div>
-          </motion.div>
+            </motion.div>
+          )}
 
-          {/* Summary Cards */}
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }}
             className="grid grid-cols-2 lg:grid-cols-4 gap-4">
             {summaryCards.map((card, i) => {
@@ -140,7 +169,6 @@ export default function AIReport() {
             })}
           </motion.div>
 
-          {/* Charts */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
             <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.15 }}
               className="glass-card p-6">
@@ -197,7 +225,6 @@ export default function AIReport() {
             </motion.div>
           </div>
 
-          {/* Hot Leads */}
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.25 }}
             className="glass-card p-6">
             <div className="flex items-center justify-between mb-5">
@@ -221,29 +248,25 @@ export default function AIReport() {
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center gap-2">
                       <p className="text-sm font-medium text-white">{lead.name}</p>
-                      <span className={`px-1.5 py-0.5 rounded text-[10px] font-medium ${
-                        lead.status === 'hot' ? 'bg-red-500/10 text-red-400' : 'bg-yellow-500/10 text-yellow-400'
-                      }`}>{lead.status.toUpperCase()}</span>
+                      {lead.score && <span className={`px-1.5 py-0.5 rounded text-[10px] font-medium ${
+                        lead.score >= 80 ? 'bg-red-500/10 text-red-400' : 'bg-yellow-500/10 text-yellow-400'
+                      }`}>{lead.score >= 80 ? 'HOT' : 'WARM'}</span>}
                     </div>
-                    <p className="text-xs text-dark-400 truncate">{lead.phone} · {lead.service}</p>
-                    <p className="text-xs text-dark-300 mt-0.5">{lead.note}</p>
+                    <p className="text-xs text-dark-400 truncate">{lead.note}</p>
                   </div>
-                  <div className="flex items-center gap-3">
-                    <div className="text-right">
-                      <p className="text-lg font-bold text-white">{lead.score}</p>
-                      <p className="text-[10px] text-dark-500">Score</p>
+                  {lead.score && (
+                    <div className="flex items-center gap-3">
+                      <div className="text-right">
+                        <p className="text-lg font-bold text-white">{lead.score}</p>
+                        <p className="text-[10px] text-dark-500">Score</p>
+                      </div>
                     </div>
-                    <Link to={`/leads`}
-                      className="px-3 py-1.5 rounded-lg text-xs font-medium text-brand-300 bg-brand-500/10 hover:bg-brand-500/20 transition-all opacity-0 group-hover:opacity-100">
-                      Contact
-                    </Link>
-                  </div>
+                  )}
                 </div>
               ))}
             </div>
           </motion.div>
 
-          {/* AI Daily Recommendation */}
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 }}
             className="glass-card p-6"
             style={{ borderColor: 'rgba(20,184,166,0.2)' }}>
@@ -261,18 +284,16 @@ export default function AIReport() {
                   Based on your lead activity and booking patterns, here's your recommended action plan for today:
                 </p>
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                  {[
-                    { time: '9:00 AM', task: 'Contact Robert Kim', desc: 'Send proposal & schedule closing call', priority: 'High', color: 'text-red-400' },
-                    { time: '11:00 AM', task: 'Demo with Lisa Park', desc: 'Product demo — focus on Growth plan features', priority: 'High', color: 'text-red-400' },
-                    { time: '2:00 PM', task: 'Follow up with Sarah', desc: 'Send pricing comparison & case study', priority: 'Medium', color: 'text-yellow-400' },
-                  ].map((item, i) => (
+                  {recommendations.map((item, i) => (
                     <div key={i} className="p-4 rounded-xl bg-white/[0.03] border border-white/5">
                       <div className="flex items-center justify-between mb-2">
                         <span className="text-xs text-dark-500">{item.time}</span>
-                        <span className={`text-[10px] font-medium ${item.priority === 'High' ? 'text-red-400' : 'text-yellow-400'}`}>{item.priority}</span>
+                        <span className={`text-[10px] font-medium ${i === 0 ? 'text-red-400' : i === 1 ? 'text-yellow-400' : 'text-accent-400'}`}>
+                          {i === 0 ? 'High' : i === 1 ? 'Medium' : 'Low'}
+                        </span>
                       </div>
                       <p className="text-sm font-medium text-white">{item.task}</p>
-                      <p className="text-xs text-dark-400 mt-1">{item.desc}</p>
+                      <p className="text-xs text-dark-400 mt-1">{item.description}</p>
                     </div>
                   ))}
                 </div>
@@ -280,7 +301,6 @@ export default function AIReport() {
             </div>
           </motion.div>
 
-          {/* Share Actions */}
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.35 }}
             className="flex flex-wrap items-center gap-3 pt-2">
             <button onClick={() => handleShare('email')}

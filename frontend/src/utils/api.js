@@ -31,6 +31,26 @@ const MOCK = {
   ],
   slots: ['09:00', '09:30', '10:00', '10:30', '11:00', '11:30', '13:00', '13:30', '14:00', '14:30', '15:00', '15:30'],
   aiReply: "Thank you for your message! I'd be happy to help you with that. Our platform offers AI-powered WhatsApp automation, smart booking, and lead management. Would you like to learn more about a specific feature?",
+  aiReport: {
+    summary: "Good morning! Here's your Monday, June 8 business snapshot. Your team is performing well with consistent engagement across all channels.",
+    key_metrics: [
+      { label: "New Leads", value: 12, change: "+23%" },
+      { label: "Bookings", value: 3, change: "+8%" },
+      { label: "Messages", value: 45, change: "+15%" },
+      { label: "Hot Leads", value: 3, change: "+12%" },
+    ],
+    hot_leads: [
+      { name: "Robert Kim", score: 95, note: "Visited pricing page 3 times. Ready for follow-up.", status: "hot" },
+      { name: "Lisa Park", score: 71, note: "Engaged with WhatsApp demo bot", status: "warm" },
+      { name: "James Wilson", score: 88, note: "Asked about enterprise plan", status: "hot" },
+    ],
+    recommendations: [
+      { time: "9:00 AM", task: "Follow up with hot leads", description: "Contact Robert Kim and James Wilson for personalized demos" },
+      { time: "12:00 PM", task: "Review weekly analytics", description: "Check conversion rates and adjust WhatsApp campaigns" },
+      { time: "3:00 PM", task: "Team sync", description: "Review booking conflicts and optimize service slots" },
+    ],
+    focus_area: "Lead response time - current avg is 4.2min, target is under 2min",
+  },
 }
 
 async function safeRequest(fn) {
@@ -86,6 +106,12 @@ export const aiApi = {
     const res = await safeRequest(() => api.post('/ai/chat', data))
     return res.data ? res : { data: { reply: MOCK.aiReply } }
   },
+  report: async (data = {}) => {
+    const res = await safeRequest(() => api.post('/ai/report', data))
+    if (res.data) return res
+    return { data: MOCK.aiReport }
+  },
+  clearConversation: (convId = 'default') => api.post('/ai/conversation/clear', { conversation_id: convId }),
 }
 
 export const statsApi = {
