@@ -1,11 +1,11 @@
 import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
-import { Calendar as CalendarIcon, Clock, User, Phone, Star, X, ChevronLeft, ChevronRight, LayoutGrid, List, CheckCircle2 } from 'lucide-react'
+import { Calendar as CalendarIcon, Clock, User, Phone, Star, X, ChevronLeft, ChevronRight, LayoutGrid, List, CheckCircle2, AlertTriangle, Plus } from 'lucide-react'
 import Sidebar from '../components/Sidebar'
 
 const demoBookings = [
   { id: 1, customer_name: 'Sarah Johnson', customer_phone: '+1 (555) 123-4567', service: 'Consultation', date: '2025-01-20', time: '10:00', status: 'confirmed', notes: 'First time client', rating: 5, review: 'Excellent service!' },
-  { id: 2, customer_name: 'Mike Chen', customer_phone: '+1 (555) 234-5678', service: 'Product Demo', date: '2025-01-21', time: '14:30', status: 'confirmed', notes: '', rating: null, review: null },
+  { id: 2, customer_name: 'Mike Chen', customer_phone: '+1 (555) 234-5678', service: 'Product Demo', date: '2025-01-21', time: '10:00', status: 'confirmed', notes: '', rating: null, review: null },
   { id: 3, customer_name: 'Emily Watson', customer_phone: '+1 (555) 345-6789', service: 'Consultation', date: '2025-01-19', time: '11:00', status: 'completed', notes: 'Interested in Pro plan', rating: 5, review: 'Very professional!' },
   { id: 4, customer_name: 'John Doe', customer_phone: '+1 (555) 456-7890', service: 'Support', date: '2025-01-18', time: '15:00', status: 'cancelled', notes: 'Rescheduled', rating: null, review: null },
   { id: 5, customer_name: 'Lisa Park', customer_phone: '+1 (555) 567-8901', service: 'Consultation', date: '2025-01-18', time: '09:00', status: 'completed', notes: '', rating: 4, review: 'Great experience.' },
@@ -13,6 +13,14 @@ const demoBookings = [
 
 const services = ['Consultation', 'Product Demo', 'Support', 'Meeting', 'Other']
 const timeSlots = ['09:00', '09:30', '10:00', '10:30', '11:00', '11:30', '13:00', '13:30', '14:00', '14:30', '15:00', '15:30', '16:00', '16:30', '17:00']
+
+const serviceColors = {
+  Consultation: { bg: 'rgba(124,58,237,0.15)', dot: '#7c3aed', text: '#a78bfa' },
+  'Product Demo': { bg: 'rgba(20,184,166,0.15)', dot: '#14b8a6', text: '#5eead4' },
+  Support: { bg: 'rgba(99,102,241,0.15)', dot: '#6366f1', text: '#a5b4fc' },
+  Meeting: { bg: 'rgba(234,179,8,0.15)', dot: '#eab308', text: '#fde047' },
+  Other: { bg: 'rgba(136,136,136,0.15)', dot: '#888', text: '#aaa' },
+}
 
 const statusColors = {
   confirmed: 'bg-accent-500/10 text-accent-400 border-accent-500/20',
@@ -39,6 +47,20 @@ function getCalendarDays(year, month) {
   return days
 }
 
+function getWeekDays(date) {
+  const start = new Date(date)
+  start.setDate(start.getDate() - start.getDay())
+  return Array.from({ length: 7 }, (_, i) => {
+    const d = new Date(start)
+    d.setDate(start.getDate() + i)
+    return d
+  })
+}
+
+function findConflicts(bookings, date, time) {
+  return bookings.filter(b => b.date === date && b.time === time && b.status !== 'cancelled')
+}
+
 export default function Bookings() {
   const [bookings, setBookings] = useState(loadBookings)
   useEffect(() => { saveBookings(bookings) }, [bookings])
@@ -50,10 +72,12 @@ export default function Bookings() {
   const [calYear, setCalYear] = useState(new Date().getFullYear())
   const [calMonth, setCalMonth] = useState(new Date().getMonth())
   const [selectedDay, setSelectedDay] = useState(null)
-  const [selectedWeek, setSelectedWeek] = useState(null)
+  const [weekStart, setWeekStart] = useState(new Date())
 
   const handleCreate = (e) => {
     e.preventDefault()
+    const conflicts = findConflicts(bookings, form.date, form.time)
+    if (conflicts.length > 0 && !window.confirm(`⚠️ Conflict detected! ${conflicts[0].customer_name} already booked at ${form.time}. Create anyway?`)) return
     const newBooking = { id: Date.now(), ...form, status: 'confirmed', created_at: new Date().toISOString(), rating: null, review: null }
     setBookings(prev => [newBooking, ...prev]); setShowForm(false)
     setForm({ customer_name: '', customer_phone: '', service: 'Consultation', date: '', time: '', notes: '' })
@@ -61,6 +85,11 @@ export default function Bookings() {
   const handleCancel = (id) => setBookings(prev => prev.map(b => b.id === id ? { ...b, status: 'cancelled' } : b))
   const handleComplete = (id) => { setBookings(prev => prev.map(b => b.id === id ? { ...b, status: 'completed' } : b)); setShowFeedback(id) }
   const handleFeedback = (id) => { setBookings(prev => prev.map(b => b.id === id ? { ...b, ...feedbackForm } : b)); setShowFeedback(null); setFeedbackForm({ rating: 5, review: '' }) }
+
+  const quickBook = (date, time) => {
+    setForm({ ...form, date, time })
+    setShowForm(true)
+  }
 
   const stats = {
     total: bookings.length,
@@ -86,6 +115,9 @@ export default function Bookings() {
   const prevMonth = () => { if (calMonth === 0) { setCalYear(calYear - 1); setCalMonth(11) } else setCalMonth(calMonth - 1); setSelectedDay(null) }
   const nextMonth = () => { if (calMonth === 11) { setCalYear(calYear + 1); setCalMonth(0) } else setCalMonth(calMonth + 1); setSelectedDay(null) }
 
+  const weekDays = getWeekDays(weekStart)
+  const weekDateStr = (d) => `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`
+
   const statusBadge = (status) => {
     const colors = { confirmed: '#14b8a6', completed: '#3b82f6', cancelled: '#ef4444', pending: '#eab308' }
     return { bg: `${colors[status]}15`, color: colors[status], text: status }
@@ -101,7 +133,7 @@ export default function Bookings() {
             className="flex items-center justify-between">
             <div>
               <h1 className="text-3xl font-bold text-white">Bookings</h1>
-              <p className="text-dark-400 mt-1">Manage your appointments and customer feedback.</p>
+              <p className="text-dark-400 mt-1">Manage appointments, schedules, and feedback.</p>
             </div>
             <div className="flex items-center gap-3">
               <div className="flex items-center gap-1 p-1 rounded-xl bg-white/5 border border-white/10">
@@ -110,9 +142,14 @@ export default function Bookings() {
                   style={view === 'table' ? { background: 'linear-gradient(135deg, rgba(124,58,237,0.2), rgba(99,102,241,0.1))' } : {}}>
                   <List className="w-4 h-4" />
                 </button>
-                <button onClick={() => setView('calendar')}
-                  className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-all ${view === 'calendar' ? 'text-white' : 'text-dark-400 hover:text-white'}`}
-                  style={view === 'calendar' ? { background: 'linear-gradient(135deg, rgba(124,58,237,0.2), rgba(99,102,241,0.1))' } : {}}>
+                <button onClick={() => setView('month')}
+                  className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-all ${view === 'month' ? 'text-white' : 'text-dark-400 hover:text-white'}`}
+                  style={view === 'month' ? { background: 'linear-gradient(135deg, rgba(124,58,237,0.2), rgba(99,102,241,0.1))' } : {}}>
+                  <CalendarIcon className="w-4 h-4" />
+                </button>
+                <button onClick={() => setView('week')}
+                  className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-all ${view === 'week' ? 'text-white' : 'text-dark-400 hover:text-white'}`}
+                  style={view === 'week' ? { background: 'linear-gradient(135deg, rgba(124,58,237,0.2), rgba(99,102,241,0.1))' } : {}}>
                   <LayoutGrid className="w-4 h-4" />
                 </button>
               </div>
@@ -199,11 +236,10 @@ export default function Bookings() {
             </motion.div>
           )}
 
-          {/* Calendar View */}
-          {view === 'calendar' && (
+          {/* Monthly Calendar View */}
+          {view === 'month' && (
             <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
               className="grid lg:grid-cols-3 gap-6">
-              {/* Calendar */}
               <div className="lg:col-span-2 glass-card p-6">
                 <div className="flex items-center justify-between mb-6">
                   <button onClick={prevMonth} className="p-2 rounded-xl text-dark-400 hover:text-white hover:bg-white/5 transition-all">
@@ -220,73 +256,115 @@ export default function Bookings() {
                   ))}
                   {calendarDays.map((day, i) => {
                     const dateStr = day ? `${calYear}-${String(calMonth + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}` : null
-                    const hasBookings = dateStr && bookingsByDate[dateStr]
+                    const dayBks = dateStr ? (bookingsByDate[dateStr] || []) : []
                     const isToday = day === todayNum && calMonth === new Date().getMonth() && calYear === new Date().getFullYear()
                     const isSelected = day === selectedDay
+                    const conflictCount = dayBks.some(b => {
+                      const others = dayBks.filter(o => o.id !== b.id && o.time === b.time && o.status !== 'cancelled')
+                      return others.length > 0
+                    })
                     return (
                       <button key={i} onClick={() => day && setSelectedDay(day === selectedDay ? null : day)}
                         disabled={!day}
-                        className={`relative aspect-square rounded-xl text-sm font-medium transition-all flex items-center justify-center ${
+                        className={`relative aspect-square rounded-xl text-sm font-medium transition-all flex flex-col items-center justify-center ${
                           !day ? 'invisible' :
-                          isSelected ? 'text-white scale-105' :
+                          isSelected ? 'text-white scale-105 shadow-lg' :
                           isToday ? 'text-accent-400 border border-accent-500/30' :
                           'text-dark-300 hover:text-white hover:bg-white/5'
                         }`}
                         style={isSelected ? { background: 'linear-gradient(135deg, #7c3aed, #6366f1)' } : isToday ? { background: 'rgba(20,184,166,0.1)' } : {}}>
-                        {day}
-                        {hasBookings && !isSelected && (
-                          <div className="absolute bottom-1.5 flex gap-0.5">
-                            {bookingsByDate[dateStr].slice(0, 3).map((b, j) => (
+                        <span>{day}</span>
+                        {dayBks.length > 0 && !isSelected && (
+                          <div className="flex gap-0.5 mt-1">
+                            {dayBks.slice(0, 4).map((b, j) => (
                               <div key={j} className="w-1.5 h-1.5 rounded-full"
-                                style={{ background: b.status === 'confirmed' ? '#14b8a6' : b.status === 'completed' ? '#3b82f6' : b.status === 'cancelled' ? '#ef4444' : '#eab308' }} />
+                                style={{ background: (serviceColors[b.service] || serviceColors.Other).dot }} />
                             ))}
+                            {dayBks.length > 4 && <span className="text-[8px] text-dark-400">+{dayBks.length - 4}</span>}
                           </div>
+                        )}
+                        {conflictCount && isSelected && (
+                          <AlertTriangle className="w-3 h-3 text-red-400 absolute top-1 right-1" />
                         )}
                       </button>
                     )
                   })}
                 </div>
-                <div className="flex items-center gap-4 mt-4 pt-4 border-t border-white/5 text-xs text-dark-400">
-                  <span className="flex items-center gap-1.5"><span className="w-2 h-2 rounded-full bg-accent-500" /> Confirmed</span>
-                  <span className="flex items-center gap-1.5"><span className="w-2 h-2 rounded-full bg-blue-500" /> Completed</span>
-                  <span className="flex items-center gap-1.5"><span className="w-2 h-2 rounded-full bg-red-500" /> Cancelled</span>
+                <div className="flex items-center justify-between mt-4 pt-4 border-t border-white/5">
+                  <div className="flex items-center gap-4 text-xs text-dark-400">
+                    {Object.entries(serviceColors).slice(0, 4).map(([svc, c]) => (
+                      <span key={svc} className="flex items-center gap-1.5">
+                        <span className="w-2 h-2 rounded-full" style={{ background: c.dot }} /> {svc}
+                      </span>
+                    ))}
+                  </div>
+                  <span className="text-xs text-dark-500">{bookings.length} total bookings</span>
                 </div>
               </div>
 
-              {/* Selected Day Bookings */}
+              {/* Day Detail Sidebar */}
               <div className="glass-card p-6">
                 <h3 className="text-lg font-semibold text-white mb-4">
                   {selectedDay ? `${monthNames[calMonth]} ${selectedDay}, ${calYear}` : 'Select a date'}
                 </h3>
+                {/* Time Slot Grid */}
+                {selectedDay && (
+                  <div className="space-y-1 mb-4">
+                    <p className="text-xs text-dark-400 mb-2 font-medium">Time Slots</p>
+                    <div className="grid grid-cols-3 gap-1">
+                      {timeSlots.map(slot => {
+                        const bks = dayBookings.filter(b => b.time === slot && b.status !== 'cancelled')
+                        const conflict = bks.length > 1
+                        return (
+                          <button key={slot} onClick={() => quickBook(selectedDate, slot)}
+                            className={`relative text-[10px] py-1.5 rounded-lg transition-all ${
+                              bks.length === 0
+                                ? 'text-dark-500 hover:text-dark-300 hover:bg-white/5 border border-dashed border-white/5'
+                                : conflict
+                                ? 'bg-red-500/15 text-red-400 border border-red-500/20'
+                                : 'bg-white/[0.06] text-dark-200 border border-white/5'
+                            }`}
+                            title={bks.map(b => `${b.customer_name} — ${b.service} (${b.status})`).join('\n')}>
+                            {slot}
+                            {bks.length > 0 && (
+                              <span className={`absolute -top-1 -right-1 w-2 h-2 rounded-full ${conflict ? 'bg-red-500' : 'bg-green-500'}`} />
+                            )}
+                          </button>
+                        )
+                      })}
+                    </div>
+                  </div>
+                )}
                 {dayBookings.length > 0 ? (
-                  <div className="space-y-3">
+                  <div className="space-y-2">
                     {dayBookings.map(b => {
+                      const sc = serviceColors[b.service] || serviceColors.Other
                       const badge = statusBadge(b.status)
                       return (
-                        <div key={b.id} className="p-3 rounded-xl bg-white/5 border border-white/5">
-                          <div className="flex items-center justify-between mb-2">
+                        <div key={b.id} className="p-3 rounded-xl" style={{ background: sc.bg, borderColor: sc.dot + '30' }}>
+                          <div className="flex items-center justify-between mb-1.5">
                             <div className="flex items-center gap-2">
                               <div className="w-7 h-7 rounded-full flex items-center justify-center text-[10px] font-bold text-white"
-                                style={{ background: 'linear-gradient(135deg, #7c3aed, #14b8a6)' }}>
+                                style={{ background: `linear-gradient(135deg, ${sc.dot}, ${sc.dot}88)` }}>
                                 {b.customer_name.split(' ').map(n => n[0]).join('')}
                               </div>
                               <span className="text-sm text-white font-medium">{b.customer_name}</span>
                             </div>
                             <span className="text-xs px-2 py-0.5 rounded-full" style={{ background: badge.bg, color: badge.color }}>{badge.text}</span>
                           </div>
-                          <div className="flex items-center gap-3 text-xs text-dark-400">
+                          <div className="flex items-center gap-3 text-xs ml-9" style={{ color: sc.text }}>
                             <span className="flex items-center gap-1"><Clock className="w-3 h-3" /> {b.time}</span>
                             <span>{b.service}</span>
                           </div>
-                          <div className="flex items-center gap-2 mt-2 pt-2 border-t border-white/5">
+                          <div className="flex items-center gap-2 mt-1.5 ml-9">
                             {b.status === 'confirmed' && (
                               <>
-                                <button onClick={() => handleComplete(b.id)} className="text-[10px] px-2 py-1 rounded-md text-accent-400 hover:bg-accent-500/10">Complete</button>
-                                <button onClick={() => handleCancel(b.id)} className="text-[10px] px-2 py-1 rounded-md text-red-400 hover:bg-red-500/10">Cancel</button>
+                                <button onClick={() => handleComplete(b.id)} className="text-[10px] px-2 py-0.5 rounded-md text-accent-400 hover:bg-accent-500/10">Complete</button>
+                                <button onClick={() => handleCancel(b.id)} className="text-[10px] px-2 py-0.5 rounded-md text-red-400 hover:bg-red-500/10">Cancel</button>
                               </>
                             )}
                             {b.status === 'completed' && !b.rating && (
-                              <button onClick={() => setShowFeedback(b.id)} className="text-[10px] px-2 py-1 rounded-md text-yellow-400 hover:bg-yellow-500/10">Rate</button>
+                              <button onClick={() => setShowFeedback(b.id)} className="text-[10px] px-2 py-0.5 rounded-md text-yellow-400 hover:bg-yellow-500/10">Rate</button>
                             )}
                             {b.rating && (
                               <span className="flex items-center gap-1 text-xs text-yellow-400"><Star className="w-3 h-3 fill-yellow-500" />{b.rating}</span>
@@ -299,8 +377,97 @@ export default function Bookings() {
                   <div className="text-center py-12">
                     <CalendarIcon className="w-10 h-10 text-dark-600 mx-auto mb-3" />
                     <p className="text-sm text-dark-400">{selectedDay ? 'No bookings this day' : 'Click a date to see bookings'}</p>
+                    {selectedDay && (
+                      <button onClick={() => quickBook(selectedDate, '')}
+                        className="mt-3 px-4 py-2 rounded-xl text-xs font-medium text-brand-400 bg-brand-500/10 hover:bg-brand-500/20 transition-all flex items-center gap-1.5 mx-auto">
+                        <Plus className="w-3 h-3" /> Add Booking
+                      </button>
+                    )}
                   </div>
                 )}
+              </div>
+            </motion.div>
+          )}
+
+          {/* Weekly View */}
+          {view === 'week' && (
+            <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
+              className="glass-card p-6">
+              <div className="flex items-center justify-between mb-6">
+                <button onClick={() => { const d = new Date(weekStart); d.setDate(d.getDate() - 7); setWeekStart(d) }}
+                  className="p-2 rounded-xl text-dark-400 hover:text-white hover:bg-white/5 transition-all">
+                  <ChevronLeft className="w-5 h-5" />
+                </button>
+                <div className="text-center">
+                  <h3 className="text-lg font-semibold text-white">
+                    {weekDays[0].toLocaleDateString('en-US', { month: 'short', day: 'numeric' })} — {weekDays[6].toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
+                  </h3>
+                  <p className="text-xs text-dark-400">Week view — click a slot to book</p>
+                </div>
+                <button onClick={() => { const d = new Date(weekStart); d.setDate(d.getDate() + 7); setWeekStart(d) }}
+                  className="p-2 rounded-xl text-dark-400 hover:text-white hover:bg-white/5 transition-all">
+                  <ChevronRight className="w-5 h-5" />
+                </button>
+              </div>
+
+              <div className="overflow-x-auto">
+                <div className="min-w-[800px]">
+                  {/* Header Row */}
+                  <div className="grid grid-cols-[70px_repeat(7,1fr)] gap-px mb-px">
+                    <div className="text-xs text-dark-500 p-2" />
+                    {weekDays.map((d, i) => {
+                      const isToday = d.toDateString() === new Date().toDateString()
+                      return (
+                        <div key={i} className={`text-center p-2 rounded-t-lg ${isToday ? 'bg-accent-500/10' : ''}`}>
+                          <p className="text-xs text-dark-400">{dayNames[i]}</p>
+                          <p className={`text-lg font-bold ${isToday ? 'text-accent-400' : 'text-white'}`}>{d.getDate()}</p>
+                        </div>
+                      )
+                    })}
+                  </div>
+
+                  {/* Time Slots */}
+                  {timeSlots.map(slot => (
+                    <div key={slot} className="grid grid-cols-[70px_repeat(7,1fr)] gap-px">
+                      <div className="text-[10px] text-dark-500 p-2 flex items-start justify-end pt-2.5">{slot}</div>
+                      {weekDays.map((d, col) => {
+                        const ds = weekDateStr(d)
+                        const bks = bookingsByDate[ds]?.filter(b => b.time === slot && b.status !== 'cancelled') || []
+                        const conflict = bks.length > 1
+                        return (
+                          <button key={col} onClick={() => quickBook(ds, slot)}
+                            className={`relative min-h-[48px] rounded-lg transition-all ${
+                              bks.length === 0
+                                ? 'hover:bg-white/[0.03] border border-dashed border-transparent hover:border-white/5'
+                                : conflict
+                                ? 'bg-red-500/10 border border-red-500/20'
+                                : 'bg-white/[0.04] border border-white/5'
+                            }`}>
+                            {bks.map(b => (
+                              <div key={b.id} className="px-1.5 py-0.5 rounded text-[9px] leading-tight truncate"
+                                style={{ background: (serviceColors[b.service] || serviceColors.Other).bg, color: (serviceColors[b.service] || serviceColors.Other).text }}>
+                                {b.customer_name.split(' ')[0]}
+                                {conflict && <span className="text-red-400 ml-1">⚠</span>}
+                              </div>
+                            ))}
+                          </button>
+                        )
+                      })}
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              <div className="flex items-center justify-between mt-4 pt-4 border-t border-white/5">
+                <div className="flex items-center gap-4 text-xs text-dark-400">
+                  {Object.entries(serviceColors).map(([svc, c]) => (
+                    <span key={svc} className="flex items-center gap-1.5"><span className="w-2 h-2 rounded-full" style={{ background: c.dot }} /> {svc}</span>
+                  ))}
+                </div>
+                <div className="flex items-center gap-3 text-xs text-dark-500">
+                  <span className="flex items-center gap-1"><span className="w-2 h-2 rounded-full bg-green-500" /> Booked</span>
+                  <span className="flex items-center gap-1"><span className="w-2 h-2 rounded-full bg-red-500" /> Conflict</span>
+                </div>
               </div>
             </motion.div>
           )}
@@ -329,7 +496,12 @@ export default function Bookings() {
                           <p className="text-sm text-white">{b.customer_name}</p>
                           <p className="text-xs text-dark-400">{b.customer_phone}</p>
                         </td>
-                        <td className="px-6 py-4 text-sm text-dark-200">{b.service}</td>
+                        <td className="px-6 py-4">
+                          <span className="text-sm flex items-center gap-1.5">
+                            <span className="w-2 h-2 rounded-full" style={{ background: (serviceColors[b.service] || serviceColors.Other).dot }} />
+                            {b.service}
+                          </span>
+                        </td>
                         <td className="px-6 py-4 text-sm text-dark-200">{b.date}</td>
                         <td className="px-6 py-4 text-sm text-dark-200">{b.time}</td>
                         <td className="px-6 py-4">
