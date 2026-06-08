@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { Search, Filter, User, Phone, Mail, Tag, Star, Flame, Thermometer, Snowflake, ArrowUpRight, MessageCircle, Calendar } from 'lucide-react'
 import Sidebar from '../components/Sidebar'
+import LeadDetailPanel from '../components/LeadDetailPanel'
 
 const leadsData = [
   { id: 1, name: 'Sarah Johnson', phone: '+1 (555) 123-4567', email: 'sarah@email.com', source: 'whatsapp', status: 'hot', score: 92, notes: 'Interested in Pro plan — ready to buy', lastContact: '2 min ago', avatar: 'SJ', msgs: 12 },
@@ -95,7 +96,7 @@ export default function Leads() {
               return (
                 <motion.div key={lead.id} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.05 }}
                   className="glass-card p-5 group cursor-pointer hover:bg-white/[0.04]"
-                  onClick={() => setActiveLead(activeLead === lead.id ? null : lead.id)}>
+                  onClick={() => setActiveLead(lead)}>
                   <div className="flex items-start justify-between mb-4">
                     <div className="flex items-center gap-3">
                       <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-primary-500 to-accent-500 flex items-center justify-center text-sm font-bold text-white">
@@ -149,6 +150,8 @@ export default function Leads() {
           )}
         </div>
       </main>
+
+      <LeadDetailPanel lead={activeLead} onClose={() => setActiveLead(null)} />
     </div>
   )
 }
