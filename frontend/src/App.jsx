@@ -8,6 +8,7 @@ import Bookings from './pages/Bookings'
 import Messages from './pages/Messages'
 import Leads from './pages/Leads'
 import AIChat from './pages/AIChat'
+import TryDemo from './pages/TryDemo'
 import ProtectedRoute from './components/ProtectedRoute'
 
 export default function App() {
@@ -16,6 +17,7 @@ export default function App() {
       <Routes>
         <Route path="/" element={<Landing />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/try-demo" element={<TryDemo />} />
         <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
         <Route path="/whatsapp" element={<ProtectedRoute><WhatsAppViewer /></ProtectedRoute>} />
         <Route path="/bookings" element={<ProtectedRoute><Bookings /></ProtectedRoute>} />

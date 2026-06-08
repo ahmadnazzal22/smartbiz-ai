@@ -34,16 +34,16 @@ export default function CTADemo() {
 
             <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }}
               className="flex flex-wrap justify-center gap-4 pt-4">
-              <Link to="/login"
+              <Link to="/try-demo"
                 className="group btn-premium px-10 py-5 rounded-full text-white font-semibold text-lg flex items-center gap-2 hover:shadow-xl transition-all duration-300"
                 style={{ background: 'linear-gradient(135deg, #7c3aed, #6366f1, #14b8a6)' }}>
-                Start Free Trial
+                Try Free Demo
                 <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </Link>
-              <a href="#features"
+              <Link to="/login"
                 className="px-10 py-5 glass-card rounded-full text-dark-200 font-semibold text-lg flex items-center gap-2 hover:text-white hover:border-brand-500/30 transition-all duration-300">
-                <Play className="w-5 h-5" /> See How It Works
-              </a>
+                <Play className="w-5 h-5" /> Sign Up Free
+              </Link>
             </motion.div>
 
             <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ delay: 0.4 }}

@@ -39,14 +39,24 @@ export function AuthProvider({ children }) {
     return userData
   }
 
+  const demoLogin = async () => {
+    const userData = { ...DEMO_USER, email: 'demo@smartbiz.ai', name: 'Demo User', business_name: 'SmartBiz Inc.' }
+    localStorage.setItem('token', 'demo-token-123')
+    localStorage.setItem('user', JSON.stringify(userData))
+    localStorage.setItem('demo_mode', 'true')
+    setUser(userData)
+    return userData
+  }
+
   const logout = () => {
     localStorage.removeItem('token')
     localStorage.removeItem('user')
+    localStorage.removeItem('demo_mode')
     setUser(null)
   }
 
   return (
-    <AuthContext.Provider value={{ user, loading, login, register, logout, isAuthenticated: !!user }}>
+    <AuthContext.Provider value={{ user, loading, login, register, demoLogin, logout, isAuthenticated: !!user }}>
       {children}
     </AuthContext.Provider>
   )

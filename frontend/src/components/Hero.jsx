@@ -72,18 +72,18 @@ export default function Hero() {
 
             <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 }}
               className="flex flex-wrap gap-4">
-              <Link to="/login"
+              <Link to="/try-demo"
                 className="group btn-premium px-8 py-4 rounded-full text-white font-semibold text-lg flex items-center gap-2 glow-brand hover:scale-105 transition-all duration-300"
                 style={{ background: 'linear-gradient(135deg, #7c3aed, #6366f1, #14b8a6)' }}>
                 <Sparkles className="w-5 h-5" />
-                Start Free Trial
+                Try Free Demo
                 <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </Link>
-              <a href="#demo"
+              <Link to="/login"
                 className="px-8 py-4 glass-card rounded-full text-dark-200 font-semibold text-lg flex items-center gap-2 hover:text-white hover:border-brand-500/30 transition-all duration-300">
                 <Play className="w-5 h-5" />
-                Watch Demo
-              </a>
+                Sign Up Free
+              </Link>
             </motion.div>
 
             <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.5 }}
