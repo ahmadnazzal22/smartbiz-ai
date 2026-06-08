@@ -11,6 +11,7 @@ import AIChat from './pages/AIChat'
 import AIReport from './pages/AIReport'
 import TryDemo from './pages/TryDemo'
 import Onboarding from './pages/Onboarding'
+import PricingPage from './pages/PricingPage'
 import ProtectedRoute from './components/ProtectedRoute'
 
 export default function App() {
@@ -18,6 +19,7 @@ export default function App() {
     <AuthProvider>
       <Routes>
         <Route path="/" element={<Landing />} />
+        <Route path="/pricing" element={<PricingPage />} />
         <Route path="/login" element={<Login />} />
         <Route path="/try-demo" element={<TryDemo />} />
         <Route path="/onboarding" element={<ProtectedRoute><Onboarding /></ProtectedRoute>} />
